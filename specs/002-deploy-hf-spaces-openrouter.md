@@ -35,7 +35,15 @@ LLM continua sendo "qualquer endpoint compatível com OpenAI".
 - [x] T10 `docs/roteiro_video.md`: trocar "pod ligado" por "Space no ar"; checklist de gravação.
 - [x] T11 Spec `spec.md`: registrar E1–E6 como D15+ e atualizar §10.
 
-## Critérios de aceite
+## Critérios de aceite (verificados em 2026-10-10 em https://y5iscqd4fej0cn-8000.proxy.runpod.net)
+
+- [x] rotas `/`, `/historico`, `/protocolos`, `/modelo`, `/status`, `/api/health` em < 1 s
+- [x] análise completa via `/api/analisar` em 18 s (gpt-4o-mini 5 s + juiz Mistral), JSON válido, 3 fontes citadas
+- [x] `/transcrever` com whisper `base`: 10 s de áudio em 2,3 s
+- [x] sem segredos no repositório (grep vazio antes de cada commit)
+- [x] README com URL, custos e tabela "onde roda o quê"; relatório com a segunda configuração (bloco EVAL)
+
+Critérios originais:
 
 - URL pública do Space responde `/`, `/historico`, `/protocolos`, `/modelo`, `/status` e `/api/health` em < 2 s (sem contar a LLM).
 - Uma triagem completa (F2 ao vivo + F1) conclui em < 60 s via OpenRouter, com juiz de modelo diferente e nota em JSON válido.

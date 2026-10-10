@@ -93,7 +93,9 @@ Limite a declarar sempre: o modelo aprende a prática registrada em 2024, inclus
 F2 extrai os campos da ficha com precisão 0,92 e recall 0,93 por campo e acerta a repetição (`OUT_VEZES`) em 100%; latência mediana 22 s.
 F1 gera 30 de 30 notas; o juiz avaliou todas e aprovou 29 (1 bloqueada); latência mediana da LLM 25 s, tempo total mediano 52 s;
 2,8 fontes recuperadas e 2,1 citadas por nota; a sugestão do modelo concorda com o encaminhamento real da ficha em 77% dos casos.
-Detalhes em `docs/eval_pipeline.json` e no relatório.
+Com a configuração padrão via OpenRouter (gpt-4o-mini, Mistral Small, Gemini Flash Lite), os mesmos 30 relatos deram: F2 precisão 0,90 e recall 0,95,
+juiz aprovou 30 de 30, LLM 5 s de mediana e 20 s no total por análise, concordância do modelo com a ficha 0,80
+(`docs/eval_pipeline.json`; a configuração auto-hospedada ficou em `docs/eval_pipeline_runpod.json`).
 
 ## LLM, RAG e segurança
 
@@ -189,8 +191,13 @@ Marcelo Arruda de Siqueira · Leonardo Barbosa Nogueira · Jose Flavio Neto · P
 | Voz | Web Speech API no navegador; fallback whisper `base` no pod | — |
 | Alternativa auto-hospedada | vLLM no RunPod (Qwen3.6-27B + Qwen2.5-7B), `make pod-create` | US$ 0,59/h |
 
-Três famílias de modelo distintas (OpenAI, Mistral, Google) garantem juiz ≠ geradora. Comandos: `make docker-build docker-push`
-(imagem), `make app-create` (cria o pod e imprime a URL), `make app-status`, `make app-stop`, `make app-start`. O Hugging Face
+**URL atual:** https://y5iscqd4fej0cn-8000.proxy.runpod.net (muda se o pod for recriado; `make app-status` mostra a vigente).
+Medido pela URL pública em 2026-10-10: páginas em < 1 s, análise completa em 18 s, transcrição de 10 s de áudio em 2,3 s.
+
+Três famílias de modelo distintas (OpenAI, Mistral, Google) garantem juiz ≠ geradora. O pod clona este repositório num volume
+persistente ao subir (`scripts/runpod_app.py`, sem registro de imagens); `make app-create` cria e imprime a URL, `make app-status`,
+`make app-stop` (custo zero) e `make app-start` (religa em ~2 min). Alternativa com imagem do GHCR: `make docker-push` + `app-create --image`
+(exige token do GitHub com `write:packages`). O Hugging Face
 Spaces foi descartado porque Spaces com Docker passaram a exigir plano pago (Team na org, PRO na conta pessoal); o script
 `scripts/deploy_space.py` fica no repositório caso o grupo assine. Detalhes e decisões em
 [`specs/002-deploy-hf-spaces-openrouter.md`](specs/002-deploy-hf-spaces-openrouter.md).

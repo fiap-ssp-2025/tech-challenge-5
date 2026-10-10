@@ -137,12 +137,14 @@ restrita aos trechos recuperados, cobertura declarada (total/parcial/nenhuma) e 
 
 ## 5. LLM, RAG e segurança
 
-**Geradora.** `QuantTrio/Qwen3.6-27B-AWQ` (27B, 4 bits) servido por vLLM num pod RunPod (GPU A40/L40S 48 GB), endpoint
-compatível com OpenAI, saída estruturada por `response_format=json_schema` (decodificação restrita: o modelo não consegue
-gerar JSON fora do schema). Fallback opcional para OpenAI. O cliente limpa erros de proxy e registra backend, modelo,
-latência e tokens em cada chamada.
+**Geradora, juiz e extração ao vivo** são endpoints compatíveis com OpenAI configurados por variáveis de ambiente (`LLM_*`,
+`JUDGE_*`, `FAST_*`), com saída estruturada por `response_format=json_schema` (fallback `json_object` + validação). Duas
+configurações validadas: **OpenRouter** (padrão do deploy público): geradora `openai/gpt-4o-mini`, juiz
+`mistralai/mistral-small-3.2-24b-instruct`, extração ao vivo `google/gemini-2.5-flash-lite`, três famílias distintas;
+**auto-hospedada**: `QuantTrio/Qwen3.6-27B-AWQ` (geradora) e `Qwen/Qwen2.5-7B-Instruct-AWQ` (juiz e extração) em dois
+servidores vLLM num pod RunPod (GPU A40 48 GB). O cliente limpa erros de proxy e registra backend, modelo, latência e tokens.
 
-**Juiz.** `Qwen/Qwen2.5-7B-Instruct-AWQ` num segundo servidor vLLM do mesmo pod. Critérios: não prescreve, não fecha
+**Juiz.** Sempre um modelo de família diferente da geradora. Critérios: não prescreve, não fecha
 diagnóstico, não decide pela profissional, encaminha à rede de proteção quando há violência, linguagem respeitosa,
 privacidade. Defesas herdadas do TC3 contra juiz incoerente: reprovar exige trecho literal presente na nota; justificativa
 que nega o problema vira aprovação; padrões de posologia, afirmação diagnóstica e dado pessoal são checados por regex.
@@ -165,19 +167,26 @@ F2, concordância por campo entre o extraído e a ficha de origem; F1, aprovaç�
 recuperadas e citadas, distribuição de risco e concordância entre a sugestão do modelo e o encaminhamento real.
 
 <!-- EVAL:START -->
-Relatos sintéticos avaliados: **10**.
+Relatos sintéticos avaliados: **30**.
 
-**F2 (estruturar relato).** 10/10 extrações válidas; concordância por campo binário com a ficha de origem: precisão 0.950, recall 0.927; acerto de `OUT_VEZES` 1.000; latência mediana 16415 ms.
+**F2 (estruturar relato).** 30/30 extrações válidas; concordância por campo binário com a ficha de origem: precisão 0.902, recall 0.949; acerto de `OUT_VEZES` 0.900; latência mediana 5430 ms.
 
-**F1 (grafo completo).** 10/10 notas geradas pela LLM; juiz avaliou 10 e aprovou 10; 0 bloqueadas (blocklist ou juiz). Latência mediana da LLM 17771 ms, tempo mediano total 44.9 s. Fontes recuperadas por nota: 3.0 (citadas 2.6). Concordância entre sugestão do modelo e encaminhamento real da ficha: 0.700. Distribuição de risco por regras: {'baixo': 0, 'moderado': 0, 'alto': 5, 'critico': 5}.
+**F1 (grafo completo).** 30/30 notas geradas pela LLM; juiz avaliou 30 e aprovou 30; 0 bloqueadas (blocklist ou juiz). Latência mediana da LLM 5066 ms, tempo mediano total 20.4 s. Fontes recuperadas por nota: 2.8 (citadas 2.0). Concordância entre sugestão do modelo e encaminhamento real da ficha: 0.800. Distribuição de risco por regras: {'baixo': 0, 'moderado': 4, 'alto': 20, 'critico': 6}.
 <!-- EVAL:END -->
+
+**Comparação com a configuração auto-hospedada** (vLLM no RunPod: Qwen3.6-27B-AWQ geradora, Qwen2.5-7B-AWQ juiz e extração; mesmos 30 relatos, `docs/eval_pipeline_runpod.json`):
+F2 precisão 0.916 / recall 0.932, `OUT_VEZES` 1.000, latência mediana 22 s;
+F1 30/30 notas, juiz aprovou 29 e bloqueou 1, LLM 25 s de mediana, 52 s no total,
+concordância modelo × ficha 0.767. Leitura: a configuração via OpenRouter (gpt-4o-mini, Mistral Small, Gemini Flash Lite) é 2,5x mais rápida
+com qualidade equivalente; a auto-hospedada mantém o dado dentro de uma GPU própria, ao custo de um pod ligado. A arquitetura aceita qualquer das duas por variáveis de ambiente.
 
 ## 7. Execução e entrega
 
 `make install env data train serve` no clone; `make test` roda a suíte (features, regras do grafo, juiz, rotas web);
 `make docker-build` e `make docker-run` sobem o container com modelo, protocolos e índice RAG dentro da imagem e LLM
-remota por variável de ambiente; `make pod-create` provisiona os dois servidores vLLM no RunPod; `make publish-hf`
-publica o modelo na organização do grupo. CI no GitHub Actions executa lint, testes e build da imagem.
+remota por variável de ambiente; `make app-create` publica o app num pod de CPU do RunPod (URL no README);
+`make pod-create` provisiona a alternativa auto-hospedada com dois servidores vLLM; `make publish-hf` publica o modelo
+na organização do grupo. CI no GitHub Actions executa lint, testes e build da imagem.
 
 ## 8. Limitações
 
