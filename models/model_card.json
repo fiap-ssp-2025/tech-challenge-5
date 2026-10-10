@@ -1,0 +1,29 @@
+{
+  "model": "hist_gradient_boosting",
+  "task": "Sugerir encaminhamento à rede de proteção (DELEG_MULH/ATEND_MULH/MPU/DEFEN_PUBL) a partir da ficha SINAN",
+  "data": "SINAN 2024 · mulheres · violência não autoprovocada · DATASUS (público, anonimizado)",
+  "rows_train": 167049,
+  "rows_test": 84228,
+  "prevalence": 0.2827,
+  "threshold": 0.1499,
+  "test": {
+    "threshold": 0.1499,
+    "precision": 0.3924,
+    "recall": 0.9234,
+    "f1": 0.5508,
+    "f2": 0.7267,
+    "specificity": 0.4367,
+    "accuracy": 0.5743
+  },
+  "roc_auc": 0.8158,
+  "pr_auc": 0.6744,
+  "brier_after_calibration": 0.1462,
+  "recall_gap_by_race": 0.18,
+  "limits": [
+    "Aprende a prática registrada pelos serviços em 2024, inclusive sub-encaminhamento; não é um padrão-ouro.",
+    "Transversal: não prevê desfecho futuro. Apoia a decisão da profissional, não a substitui.",
+    "Campos ignorados são tratados como categoria própria; não há imputação de causa."
+  ],
+  "artifact_size_mb": 0.5,
+  "trained_at": "2026-10-09T19:15:29"
+}

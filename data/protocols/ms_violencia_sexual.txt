@@ -1,0 +1,1987 @@
+ATENÇÃO HUMANIZADA ÀS PESSOAS EM 
+SITUAÇÃO DE VIOLÊNCIA SEXUAL COM 
+REGISTRO DE INFORMAÇÕES E COLETA DE VESTÍGIOS
+MINISTÉRIO DA SAÚDE
+MINISTÉRIO DA JUSTIÇA
+SECRETARIA DE POLÍTICAS PARA AS MULHERES
+NORMA TÉCNICA 
+
+
+MINISTÉRIO DA SAÚDE
+MINISTÉRIO DA JUSTIÇA
+SECRETARIA DE POLÍTICAS PARA AS MULHERES
+NORMA TÉCNICA
+ATENÇÃO HUMANIZADA ÀS PESSOAS EM 
+SITUAÇÃO DE VIOLÊNCIA SEXUAL COM 
+REGISTRO DE INFORMAÇÕES E COLETA DE VESTÍGIOS
+1ª Edição
+Brasília - DF
+2015
+
+
+5
+Dilma Rousseff
+Presidenta da República
+Michel Temer
+Vice-Presidente da República
+Ministério da Saúde
+Arthur Chioro
+Ministro de Estado Chefe
+Ministério da Justiça
+José Eduardo Cardozo
+Ministro de Estado Chefe
+Secretaria de Políticas para as Mulheres
+Eleonora Menicucci
+Ministra de Estado Chefe
+Realização:
+Ministério da Saúde
+Secretaria de Atenção à Saúde
+Departamento de Ações Programáticas Estratégicas
+Coordenação-Geral de Saúde das Mulheres
+Secretaria de Vigilância em Saúde
+Departamento de Vigilância de Doenças e Agravos Não Transmissíveis e Promoção da Saúde
+Coordenação-Geral de Vigilância de Doenças e Agravos Não Transmissíveis
+Ministério da Justiça
+Secretaria Nacional de Segurança Pública 
+Departamento de Pesquisa, Análise de Informação e Desenvolvimento de Pessoal em Segurança Pública 
+Coordenação-Geral de Análise e Desenvolvimento de Pessoal
+Departamento de Políticas, Programas e Projetos.
+Coordenação-Geral do Plano de Implantação e Acompanhamento de Programas Sociais de
+Prevenção da Violência
+Secretaria de Políticas para as Mulheres
+Presidência da República
+Secretaria de Enfrentamento à Violência Contra as Mulheres
+Coordenação-Geral de Fortalecimento da Rede de Atendimento
+Secretaria de Articulação Institucional e Ações Temáticas
+Coordenação-Geral de Saúde
+
+6
+© 2015 Ministério da Saúde, Ministério da Justiça, Secretaria de Políticas para as Mulheres/PR.
+Todos os direitos reservados. É permitida a reprodução parcial ou total desta obra, desde que 
+citada a fonte e que não seja para venda ou qualquer fim comercial.
+Tiragem: 1ª edição – 1ª impressão – 2015 – 5.000 exemplares 
+Edição e informações
+SECRETARIA DE POLÍTICAS PARA AS MULHERES
+PRESIDÊNCIA DA REPÚBLICA
+Secretaria de Enfrentamento à Violência Contra as Mulheres
+Coordenação-Geral de Fortalecimento da Rede de Atendimento
+Secretaria de Articulação Institucional e Ações Temáticas
+Coordenação-Geral de Saúde
+Setor de Clubes Esportivo Sul, Trecho 02, Lote 22 
+Ed. Tancredo Neves, Entrada 3, 1º andar
+70200-002 Brasília/DF
+Tel: (61) 3313-7098
+Elaboração
+Aline Yamamoto
+Andréa da Silveira Passos
+Anita Monteiro
+Beatriz Cruz da Silva
+Caroline Schweitzer de Oliveira
+Cláudia Maria Nunes Saad Fávero
+Eneida Anjos Paiva
+Isabel Seixas de Figueiredo
+Kelvia de Assunção Ferreira Barros
+Leandro Arbogast Cunha
+Luana Grillo da Silva
+Maria Esther Albuquerque Vilella
+Maristela Amaral Gois
+Marta Maria Alves da Silva
+Regina Maria Filomena De Luca Miki
+Rosangela Rigo
+Rurany Ester Silva
+Samuel Teixeira Gomes Ferreira
+Stella Ribeiro da Matta Machado
+Trícia Cristine Kommers Albuquerque
+Capa, projeto gráfico e diagramação
+Jadermilson Santos
+
+7
+À Rosangela Rigo 
+Em sua luta pelos direitos das mulheres, 
+com comprometimento, valorização e competência.
+Rosangela, presente!
+
+8
+Apresentação
+A violência contra as mulheres é um fenômeno multidimensional que afeta as cidadãs de todas as 
+classes sociais, raças, etnias e orientações sexuais, que se constitui como uma das principais formas 
+de violação dos direitos humanos, atingindo as mulheres no seu direito à vida, à saúde e à integridade 
+física. Um dos grandes desafios para enfrentar essa violência é a articulação e integração dos serviços 
+e do atendimento de forma a evitar a revitimização destas mulheres e, acima de tudo, oferecer o aten­
+dimento humanizado e integral. 
+A Norma Técnica para a Atenção Humanizada às Pessoas em Situação de Violência Sexual com 
+Registro de Informações e Coleta de Vestígios aqui apresentada integra uma das ações do Programa 
+Mulher Viver sem Violência lançado em 13 de março de 2013 pela Presidência da República, coorde­
+nado pela SPM/PR – Secretaria de Políticas para as Mulheres, com a parceria do Ministério da Justiça 
+e do Ministério da Saúde. 
+O Programa Mulher, Viver sem Violência representa uma ação importante para garantir a união 
+necessária de esforços para combater as várias formas de violência contra as mulheres, assegurar e 
+garantir o acesso ao atendimento integral e humanizado do qual necessita nesse contexto e contribuir 
+para o enfrentamento da impunidade dos agressores. 
+ Para tanto, propõe o fortalecimento e a consolidação, em âmbito nacional, da rede integrada de 
+atendimento às mulheres em situação de violência envolvendo e articulando as diversas áreas de as­
+sistência, atenção, proteção e defesa dos direitos das mulheres em situação de violência. Os integran­
+tes dos órgãos e serviços públicos das três esferas de Estado e de governo e o sistema de justiça são 
+copartícipes na sua implementação.
+O Programa Mulher, Viver sem Violência é composto por seis estratégias de ação:
+1.	 Casa da Mulher Brasileira
+2.	 Ampliação da Central de Atendimento à Mulher – Ligue 180
+3.	 Organização e Humanização do Atendimento às Vítimas de Violência Sexual
+
+9
+4.	 Centros de Atendimento às Mulheres nas Regiões de Fronteira Seca
+5.	 Campanhas Continuadas de Conscientização
+6.	 Unidades Móveis para o Atendimento às Mulheres do Campo e Floresta
+Todas estas ações representam um importante avanço para o atendimento às mulheres em situ­
+ação de violência e reafirmam os princípios da transversalidade e intersetorialidade das políticas, da 
+integração entre os diferentes Ministérios para ampliar o acesso e o atendimento integral às mulheres.
+A violência sexual é entendida como uma questão de saúde pública, segurança e acesso à justi­
+ça, que exige do Estado políticas e ações integradas para responder a esta demanda. Pode acometer 
+crianças, adolescentes, mulheres, homens e pessoas idosas em espaços privados e públicos; e causar 
+traumas, ferimentos visíveis e invisíveis e em algumas situações levar à morte.
+A atenção às pessoas em situação de violência sexual não é uma ação isolada e o seu enfrentamen­
+to depende de iniciativas intersetoriais que possibilitem ações de atendimento, proteção, prevenção a 
+novas situações e medidas para possibilitar a responsabilização dos(as) autores(as) de agressão.
+A Secretaria de Políticas para as Mulheres, o Ministério da Saúde e o Ministério da Justiça traba­
+lham em conjunto o desenvolvimento de ações que possibilitem estratégias de prevenção, acolhimen­
+to, atendimento e proteção às pessoas em situação de violência. Ao mesmo tempo, criam estraté­
+gias para garantir a responsabilização e o combate à impunidade de autores(as) de agressão a serem 
+implantadas e implementadas nas unidades da federação. Reunir essas iniciativas para a unificação 
+de procedimentos é possível quando a articulação e atuação governamental expressam o desejo de 
+possibilitar à pessoa em situação de violência sexual um atendimento digno, humanizado e resolutivo, 
+buscando evitar revitimizações e torná-lo mais ágil e com menos exposição da pessoa que sofreu a 
+violência.
+
+
+11
+Sumário
+Introdução	................................................................................................................................................... 12
+Marcos Legais .............................................................................................................................................. 13
+Atenção Humanizada às Pessoas em Situação de Violência Sexual ............................................................ 17
+Atendimento Integral com Registro de Informações e Coleta de Vestígios de Violência Sexual no Sistema 
+Único de Saúde .................................................................................................................................................. 20
+Procedimentos Técnicos para o Atendimento às Pessoas em Situação de Violência Sexual com Registro 
+de Informações e Coleta de Vestígios ............................................................................................... 22
+Atendimento ................................................................................................................................................ 24
+Coleta de Material Biológico para Exames de DNA ...................................................................................... 26
+Secagem, Acondicionamento, Armazenamento e Transporte ...................................................................... 28
+Orientações Gerais para Armazenamento e Transporte de Vestígios ............................................................ 29
+Referências Bibliográficas ............................................................................................................................. 30
+ANEXO A - TERMO DE CONSENTIMENTO INFORMADO PROCEDIMENTOS PROFILÁTICOS E COLETA DE 
+VESTÍGIOS .............................................................................................................................................. 33
+ANEXO B - FICHA DE ATENDIMENTO MULTIPROFISSIONAL ÀS PESSOAS EM SITUAÇÃO DE VIOLÊNCIA 
+SEXUAL ................................................................................................................................................... 35
+ANEXO C - MAPA DE LESÕES ........................................................................................................................ 39
+ANEXO D - IMAGEM CRONOMÉTRICA PARA EXAME GINECOLÓGICO ......................................................... 43
+
+12
+Introdução
+A violência sexual é um fenômeno tão antigo 
+quanto a história da humanidade. Tornou-se cultu­
+ral e banalizada pela sociedade como sendo uma das 
+desigualdades de gênero fundadas na relação entre 
+sistemas de dominação e produção de diferenças, im­
+posta em especial às mulheres, crianças e adolescen­
+tes do sexo feminino, não eximindo, no entanto, as 
+pessoas do sexo masculino ou pessoas idosas. 
+Os avanços em direitos humanos, legislação e 
+tecnologias contribuem para o seu enfrentamento, 
+contudo ainda são insuficientes para a solução do 
+problema. O aperfeiçoamento de estratégias de vigi­
+lância na produção e qualificação de informações so­
+bre este problema possibilita identificar o perfil das 
+vítimas e dos(as) autores(as) da agressão. Também 
+permite identificar fatores de risco e de proteção às 
+ocorrências de violências e os segmentos mais vul­
+neráveis, o que é fundamental para a implantação de 
+políticas de prevenção, atenção e proteção às pessoas 
+em situação de violência. O uso de ferramentas de ge­
+oprocessamento microrregional das ocorrências pos­
+sibilita identificar áreas críticas no território e desen­
+volver ações locais intersetoriais, envolvendo governo 
+e sociedade civil, que previnam e contribuam para o 
+rompimento do ciclo de violência e vulnerabilidades e 
+articulem a rede de atenção e proteção.
+Os esforços empreendidos por todos os setores 
+que atuam no atendimento de pessoas em situação 
+de violência sexual culminaram, em 2013, com a edi­
+ção de leis e decretos com a finalidade de institucio­
+nalizar, fortalecer e ampliar as iniciativas em desen­
+volvimento na área de saúde, segurança, políticas 
+públicas para as mulheres, assistência social, direitos 
+humanos, entre outras. 
+O atendimento integral às pessoas em situação de 
+violência sexual, normatizado desde 1998, é potencia­
+lizado com a estruturação do registro de informações 
+e coleta de vestígios na rede pública de saúde. Desta 
+forma, busca-se otimizar recursos, garantir a integra­
+lidade na atenção e apoiar os(as) usuários(as) do SUS 
+com atendimento humanizado, cuidadoso e sem dis­
+criminação, contribuindo para minimizar sofrimentos. 
+A realização do registro de informações e da co­
+leta de vestígios no momento do atendimento em 
+saúde contribui para a humanização da atenção e, em 
+especial, para o combate à impunidade, consideran­
+do a oportunidade de sua realização nas primeiras 
+horas após a violência. Este proceder permite que as 
+informações e vestígios da violência estejam devida­
+mente registrados, armazenados e disponíveis para 
+os sistemas de segurança pública e de justiça quando 
+a pessoa em situação de violência decidir registrar a 
+ocorrência na polícia.
+A estruturação da atenção integral à saúde das pes­
+soas em situação de violência sexual em rede é um pas­
+so importante para assegurar o cuidado, promoção e 
+prevenção a esse público. Não se trata de um novo servi­
+ço, mas de uma concepção de trabalho que requer a ar­
+ticulação intrasetorial e intersetorial de forma a integrar 
+políticas e ações governamentais e não governamentais 
+no âmbito local (BRASIL, 2010).
+
+13
+Marcos Legais
+De acordo com a Constituição Federal, com a Lei 
+8.080 de 1990, Lei Orgânica da Saúde, e com as de­
+mais políticas em desenvolvimento, a saúde é um 
+direito fundamental do ser humano. Cabe ao Estado 
+prover as condições indispensáveis ao seu pleno exer­
+cício, garantindo que o acesso às ações e aos serviços 
+seja universal e igualitário.
+A Organização Mundial de Saúde em seu Relató­
+rio Mundial sobre a Violência e Saúde alerta os paí­
+ses a respeito da importância das violências no ado­
+ecimento e morte da população. As lesões e mortes, 
+tanto decorrentes das violências interpessoais como 
+das autoprovocadas, independente das tipologias e 
+naturezas da violência, a exemplo da violência físi­
+ca, sexual, psicológica e negligência, geram grande 
+demanda no setor da saúde com impactos econômi­
+cos e sociais. Este relatório define a violência como 
+“o uso intencional de força física ou do poder, real ou 
+em ameaça, contra si próprio, contra outra pessoa, 
+ou contra um grupo ou uma comunidade que resulte 
+ou tenha possibilidade de resultar em lesão, morte, 
+dano psicológico, deficiência de desenvolvimento ou 
+privação” (WHO, 2002), destacando o papel do setor 
+da saúde no enfrentamento das violências, dentre as 
+quais, a sexual.
+A Convenção de Belém do Pará (1994) apresenta 
+o conceito de violência contra a mulher como: “qual­
+quer ato ou conduta baseada no gênero, que cause 
+morte, dano ou sofrimento físico, sexual ou psicoló­
+gico à mulher, tanto na esfera pública como na esfera 
+privada”. Os Estados parte da Convenção são orienta­
+dos a adotar medidas de caráter intersetorial, a fim de 
+prevenir, punir e erradicar a violência contra a mulher.
+O Ministério da Saúde normatiza o atendimento 
+às pessoas em situação de violência sexual desde os 
+anos de 1980 e vem atualizando suas diretrizes ao 
+longo das últimas décadas, contando com a parceria 
+das Secretarias de Saúde das unidades da federação, 
+das sociedades científicas e dos movimentos sociais. 
+Desse esforço coletivo desenvolveram-se normas téc­
+nicas e protocolos clínicos sobre acolhimento, aten­
+dimento e notificação de violências. Desta forma, é 
+possível acolher, atender, realizar exames clínicos e 
+laboratoriais, administrar a anticoncepção de emer­
+gência, realizar quimioprofilaxias para o HIV e para 
+doenças sexualmente transmissíveis. Também é pos­
+sível oferecer acompanhamento psicossocial, sem 
+perder a perspectiva de que o aperfeiçoamento dos 
+(as) profissionais que atuam diretamente nos casos 
+pode melhorar suas habilidades e capacidades técni­
+cas em relação à violência sexual. 
+Nas diretrizes da Política Nacional de Redução da 
+Morbimortalidade por Acidentes e Violências (2001), 
+pessoas em situação de violência têm o direito de 
+serem acolhidas, orientadas, atendidas e encaminha­
+das, quando necessário, para serviços especializados 
+da rede de saúde, de outras áreas de políticas públi­
+cas e do sistema de justiça. 
+A Política Nacional de Atenção Integral à Saúde da 
+Mulher (2004) estabelece em suas prioridades a aten­
+ção para mulheres em situação de violência sexual e 
+doméstica como uma das ações intersetoriais represen­
+tativas dos direitos humanos. Os desdobramentos dessa 
+política estão dispostos nas normas técnicas afetas ao 
+tema da violência sexual e na legislação em vigor que 
+potencializa as especificidades da atenção à saúde.
+A Política Nacional de Promoção da Saúde (2014), 
+que tem por objetivo promover a equidade e a me­
+
+14
+lhoria das condições e modos de viver ampliando a 
+potencialidade da saúde individual e coletiva, reduzin­
+do vulnerabilidades e riscos à saúde decorrentes dos 
+determinantes e condicionantes da saúde, também 
+definiu o enfrentamento das violências e a promoção 
+da cultura de paz e de direitos humanos como uma de 
+suas prioridades. Essa política parte de uma aborda­
+gem intersetorial, interdisciplinar, interinstitucional e 
+com participação da sociedade civil na implementação 
+de ações de promoção da saúde e da atenção integral. 
+No âmbito do Ministério da Justiça, foi editada em 
+2005, em parceria com a Secretaria de Políticas para 
+as Mulheres da Presidência da República (SPM/PR), a 
+Norma Técnica de Padronização das Delegacias Espe­
+cializadas de Atendimento às Mulheres - DEAMs.
+A criação das DEAMs foi a primeira experiência de 
+implementação de uma política pública de enfrenta­
+mento à violência contra as mulheres no Brasil. Desde 
+a instalação das primeiras DEAMs, em 1985, passa­
+ram-se mais de 30 anos e as delegacias das mulheres 
+não só permanecem como têm renovado, a cada dia, 
+seu papel e sua importância, servindo inclusive como 
+modelo para países da América Latina e África.
+A Norma Técnica foi atualizada, em 2010, após a 
+edição da Lei Maria da Penha, com a participação da 
+Secretaria de Políticas para as Mulheres da Presidência 
+da República, das Secretarias de Segurança Pública e 
+das Polícias Civis das Unidades Federadas, bem como 
+de especialistas na temática da violência de gênero e 
+de diferentes organizações não-governamentais.
+Em 2007, com a Edição da Lei nº 11.530/2007, 
+que criou o Programa Nacional de Segurança Públi­
+ca com Cidadania, estabeleceu-se como focos priori­
+tários dos programas, projetos e ações da segurança 
+pública, dentre outros, as mulheres em situação de 
+violência (art. 4º, II).
+A Política Nacional de Enfrentamento à Violência 
+contra as Mulheres “tem por finalidade estabelecer 
+conceitos, princípios, diretrizes e ações de prevenção 
+e combate à violência contra as mulheres, assim como 
+de assistência e garantia de direitos às mulheres em 
+situação de violência, conforme normas e instrumen­
+tos internacionais de direitos humanos e legislação 
+nacional” (BRASIL, 2011, pg. 9). Está estruturada em 
+6 diretrizes:
+I. Garantir o cumprimento dos tratados, acordos e 
+convenções internacionais firmados e ratificados pelo 
+Estado Brasileiro relativos ao enfrentamento da vio­
+lência contra as mulheres.
+II. Reconhecer a violência de gênero, raça e etnia 
+como violência estrutural e histórica que expressa 
+a opressão das mulheres e que precisa ser tratada 
+como questão da segurança, justiça, educação, assis­
+tência social e saúde pública.
+III. Combater as distintas formas de apropriação 
+e exploração mercantil do corpo e da vida das mulhe­
+res, como a exploração sexual e o tráfico de mulheres.
+IV.	 Implementar medidas preventivas nas políti­
+cas públicas, de maneira integrada e intersetorial nas 
+áreas de saúde, educação, assistência, turismo, comu­
+nicação, cultura, direitos humanos e justiça. 
+V. Incentivar a formação e capacitação de profis­
+sionais para o enfrentamento à violência contra as 
+mulheres, em especial no que tange à assistência.
+VI.	 Estruturar a Rede de Atendimento às mulhe­
+res em situação de violência nos Estados, Municípios 
+e Distrito Federal (BRASIL, 2011, pg. 32-33).
+ O Pacto Nacional pelo Enfrentamento à Violên­
+cia Contra as Mulheres foi lançado em 2007, como 
+
+15
+parte da agenda social do Governo Federal. Consiste 
+em um acordo federativo entre o Governo Federal, 
+os governos dos estados e dos municípios brasileiros 
+para o planejamento de ações que consolidam a Po­
+lítica Nacional pelo Enfrentamento à Violência contra 
+as Mulheres por meio da implementação de políticas 
+públicas integradas em todo território nacional (BRA­
+SIL, 2011). Está estruturado em cinco eixos:
+I.	
+Garantia da aplicabilidade da Lei Maria da Penha.
+II.	 Ampliação e fortalecimento da rede de servi­
+ços para mulheres em situação de violência.
+III.	 Garantia da segurança cidadã e acesso à Justiça.
+IV.	 Garantia dos direitos sexuais e reprodutivos, en­
+frentamento à exploração sexual e ao tráfico de mulheres.
+V.	 Garantia da autonomia das mulheres em situ­
+ação de violência e ampliação de seus direitos.
+É Importante destacar que com a Lei nº 
+11.340/2006, mais conhecida como Lei Maria da 
+Penha, as ações e políticas para o enfrentamento à 
+violência doméstica contra as mulheres ganham no­
+vos contornos no Brasil. A partir dessa Lei, a violência 
+doméstica contra as mulheres é tipificada e passa ser 
+tratada como crime. 
+Considerada pela ONU uma das três legislações in­
+ternacionais que mais protegem as mulheres, permitiu 
+no Brasil maior articulação da rede de serviços já exis­
+tente, ampliação do atendimento especializado e inte­
+gração dos serviços de assistência psicossocial com o 
+sistema de segurança pública e o sistema de justiça.  A 
+Lei assegura o atendimento às mulheres em situação de 
+violência e cria mecanismos de proteção às mulheres, 
+bem como, o enfrentamento à impunidade destes cri­
+mes. A partir dela foi criada pela SPM/PR a Norma Técni­
+ca de Uniformização dos Centros de Referência de Aten­
+dimento às Mulheres em Situação de Violência (2006).
+Compõe o atendimento integral à saúde de pes­
+soas em situação de violência, o registro da notifica­
+ção compulsória de suspeita ou evidência de violên­
+cias interpessoais e autoprovocadas definidas pela 
+legislação (violências contra crianças, adolescentes, 
+mulheres e pessoas idosas) de acordo com a Portaria 
+GM/MS nº 1.271 de 06/06/2014. Esse registro é feito 
+pelos(as) profissionais de saúde e de outras áreas, em 
+conformidade com pactuações locais, sendo esta no­
+tificação uma ferramenta de informação, que possibi­
+lita conhecer para intervir e também um instrumento 
+de garantia de direitos ao acionar a rede de atenção 
+e proteção. Salienta-se que nas situações de violência 
+sexual esta notificação é obrigatória e imediata para 
+mulheres e homens em todos os ciclos de vida. 
+Quando do atendimento de crianças e adolescentes é obrigatória a comunicação ao 
+Conselho Tutelar, sem prejuízo de outras providências legais (Lei nº 8.069/1990 – Esta­
+tuto da Criança e do Adolescente).
+Nos casos de violência contra pessoas idosas é obrigatório comunicar a quaisquer dos 
+seguintes órgãos: autoridade policial, Ministério Público, Conselho Municipal, Estadual 
+ou Nacional do Idoso (Lei nº 10.741/2003).
+
+16
+O Decreto nº 7.508/2011 regulamenta a Lei nº 
+8.080/1990 e orienta a organização de redes de atenção 
+à saúde para o SUS, onde se inclui a rede de serviços de 
+atenção para pessoas em situação de violência sexual.
+A Norma Técnica sobre Prevenção e Tratamento dos 
+Agravos Resultantes da Violência Sexual em vigor é um 
+protocolo de organização e operacionalização da aten­
+ção à saúde de mulheres e adolescentes que tenham 
+sofrido violência sexual. A norma visa efetivar o direito a 
+receber atendimento conforme os consensos clínicos e 
+medicamentosos nacionais e internacionais atualizados 
+regularmente. 
+O Ministério da Saúde atualiza periodicamente a 
+norma técnica “Aspectos Jurídicos do Atendimento às 
+vítimas de violência sexual – perguntas e respostas 
+para profissionais de saúde”, de acordo com as mo­
+dificações na legislação e da jurisprudência brasileira 
+com o objetivo de qualificar a atuação dos(as) profis­
+sionais de saúde. 
+O ano de 2013 foi um período de efervescência le­
+gislativa dando maior visibilidade ao tema do enfren­
+tamento à violência sexual como uma prioridade do 
+Estado brasileiro. O Decreto nº 7.958, de 13 de março 
+de 2013, que estabelece diretrizes para o atendimen­
+to humanizado às vítimas de violência sexual pelos(as) 
+profissionais da área de segurança pública e da rede 
+de atendimento do SUS, orienta uma ação que deverá 
+alterar a atenção integral para pessoas em situação 
+de violência sexual, com a implementação do registro 
+de informações e coleta de vestígios no SUS. 
+A Lei nº 12.845/2013 é resultado da atuação con­
+junta da sociedade civil, poder executivo e o legislati­
+vo para uniformizar o trabalho desenvolvido na área 
+de saúde pública. O referido diploma legal dispõe so­
+bre o atendimento obrigatório, integral e imediato de 
+pessoas em situação de violência em todos os hos­
+pitais integrantes da rede SUS nos seguintes termos:
+	 Art. 1º Os hospitais devem oferecer 
+às vítimas de violência sexual atendimen­
+to emergencial, integral e multidisciplinar, 
+visando ao controle e ao tratamento dos 
+agravos físicos e psíquicos decorrentes de 
+violência sexual, e encaminhamento, se for 
+o caso, aos serviços de assistência social.
+O atendimento da pessoa em situação de violên­
+cia nos serviços de saúde dispensa a apresentação do 
+Boletim de Ocorrência (BO). Entretanto, cabe às insti­
+tuições de saúde, conforme a Lei nº 12.845/2013, Art. 
+3º, III, estimular o registro da ocorrência e os demais 
+trâmites legais para encaminhamento aos órgãos de 
+medicina legal, no sentido de diminuir a impunidade 
+dos(as) autores(as) de agressão. 
+Importante destacar que a responsabilidade 
+para a implementação da referida Lei está a car­
+go do Ministério da Saúde e das Secretarias Es­
+taduais e Municipais de Saúde, mas que para sua 
+construção e operacionalização levou em conta 
+ações bem sucedidas em municípios brasileiros 
+que já realizam este atendimento, bem como as 
+discussões e pontos levantados pelos Conselhos 
+Nacionais de Secretários Estaduais e Municipais 
+de Saúde, do Conselho Nacional de Saúde, pela 
+Federação Brasileira das Associações de Ginecolo­
+gia e Obstetrícia, pelo Conselho Federal de Medi­
+cina, pelas Instituições de Ensino Superior e os(as) 
+gestores(as) e profissionais de saúde que lidam di­
+retamente com as pessoas em situação de violên­
+cia sexual, respeitando o sigilo, a ética, agilidade e 
+eficiência no atendimento. 
+
+17
+Geralmente, a violência sexual está acompanha­
+da de outras agressões que incluem a violência física 
+e psicológica. Pode acarretar lesões e traumas nem 
+sempre visíveis, ou mesmo gerar internações, produ­
+zir sequelas físicas ou psíquicas, como a depressão e 
+estresse pós-traumático ou levar à morte. 
+A violência sexual, em razão da própria situação 
+e das chantagens e ameaças, que humilham e intimi­
+dam quem a sofreu, pode comumente vir acompa­
+nhada de sentimentos de culpa, vergonha e medo, 
+sendo necessário tempo, cuidado e respeito no aten­
+dimento e na escuta ofertada nos serviços de saúde 
+e em toda a rede. Isso significa garantir atendimento 
+e atenção humanizada e uma escuta qualificada a to­
+dos(as) aqueles(as) que acessarem esses serviços. 
+O Decreto nº 7.958/2013 assegura que durante o 
+atendimento é preciso observar os princípios do “res­
+peito da dignidade da pessoa, da não discriminação, 
+do sigilo e da privacidade”, além de aspectos como:
+• O devido acolhimento em serviços de referência;
+• A disponibilização de espaço de escuta qualifica­
+da com privacidade, de modo a proporcionar ambien­
+te de confiança e respeito; 
+• A informação prévia das pessoas em situação 
+de violência sexual, assegurada a compreensão so­
+bre o que será realizado em cada etapa do atendi­
+mento e a importância das condutas profissionais, 
+respeitada sua decisão sobre a realização de qual­
+quer procedimento;
+• Divulgação de informações sobre a existência de 
+serviços de referência para atendimento à violência 
+sexual. 
+A discussão sobre humanização da atenção e dos 
+atendimentos não é uma novidade. Trata-se de pre­
+missa a ser assegurada em toda a rede de serviços que 
+atendem as pessoas em situação de violência sexual.
+ 
+No que se refere à saúde, a Política Nacional de 
+Humanização (2004) assegura a humanização como 
+eixo norteador das práticas de atenção e gestão em 
+todas as instâncias do SUS. Conforme a Política, “hu­
+manizar é ofertar atendimento de qualidade articu­
+lando os avanços tecnológicos com acolhimento, com 
+melhoria dos ambientes de cuidado e das condições 
+de trabalho dos profissionais”.
+A Humanização deve ser vista como uma das di­
+mensões fundamentais da atenção em saúde, não 
+podendo ser entendida apenas como um “programa” 
+a ser aplicado aos diversos serviços, mas como uma 
+política que opere transversalmente em toda a rede 
+SUS (PNH, 2004).
+Ao se discutir aspectos para garantir o atendimen­
+to humanizado nos serviços de saúde, é preciso res­
+saltar o acolhimento como um importante elemento 
+para a qualidade e humanização da atenção. Por aco­
+lher, entenda-se o conjunto de medidas, posturas e 
+atitudes dos(as) profissionais de saúde que garantam 
+credibilidade e consideração à situação de violência.
+Como mencionado, a violência sexual constitui 
+um grave problema de saúde pública, pois representa 
+uma das principais causas de morbidade, especial­
+mente de meninas e mulheres. Nesse sentido, cabe 
+Atenção Humanizada às Pessoas em Situação de Violência Sexual
+
+18
+mento em toda a rede de saúde. É necessária a indica­
+ção dos(as) profissionais responsáveis por cada etapa 
+da atenção e é imprescindível que esses fluxos sejam 
+do conhecimento de todos(as), de modo a acolher e 
+atender as pessoas que acessarem o serviço de forma 
+ágil, humanizada e respeitosa.
+O acompanhamento clínico, psicológico e social 
+previsto nos serviços de saúde de referência devem 
+se estender por um período posterior à realização do 
+primeiro atendimento, sendo necessário que a equi­
+pe do serviço de saúde avalie a continuidade do seu 
+acompanhamento e a importância de encaminha­
+mentos para outros serviços e unidades da rede: Uni­
+dades Básicas de Saúde, ambulatórios, policlínicas, 
+Centros de Atenção Psicossocial (CAPS), Unidades de 
+Saúde Especializadas, Centros de Referência de Assis­
+tência Social (CRAS) e Centros de Referência Especia­
+lizados de Assistência Social (CREAS), Centros de Refe­
+rência de Atenção à Mulher em Situação de Violência 
+(CRAM), Casa da Mulher Brasileira, entre outros.
+Conforme disposto na Norma Técnica Prevenção e 
+Tratamento dos Agravos Resultantes da Violência Se­
+xual contra Mulheres e Adolescentes do Ministério da 
+Saúde sobre a atenção à violência sexual, as pessoas 
+atendidas devem ser informadas e orientadas sobre 
+tudo o que será realizado em cada etapa do atendi­
+mento e a importância de cada medida a ser tomada. 
+reconhecer os serviços de saúde como importantes 
+portas de entrada para aqueles(as) que sofreram vio­
+lência sexual, assegurando-lhes acolhimento adequa­
+do e atendimento imediato, a partir das demandas de 
+cada pessoa.
+Para que o acesso ocorra de fato, é imprescindível 
+que a população conheça as ofertas de serviços e sinta-
+se motivada a procurá-los, sempre que deles necessitar. 
+A disponibilização de informações sobre os servi­
+ços de referência que asseguram a atenção integral às 
+pessoas em situação de violência sexual em toda a rede 
+de atendimento do SUS e na rede de serviços de outras 
+políticas públicas (Assistência Social, Segurança Pública, 
+Políticas para as Mulheres, Justiça, etc.) contribui para 
+garantir um maior acesso e proteção. 
+No âmbito do SUS, as instituições envolvidas na 
+atenção às pessoas em situação de violência sexual 
+devem assegurar cada etapa do atendimento que for 
+necessária. Isso inclui medidas de prevenção, emer­
+gência, acompanhamento, reabilitação, tratamento 
+de eventuais agravos e impactos resultantes da vio­
+lência sexual sobre a saúde física e psicológica, além 
+do abortamento legal, se for solicitado pela mulher 
+ou adolescente, de acordo com a legislação vigente.
+É preciso que se estabeleçam fluxos de atendi­
+ETAPAS DO ATENDIMENTO: acolhimento, registro da história, exames clínicos e ginecológicos, coleta de 
+vestígios, contracepção de emergência, profilaxias para HIV, IST e Hepatite B, comunicação obrigatória 
+à autoridade de saúde em 24h por meio da ficha de notificação da violência, exames complementares, 
+acompanhamento social e psicológico, e seguimento ambulatorial.
+
+19
+Sua autonomia deve ser respeitada, acatando-se a 
+eventual recusa de algum procedimento.
+No cerne da atenção integral e humanizada no 
+SUS, é importante garantir, com qualidade e respei­
+to, a escolha das mulheres que sofreram violência 
+sexual pelo abortamento assegurado pela legislação 
+brasileira. Além dos aspectos já mencionados, a aten­
+ção humanizada em saúde às pessoas em situação de 
+violência sexual relaciona-se a aspectos mais práticos 
+e objetivos que devem ser garantidos nos estabeleci­
+mentos de saúde que realizem o serviço. 
+Cite-se, por exemplo:
+• Instalações e área física adequada para aten­
+dimento
+Locais específicos para acolhida e atendimento, 
+preferencialmente fora do espaço físico do pronto-
+socorro ou da triagem, para garantir privacidade du­
+rante os atendimentos. Evitar identificação nominal 
+das salas de atendimento exclusivas para vítimas de 
+violência sexual.
+• Equipamentos e instrumentais suficientes
+Equipamentos e materiais permanentes em con­
+dições adequadas de uso que satisfaçam as necessi­
+dades do atendimento de tal modo a contar com au­
+tonomia e resolutividade. Quando ofertado o serviço 
+de aborto previsto em lei deve-se seguir as orienta­
+ções da Norma Técnica de Atenção Humanizada ao 
+Abortamento em vigor. 
+• Recursos humanos qualificados para a atenção
+O atendimento precisa ser ofertado por equipe 
+multiprofissional e interdisciplinar, essencialmente: 
+médico(a); enfermeiro(a); técnico(a) em enfermagem; 
+assistente social e psicólogo(a). Poderá contar, ainda, 
+com outros profissionais como farmacêutico(a). 
+Frente a todas as indicações necessárias à ga­
+rantia de atenção humanizada e integral às pessoas 
+em situação de violência sexual, cabe ressaltar que 
+compete aos gestores(as) de saúde nos Municípios, 
+Estados e Distrito Federal implantar, implementar e 
+garantir sustentabilidade às ações e o maior número 
+possível de serviços de referência. 
+Cabe aos(às) gestores(as) e diretores(as) dos esta­
+belecimentos de saúde a implantação de mecanismos 
+de avaliação permanente das ações desenvolvidas.
+
+20
+Atendimento Integral com Registro de Informações e Coleta de Vestígios de Violência 
+Sexual no Sistema Único de Saúde 
+O cuidado em saúde à pessoa em situação de vio­
+lência sexual deve ser realizado conforme as normas 
+técnicas do Ministério da Saúde1 . Recomenda-se que 
+o atendimento seja realizado até 72 horas da agres­
+são devido à maior eficácia das medidas profiláticas.
+A proteção, a atenção e o cuidado integral consti­
+tuem funções primordiais dos serviços de saúde que 
+compõem a rede de atendimento a pessoas em situa­
+ção de violência sexual. Desta forma, é preciso que os 
+serviços de saúde atuem articuladamente com outros 
+serviços e órgãos existentes em cada localidade para 
+cumprir plenamente essas funções.
+A publicação do Decreto nº 7.958, de 13 de mar­
+ço de 2013, constitui um importante dispositivo que 
+prevê esse tipo de articulação intersetorial, de modo 
+a fortalecer o atendimento integral e humanizado. 
+Nesse sentido, o Decreto prevê articulação entre os 
+setores de Saúde, Segurança e Justiça, com vistas não 
+apenas à necessária proteção das pessoas que sofre­
+ram a violência, mas também à adoção das medidas 
+necessárias à responsabilização legal daqueles que a 
+cometeram.
+O Decreto prevê a possibilidade de que os(as) pro­
+fissionais de saúde agreguem ao atendimento, feito 
+com foco nos cuidados com a pessoa em situação de 
+violência sexual, um segundo olhar que possibilite 
+identificar e registrar elementos necessários à perse­
+cução penal do(a) agressor(a).
+  A atribuição legal de buscar informações que 
+subsidiem a persecução penal é fundamentalmente 
+do sistema de segurança, mas os(as) profissionais de 
+saúde podem contribuir imensamente para que infor­
+mações e vestígios importantes sejam preservados.
+A identificação de achados que constituam provas 
+médico-legais é de grande importância nas situações 
+de violência sexual, tanto para a comprovação ma­
+terial do crime alegado, como para a identificação e 
+responsabilização do(a) autor(a). Assim, é importante 
+que os(as) profissionais de saúde atentem para esses 
+elementos, principalmente nas situações em que a 
+vítima não procurou de imediato o sistema de segu­
+rança pública, mas posteriormente venha representar 
+contra o(a) agressor(a).
+Coexistem no Brasil diferentes fluxos de aten­
+dimento a pessoas em situação de violência sexual, 
+mas todos devem levar em conta a preservação de 
+informações e vestígios da agressão, evitando a revi­
+timização.
+As situações são as seguintes:
+I. Quando a pessoa procura inicialmente o siste­
+ma de segurança pública
+Nesses casos o sistema de segurança registra to­
+das as informações da ocorrência e a encaminha aos 
+órgãos de medicina legal para a realização da perícia, 
+que irá caracterizar o tipo de lesão encontrada e co­
+letar os vestígios que podem auxiliar na identificação 
+da autoria e materialização do crime. Em seguida a 
+1 Norma Técnica de Prevenção e Tratamento dos Agravos Resultantes da Violência Sexual contra Mulheres e Adolescentes. 
+Linha de Cuidado para a Atenção Integral à Saúde de  Crianças,  Adolescentes e suas Famílias em Situação de Violências.
+
+21
+pessoa é encaminhada ao sistema de saúde para os 
+cuidados pertinentes. 
+Caso haja uma situação de urgência ou emergên­
+cia, a vítima é encaminhada inicialmente ao sistema 
+de saúde.
+II. Quando a pessoa procura inicialmente o siste­
+ma de saúde
+Neste caso existem várias possibilidades de fluxo, 
+dependendo da conformação da rede e das pactua­
+ções formais locais entre sistema de justiça, seguran­
+ça e saúde.
+ Na saúde, não é necessário o registro de boletim 
+de ocorrência para o atendimento. Se a pessoa não 
+deseja registrar o boletim de ocorrência, sua vontade 
+deverá ser respeitada, sem prejuízo ao atendimento 
+integral à saúde e de todas as orientações necessárias 
+sobre seus direitos.
+Em todos os casos, a equipe de saúde deve orien­
+tar sobre a importância da pessoa registrar o boletim 
+de ocorrência, pois este é um direito de cidadania e 
+contribui para o enfrentamento da impunidade do(a) 
+agressor(a).
+As pactuações locais de atendimento intersetorial às pessoas em situação de violência sexual podem ser 
+desenvolvidas em parceria entre a equipe de perícia oficial e a equipe do hospital, de modo que tanto a assis­
+tência por parte da saúde quanto a perícia ocorram no mesmo local, mas são realizadas por equipes distintas, 
+num só momento.
+Esta Norma Técnica trata das situações em que há possibilidade de realização do registro de informações e 
+coleta de vestígios da violência sexual pelos(as) médicos(as) do SUS nos serviços de referência aptos/habilitados 
+para este atendimento.
+Enfrentar a violência contra as mulheres exige, acima de tudo, a construção de condições para que possam es­
+colher e decidir, a partir das informações qualificadas sobre todos os seus direitos, sobre os serviços especializados e 
+sobre os procedimentos para a denúncia da violência sofrida, contribuindo dessa forma para sua autonomia. 
+A decisão da mulher deverá sempre ser respeitada!
+Os serviços de saúde NÃO substituem as funções e atribuições da segurança pública, como a 
+medicina legal, posto que atuam de forma complementar e integrada. 
+É importante registrar que não haverá formalização de laudo pericial pelos profissionais do 
+SUS, mas tão-somente a realização do exame físico, a descrição das lesões e o registro de 
+informações e a coleta de vestígios. 
+Se a pessoa em situação de violência decidir pelo registro policial, tais informações e mate­
+riais serão encaminhados à autoridade policial, quando requisitados.
+
+22
+Procedimentos Técnicos para o Atendimento às Pessoas em Situação de Violência 
+Sexual com Registro de Informações e Coleta de Vestígios
+Os procedimentos técnicos a seguir visam norma­
+tizar e orientar o atendimento integral às vítimas de 
+violência sexual com registro de informações e coleta 
+de vestígios, tomando por base a literatura da Orga­
+nização Mundial de Saúde, guias e manuais de diver­
+sas experiências nacionais e internacionais da área de 
+saúde e medicina legal, e os procedimentos operacio­
+nais padronizados da área de perícia criminal produ­
+zidos pelo Ministério da Justiça. Tais orientações po­
+derão ser adequadas respeitando as especificidades, 
+de acordo com a organização da rede de serviços e 
+pactuações locais.
+A realização desses procedimentos envolve anam­
+nese, escuta qualificada, realização do exame físico, 
+descrição das lesões, registro de informações e coleta 
+de vestígios em serviços de saúde.
+Atribuições Gerais para todos os Serviços de Saúde
+•	 Orientar as vítimas sobre a importância do registro 
+do boletim de ocorrência;
+•	 Reconhecer os sinais de violência não decla­
+rada, especialmente da violência doméstica, manten­
+do os(as) profissionais sensibilizados(as) e capacita­
+dos(as);
+•	 Acolher as pessoas em situação de violência 
+de forma humanizada sem preconceitos e juízos de 
+valor;
+•	 Garantir a necessária privacidade durante o 
+atendimento, estabelecendo um ambiente de con­
+fiança e respeito;
+•	 Manter sigilo sobre as informações prestadas 
+pela vítima ou pelo seu responsável, repassando a 
+outro profissional ou outro serviço, apenas as infor­
+mações necessárias para garantir o atendimento ade­
+quado;
+•	 Ouvir atentamente o relato da situação, de 
+forma a poder avaliar a possibilidade de risco de mor­
+te ou de repetição da violência sofrida. 
+Atribuições Gerais para os Serviços de Referência 
+para Atenção às Pessoas em Situação de Violência Se­
+xual com Registro de Informações e Coleta Vestígios
+•	 Avaliar e tratar as condições médicas de 
+emergência;
+•	 Realizar os exames clínicos e a coleta de material 
+com consentimento informado;
+•	 Apresentar o Termo de Consentimento Infor­
+mado (Anexo A), de modo a colher assinatura para 
+autorização da coleta e preservação de eventuais ves­
+tígios biológicos que possam ser identificados;
+•	 Respeitar a todo momento a confidencialida­
+de do caso; 
+•	 Solicitar os exames laboratoriais preconizados 
+conforme Norma Técnica Prevenção e Tratamento 
+dos Agravos Resultantes da Violência Sexual Contra 
+Mulheres e Adolescentes do Ministério da Saúde;
+•	 Realizar a contracepção de emergência nos 
+termos da Norma Técnica Anticoncepção de Emer­
+gência: Perguntas e Respostas para Profissionais de 
+Saúde, exceto se esse procedimento tenha sido reali­
+zado pelo serviço que primeiro atendeu à vítima;
+
+23
+•	 Realizar profilaxia das DST/AIDS e Hepatite B, 
+com medidas específicas nas primeiras 72 horas;
+•	 Preencher o formulário de dispensação de anti
+-retrovirais;
+•	 Realizar ou encaminhar para acompanhamen­
+to psicológico e social;
+•	 Preencher obrigatoriamente os dados conti­
+dos na Ficha de Notificação Compulsória de Violência 
+Interpessoal/Autoprovocada, de modo a possibilitar a 
+análise das informações (Portaria nº 1.271, de 6 de 
+junho de 2014);
+•	 Todas as informações devem ser cuidadosamen­
+te registradas na Ficha de Atendimento Multiprofissio­
+nal às Pessoas em Situação de Violência Sexual, com le­
+tra legível e sem espaços em branco, tendo em vista que 
+este registro poderá ser fonte oficial de informações, es­
+pecialmente quando o exame pericial não for realizado;
+•	 Constar, na Ficha de Atendimento Multiprofissio­
+nal, data e hora dos atendimentos, história clínica e exame 
+físico completo, incluindo o exame ginecológico, descrição 
+minuciosa das lesões, relatando se são recentes ou não e 
+sua localização específica, descrição do relato da usuá­
+ria, bem como das orientações fornecidas pelo(a) profis­
+sional e a identificação, de todos os(as) profissionais que 
+atenderam a vítima;
+•	 Garantir a referência para o seguimento/acom­
+panhamento através de consultas pré-agendadas;
+•	 Realizar a interrupção legal da gestação confor­
+me as normas técnicas do Ministério da Saúde; 
+•	  Encaminhar a mulher para os serviços de saúde 
+caso ela opte pela manutenção da gestação;
+•	 Realizar os registros necessários, não só para o 
+acompanhamento da vítima como também para prová­
+veis finalidades legais.
+
+24
+Atendimento
+• Estabelecer uma relação de respeito e empatia 
+com a vítima;
+• Iniciar a entrevista com perguntas abertas e evi­
+tar conduzir as respostas;
+• Questionar diretamente a vítima somente quan­
+do a narrativa livre for esgotada;
+• Ler Termo de Consentimento Informado (ANEXO 
+A) para a vítima e certificar-se se foi compreendido. A 
+vítima tem liberdade para aceitar ou recusar qualquer 
+das etapas ou procedimentos do atendimento;
+• Preencher a Ficha de Atendimento Multiprofis­
+sional, conforme modelo (ANEXO B).
+Acolhimento e Escuta  Qualificada
+O acolhimento e a escuta qualificada são elemen­
+tos importantes para uma atenção humanizada às 
+pessoas em situação de violência sexual.
+Acolhimento engloba o tratamento digno e respei­
+toso, a escuta, o reconhecimento e a aceitação das di­
+ferenças, o respeito ao direito de decidir de mulheres 
+e homens, assim como o acesso e a resolutividade da 
+assistência. 
+A capacidade de escuta, sem pré-julgamentos e impo­
+sição de valores, a aptidão para lidar com conflitos, a valo­
+rização das queixas e a identificação das necessidades são 
+pontos básicos do acolhimento que poderão incentivar 
+as vítimas a falarem de seus sentimentos e necessidades. 
+Cabe ao(à) profissional desenvolver escuta ativa e relação 
+de empatia, que é a capacidade de criar comunicação sin­
+tonizada a partir das demandas das pessoas, assim como 
+a possibilidade de se colocar no lugar do outro.
+PONTOS IMPORTANTES
+ 
+• Respeitar a fala da vítima, auxiliando a expressar seus 
+sentimentos, buscando a autoconfiança;
+• Estabelecer comunicação efetiva, estando aten­
+to à comunicação não-verbal (gestos, expressões fa­
+ciais); 
+• Utilizar linguagem simples, aproximativa, inteli­
+gível e apropriada ao universo da vítima;
+• Organizar o acesso, priorizando o atendimento 
+de acordo com necessidades detectadas;
+• Identificar e avaliar as necessidades e riscos dos 
+agravos à saúde em cada caso, resolvendo-os, confor­
+me a capacidade técnica do serviço, ou encaminhan­
+do a vítima para serviços específicos;
+• Garantir a privacidade no atendimento e a con­
+fidencialidade das informações;
+• Realizar os procedimentos técnicos de forma 
+humanizada, informando sobre as intervenções ne­
+cessárias. 
+ Exame Físico
+• Explicar para a pessoa examinada a necessidade 
+do exame e da coleta de material;
+• Informar os passos do exame, os locais do corpo 
+a serem tocados, explicando os procedimentos que 
+serão realizados e os materiais que serão coletados. 
+Havendo a recusa, a decisão e autonomia da pessoa 
+devem ser respeitadas;
+• Descrever as lesões em sua localização, tama­
+
+25
+nho, número e forma, preferencialmente no sentido craniocaudal, inclusive as lesões genitais e extragenitais, assi­
+nalando-as na Ficha de Atendimento específica ou fotografando-as, se possível, com o consentimento da pessoa;
+•	 O exame deverá ser realizado pelo(a) médico(a) com a presença de outro(a) profissional de saúde também 
+habilitado para o atendimento integral às pessoas em situação de violência sexual.
+Quadro 1: Lesões corporais mais frequentemente observadas em casos de violência sexual
+REGIÃO 
+POSSÍVEL LESÃO 
+Craniana 
+Couro cabeludo 
+Equimose, escoriação, edema traumático e ferida contusa  
+Face 
+Fratura (malar, mentoniana e nasal), marcas de mordida, 
+escoriação, equimose facial e edema traumático  
+Olhos 
+Equimose periorbitária (olho roxo) e da esclerótica (hemorragia 
+em esclera) e edema traumático   
+Orelhas 
+Equimose, escoriação e edema traumático  
+Boca 
+Equimose labial, equimose intraoral, escoriação, marca de 
+mordida, fratura e trauma dentário  
+Cervical 
+Externa 
+Marca de mordida, equimose por sucção, equimose e 
+escoriação  
+Interna 
+Trauma laríngeo, alteração na voz (rouquidão, disfonia) e 
+diﬁculdade de deglutição  
+Torácica e abdominal 
+Equimose, equimose por sucção, escoriação, marca de mordida 
+e corpos estranhos presentes na pele: terra, graveto, etc. 
+Mamária 
+Marcas de mordida ou sucção, equimose, escoriação e 
+laceração nos mamilos  
+Membros Superiores 
+Equimose (especialmente nos antebraços e mãos); lesões de 
+defesa, escoriação, edema traumático e fraturas  
+Mãos 
+Equimose, escoriação, edema traumático e fratura  
+Membros Inferiores 
+Equimose (especialmente nas faces mediais das coxas); lesões 
+de defesa, escoriação, marca de mordida e edema traumático  
+Genital 
+Equimose, escoriação, edema traumático e rotura himenal 
+Anal 
+Equimose, escoriação, edema traumático, laceração e dilatação  
+*A existência dessas lesões não caracteriza por si a violência sexual, uma vez que podem ser resultantes da prática sexual 
+consentida. 
+ 
+
+26
+Coleta de Material Biológico para Exames de DNA
+A coleta de material biológico (amostra de refe­
+rência da vítima e vestígios) é extremamente impor­
+tante para a identificação do(a) agressor(a) por meio 
+de exames de DNA.
+A pessoa em situação de violência, seu familiar ou 
+responsável legal deverá consentir e assinar o Termo de 
+Consentimento Informado (Anexo A) antes da coleta de 
+material biológico ser realizada.
+A coleta do material biológico no corpo da vítima 
+deve ser realizada o mais rapidamente possível a par­
+tir do momento da agressão sexual. A possibilidade 
+de se coletar vestígios biológicos em quantidade e 
+qualidade suficientes diminui com o passar do tempo, 
+reduzindo significativamente após 72h da agressão.
+O(a) médico(a) responsável pela coleta deve estar 
+ciente da possibilidade de haver vestígios do(a) agres­
+sor(a) não somente nas regiões genital e anal, mas 
+também em outras locais do corpo da vítima, como, 
+por exemplo, regiões mamárias e perioral, e ainda em 
+objetos e roupas.
+Durante a coleta, deve-se assegurar que o mate­
+rial coletado não seja contaminado com outros mate­
+riais biológicos presentes no ambiente ou pelo DNA 
+da pessoa que coletou a amostra. Deverão ser utiliza­
+das luvas descartáveis, máscara e outros materiais e 
+instrumentos esterilizados como, por exemplo, swab, 
+pinça, tesoura etc.
+                                                     
+ Coleta de Vestígios 
+I.	 Material: secreção vaginal
+A coleta de secreção vaginal para pesquisa de esper­
+matozoide e exame de DNA deve ser feita com a vítima 
+em posição ginecológica. Deve-se priorizar a coleta de 
+secreções e não da parede mucosa. Recomenda-se a uti­
+lização de espéculo, preferencialmente descartável, sem 
+a presença de materiais lubrificantes.
+A coleta deverá ser realizada utilizando-se, pelo 
+menos, quatro swabs esterilizados, de haste longa e 
+flexível. Se possível, os swabs deverão ser passados si­
+multaneamente, de dois em dois, lado a lado, a fim de 
+que as amostras tenham maior similaridade entre si.
+Os swabs deverão ser numerados pela ordem de 
+coleta, sendo que o 1° e 2° deverão ser destinados 
+para exame de DNA e o 3° e 4° deverão ser destinados 
+para teste de triagem para detecção da presença de 
+sêmen (PSA, Seminogelina, etc.) e pesquisa de esper­
+matozoides.
+O material coletado poderá ser mantido nos swa­
+bs e/ou transferido para outros suportes: 
+• A secreção coletada nos swabs destinados ao 
+exame de DNA poderá ser transferida imediatamente 
+para dois papeis filtro.
+• A secreção coletada nos swabs destinados à 
+pesquisa de espermatozoides poderá ser transferida 
+imediatamente, antes da secagem, para lâminas ví­
+treas, e fixada conforme rotina local estabelecida (he­
+matoxilina eosina, álcool 96,1% etc.).
+	
+II.	 Material: secreção anal
+	
+A coleta de secreção anal pode ser feita tanto em 
+posição genopeitoral ou ginecológica. Deve-se atentar 
+para a possibilidade de haver secreção não apenas na 
+
+27
+região anal, mas também na região perianal e períneo.
+Para coleta de material da cavidade anal, intro­
+duzir um ou se possível, dois swabs umedecidos com 
+soro fisiológico 0,9% por vez no canal anal, preferen­
+cialmente em movimentos rotatórios. 
+Os swabs deverão ser numerados pela ordem de 
+coleta, sendo que o 1° e 2° deverão ser destinados 
+para exame de DNA e, caso seja possível, o 3° e 4° 
+deverão ser destinados para teste de triagem para 
+detecção da presença de sêmen (PSA, Seminogelina, 
+etc.) e pesquisa de espermatozoides.
+O material coletado poderá ser mantido nos swa­
+bs e/ou transferido para outros suportes: 
+• A secreção coletada nos swabs destinados ao 
+exame de DNA poderá ser transferida imediatamente 
+para dois papéis filtro.
+• A secreção coletada nos swabs destinados à 
+pesquisa de espermatozoides poderá ser transferida 
+imediatamente, antes da secagem, para lâminas ví­
+treas, e fixada conforme rotina local estabelecida (he­
+matoxilina eosina, álcool 96,1% etc.)
+III.	 Material: sêmen, secreções e ou fluidos de­
+positados na pele ou em outras regiões do corpo
+Em casos de suspeita de deposição de sêmen, se­
+creções ou fluidos biológicos (saliva, sêmen, sangue, 
+etc.) em outras áreas do corpo da vítima como, por 
+exemplo, face, lábios, tórax, abdome, coxa, períneo 
+ou regiões com mordida(s), esses locais também de­
+verão ser submetidos à coleta.
+Nestas situações, o procedimento será o mesmo an­
+teriormente mencionado, com a utilização de swab pre­
+viamente umedecido em soro  fisiológico 0,9%. Os swabs 
+deverão ser passados levemente na região onde puder 
+ser visualizado o material ou, se não houver a visualização, 
+onde houver o relato de deposição do material.
+Caso a coleta ocorra na cavidade oral, não é ne­
+cessário umedecer previamente o swab. Deve ser 
+priorizada a coleta da eventual secreção observada. 
+O sêmen e o espermatozoide tendem a se depositar 
+entre os dentes e a gengiva. Para a coleta neste caso, 
+passar o swab seco entre os dentes inferiores.
+Os swabs deverão ser numerados pela ordem de 
+coleta, sendo que o 1° e 2° deverão ser destinados 
+para exame de DNA e, caso seja possível, o 3° e 4° 
+deverão ser destinados para teste de triagem para 
+detecção da presença de sêmen (PSA, Seminogelina, 
+etc.) e pesquisa de espermatozoides.
+IV.	 Material: vestígio subungueal
+Nos casos de suspeita ou relato de ter havido luta 
+corporal entre o(a) agressor(a) e a vítima, deverá ser 
+coletado material subungueal (sob as unhas) dos de­
+dos da vítima a fim de se buscar detectar material bio­
+lógico do(a) agressor(a).
+A coleta deverá ser realizada utilizando-se, pelo 
+menos, dois swabs esterilizados. Para facilitar o pro­
+cedimento, umedecer levemente os swabs com água 
+destilada e, em seguida, proceder à coleta, passando 
+o swab na região subungueal de cada dedo. Deve-se 
+utilizar um swab para cada mão, com a respectiva 
+identificação de mão direita e esquerda. Em caso de 
+utilização de mais de um swab por mão, numerar os 
+swabs por ordem de coleta.
+V.	 Material: cabelo e pelo
+Se durante o exame físico for constatada a presen­
+
+28
+ça de cabelo(s) e/ou pelo(s) com características diver­
+sas aos da vítima, o(a) médico(a) deverá coletá-lo(s) 
+com utilização de pinça esterilizada. 
+VI.	Material: vestes e objetos com possível pre­
+sença de sêmen e/ou outros fluidos biológicos
+Se for constatada ou houver relato de presença de 
+sêmen e/ou outros fluidos biológicos em vestes e/ou ob­
+jetos trazidos pela vítima, estes deverão ser coletados.  	
+Coleta para Amostra de Referência: Coleta de 
+amostra da vítima
+VII.	Material: células de mucosa oral
+O material coletado da mucosa oral da vítima ser­
+virá como padrão genético de comparação com o ves­
+tígio coletado no seu corpo. 
+A coleta deverá ser realizada utilizando-se, pelo 
+menos, dois swabs esterilizados, de haste longa e fle­
+xível. O procedimento consiste em friccionar o swab 
+contra as paredes internas de cada bochecha em mo­
+vimentos como se estivesse raspando/girando nas su­
+perfícies mucosas.
+Recomenda-se que se friccione o mesmo swab 
+dez vezes em cada uma das bochechas.
+Caso o serviço utilize papel filtro como suporte 
+para este tipo de material, a secreção coletada deverá 
+ser transferida imediatamente, após a coleta, para os 
+respectivos papéis filtro.
+Secagem, Acondicionamento, Armazenamento e Transporte
+Após a coleta, deve-se deixar os swabs secarem 
+à temperatura ambiente (menor ou igual a 25o C), 
+protegidos da luz solar e de fontes de contaminação 
+biológica. Na sequência devem ser acondicionados 
+em porta-swabs ou em suas embalagens de origem, 
+dentro de envelopes de papel ou de recipientes se­
+cos apropriados, lacrados, identificados em etiquetas 
+impermeáveis, contendo as devidas informações per­
+tinentes ao caso: as iniciais do nome da vítima, data 
+e hora da coleta, tipo de amostra, responsável pela 
+coleta e nomes dos integrantes da equipe de saúde 
+que tiveram contato com o material coletado. 
+O armazenamento dos swabs deverá ser sob con­
+gelamento em embalagens plásticas apropriadas às 
+condições de temperatura e umidade que impeçam 
+extravasamentos. Caso não seja possível o congela­
+mento imediato, o armazenamento deverá ser feito 
+sob refrigeração (média de 4o C) por, no máximo, 48 
+horas e após esse período congelar. 
+No caso de os vestígios serem coletados em swa­
+bs e transferidos para papel filtro, estes poderão, após 
+a secagem, ser acondicionados em envelopes de pa­
+pel ou em recipientes secos apropriados. Os recipien­
+tes deverão ser lacrados, identificados em etiquetas 
+impermeáveis, contendo as devidas informações per­
+tinentes ao caso: as iniciais do nome da vítima, bem 
+como data e hora da coleta, tipo de amostra, res­
+ponsável pela coleta e nomes dos(as) integrantes da 
+equipe de saúde que tiveram contato com o material 
+coletado. O armazenamento poderá ser feito em en­
+velope de papel, em temperatura ambiente (menor 
+ou igual a 25o C) e em condições de umidade que não 
+
+29
+Preservação
+Os vestígios biológicos e amostras de referência coletados deverão ser preserva­
+dos de forma a garantir a integridade de seu material genético. Para isso, deve ser 
+evitado que o material biológico coletado seja exposto à luz solar, a substâncias 
+químicas e a condições que favoreçam o crescimento de microorganismos, tais 
+como umidade e calor.
+Em razão da natureza do material coletado (em 
+swab/papel filtro), a estrutura necessária para seu ar­
+mazenamento requer apenas um espaço para manu­
+seio (bancada e pia) e acondicionamento (congelador 
+e/ou armário).
+O armazenamento do material coletado exige 
+mecanismos de segurança, como controle rigoroso 
+do acesso à sala de armazenamento, que deverá ser 
+mantida trancada.
+Garantir que todos os materiais sejam embala­
+dos e que estejam seguros e à prova de adulteração, 
+apenas pessoal autorizado deve ser encarregado do 
+material.
+Como ainda não existem normas legais para o 
+prazo de descarte do material, recomenda-se seu ar­
+mazenamento por tempo indeterminado. O descarte 
+só poderá ser feito mediante autorização judicial.
+Registrar o manuseio do material a partir da sua 
+coleta: detalhes de transferência entre instituições 
+também devem ser registrados. As autoridades locais 
+deverão estabelecer protocolos para o registro dessas 
+informações e fluxos de transferência de material. 
+Documentar os itens coletados em lista pormeno­
+rizada nos prontuários ou registros médicos dos(as) 
+pacientes, bem como detalhes de quando, para quem 
+e como o material foi transferido.
+Orientações Gerais para Armazenamento e Transporte de Vestígios
+afetem sua preservação.
+O material biológico úmido coletado, seja em 
+swab seja em papel filtro, nunca deverá ser acondi­
+cionado diretamente em sacos plásticos.
+Se o material coletado for veste ou objeto trazido 
+pela vítima, também deverão ser seguidos os proce­
+dimentos de secagem, acondicionamento e congela­
+mento. Após a secagem, o material deverá ser acon­
+dicionado em envelopes de papel, não devendo ser 
+utilizados sacos plásticos. 
+A coleta, secagem, acondicionamento, armazena­
+mento e transporte do material biológico deverão se­
+guir padronização específica acima descrita, a fim de 
+que se garanta sua segurança e rastreabilidade.
+
+30
+Referências Bibliográficas
+BRASIL. Constituição (1988). Constituição da República Federativa do Brasil: promulgada em 5 de outubro 
+de 1988. Organização do texto: Juarez de Oliveira. 4ª ed. São Paulo: Saraiva 1990.
+_______. Decreto n° 7.508 de 28 de junho de 2011. Regulamenta a Lei no 8.080, de 19 de setembro de 1990, 
+para dispor sobre a organização do Sistema Único de Saúde - SUS, o planejamento da saúde, a assistência à saúde 
+e a articulação interfederativa, e dá outras providências. Ministério da Saúde. Secretaria de Gestão Estratégica e 
+Participativa. Decreto nº 7.508, de 28 de junho de 2011 : regulamentação da Lei nº 8.080/90 / Ministério da Saúde. 
+Secretaria de Gestão Estratégica e Participativa. – 1. ed., 4. reimpr. Brasília : Ministério da Saúde, 2013. 16 p. 
+_______. Decreto nº 7.958, de 13 de março de 2013. Estabelece diretrizes para o atendimento às vítimas de vio­
+lência sexual pelos profissionais de segurança pública e da rede de atendimento do Sistema Único de Saúde. Diário 
+Oficial [da] República Federativa do Brasil, Brasília, DF, Seção 1. 14/03/2013. p. 1
+_______. Lei nº 10.741 de 01 de outubro de 2003. Disponível em: http://www.planalto.gov.br/ccivil03/
+leis/2003/l10.741.htm. Acesso em: 06 de março de 2014.
+_______. Lei nº 10.778, de 24 de novembro de 2003. Disponível em: http://www.planalto.gov.br/ccivil03/
+leis/2003/l10.778.htm . Acesso em: 06 de março de 2014.
+_______. Lei nº 11.340, de 07 de agosto de 2006. Cria mecanismos para coibir a violência doméstica e fami­
+liar contra a mulher. Disponível em: http://www.planalto.gov.br/ccivil03/ato2004-2006/2006/lei/l11340.htm. 
+Acesso em: 06 de março de 2014.
+_______. Lei nº 11.530, de 24 de outubro de 2007. Institui o Programa Nacional de Segurança Pública 
+com Cidadania - PRONASCI e dá outras providências. Disponível em: http://www.planalto.gov.br/ccivil_03/_
+ato2007-2010/2007/Lei/L11530.htm. Acesso em 01 de setembro de 2015.
+_______. Lei nº 12.462, de 24 de julho de 2011. Disponível em: http://www.planalto.gov.br/ccivil03/
+ato2011-2014/2013/Lei/L12833.htm . Acesso em: 12 de março de 2014.
+_______. Lei nº 12.845, de 1º de agosto de 2013. Dispõe sobre o atendimento obrigatório e integral de 
+pessoas em situação de violência sexual. Diário Oficial [da] República Federativa do Brasil, Brasília, DF, Seção 
+1 - 2/8/2013, Página 1.
+_______. Lei nº 8.069, de 13 de julho de 1990. Estatuto da Criança e do Adolescente. Disponível em: http://
+www.planalto.gov.br/ccivil03/leis/l8069.htm. Acesso em 06 de março de 2014.
+_______. Lei nº 8.080, de 19 de setembro de 1990. Dispõe sobre as condições para a promoção, proteção e 
+recuperação da saúde, a organização e o funcionamento dos serviços correspondentes e dá outras providências. 
+Disponível em: http://www.planalto.gov.br/ccivil_03/Leis/L8080.htm. Acesso em: 01 de setembro de 2015.
+_______. Ministério da Justiça. Secretaria Nacional de Segurança Pública. Procedimento Operacional Pa­
+drão PERÍCIA CRIMINAL - Exame de Lesões Corporais, 2013.
+
+31
+_______. Ministério da Justiça. Secretaria Nacional de Segurança Pública. Procedimento Operacional Padrão 
+PERÍCIA CRIMINAL - Preservação e envio de vestígios biológicos, 2013.
+_______. Ministério da Saúde. Humaniza SUS: Política Nacional de Humanização: a humanização como eixo 
+norteador das práticas de atenção e gestão em todas as instâncias do SUS. Brasília: Ministério da Saúde, 2004. 
+_______. Ministério da Saúde. Linha de Cuidado para a Atenção Integral à Saúde de Crianças, Adolescentes 
+e suas Famílias em Situação de Violências: Orientação para Gestores e Profissionais de Saúde. Brasília: Ministé­
+rio da Saúde, 2012. 
+_______. Ministério da Saúde. Portaria GM/MS nº 1.271, de 06 de junho de 2014. Define a Lista Nacional 
+de Notificação Compulsória de doenças, agravos e eventos de saúde pública nos serviços de saúde públicos e 
+privados em todo o território nacional, nos termos do anexo, e dá outras providências. Disponível em: http://
+bvsms.saude.gov.br/bvs/saudelegis/gm/2014/prt127106062014.html.
+_______. Ministério da Saúde. Portaria nº 485, de 1º de abril de 2014. Redefine o funcionamento do Serviço de 
+Atenção às Pessoas em Situação de Violência Sexual no âmbito do Sistema Único de Saúde (SUS). Disponível em: http://
+bvsms.saude.gov.br/bvs/saudelegis/gm/2014/prt0485_01_04_2014.html. Acesso em: 01 de setembro de 2015.
+_______. Ministério da Saúde. Rede Nacional de Núcleos de Prevenção de Violências e Promoção da Saúde. 
+Portaria GM/MS nº 936, de 18 de maio de 2004. Brasil: Ministério da Saúde, 2004.
+_______. Ministério da Saúde. Secretaria de Atenção à Saúde. Departamento de Ações Programáticas e 
+Estratégicas. Atenção Humanizada ao Abortamento: Norma Técnica. 2ª ed. Brasília: Ministério da Saúde, 2011.
+_______. Ministério da Saúde. Secretaria de Atenção à Saúde. Departamento de Ações Programáticas e Es­
+tratégicas. Prevenção e tratamento dos agravos resultantes da violência sexual contra mulheres e adolescentes: 
+Norma Técnica. 3ª ed. Atual. e ampl. Brasília: Ministério da Saúde, 2011.
+_______. Ministério da Saúde. Secretaria de Atenção à Saúde. Departamento de Ações Programáticas Estra­
+tégicas.  Anticoncepção de Emergência: Perguntas e Respostas para Profissionais de Saúde. 2ª Edição. Brasília: 
+Editora do Ministério da Saúde, 2011.
+_______. Ministério da Saúde. Secretaria de Atenção à Saúde. Portaria nº 618, de 18 de julho de 2014. Alte­
+ra a tabela de serviços especializados do Sistema de Cadastro Nacional de Estabelecimentos de Saúde (SCNEA) 
+para o serviço 165 Atenção Integral à Saúde de pessoas em Situação de Violência Sexual e dispõe sobre regras 
+para seu cadastramento.
+_______. Ministério da Saúde. Secretaria de Vigilância em Saúde. Política Nacional de Promoção da Saúde. 
+Portaria GM/MS nº 2.466, de 11 de novembro de 2014. Redefine a Política Nacional de Promoção da Saúde 
+(PNPS). Disponível em: http://bvsms.saude.gov.br/bvs/saudelegis/gm/2014/prt244611112014.html
+_______. Ministério da Saúde. Secretaria de Vigilância em Saúde. Política Nacional de Redução da Morbimortali­
+dade por Acidentes e Violências. Portaria GM/MS nº 737, de 16 de maio de 2001. Brasil: Ministério da Saúde, 2001.
+
+32
+_______. Portaria Interministerial n° 288, de 25 de março de 2015. Estabelece orientações para a organiza­
+ção e integração do atendimento às vítimas de violência sexual pelos profissionais de segurança pública e pelos 
+profissionais de saúde do Sistema Único de Saúde (SUS) quanto à humanização do atendimento e ao registro de 
+informações e coleta de vestígios.
+_______. Presidência da República. Secretaria de Políticas para as Mulheres. Norma Técnica de Padronização das 
+Delegacias Especializadas de Atendimento às Mulheres – DEAM’s. Edição Atualizada, 2010. Disponível em: http://www.
+compromissoeatitude.org.br/wp-content/uploads/2012/08/MJ-2010-Norma-Tecnica-Padronizacao-DEAMs.pdf
+_______. Presidência da República. Secretaria de Políticas para as Mulheres. Norma Técnica de Uniformiza­
+ção Centros de Referência de Atendimento à Mulher em Situação de Violência. Brasil: Presidência da República. 
+Secretaria de Políticas para as Mulheres, 2006. Disponível em: http://www.compromissoeatitude.org.br/wp-
+content/uploads/2013/01/SPM-Norma-Tecnica-de-Uniformizacao-CRAMs-2006.pdf
+_______. Presidência da República. Secretaria Nacional de Enfrentamento à Violência contra as Mulheres. Secre­
+taria de Políticas para as Mulheres. Pacto Nacional pelo Enfrentamento à Violência contra as Mulheres. Brasília, 2010. 
+Disponível em: http://www.spm.gov.br/publicacoes-teste/publicacoes/2010/PactoNacionallivro.pdf
+_______. Presidência da República. Secretaria Nacional de Enfrentamento à Violência contra as Mulheres. 
+Secretaria de Políticas para as Mulheres. Política Nacional de Enfrentamento à Violência contra as Mulheres. 
+Brasília, 2011. Disponível em: http://www.spm.gov.br/publicacoes-teste/publicacoes/2011/politica-nacional
+DISTRITO FEDERAL. Manual para Atendimento às Vítimas de Violência na Rede de Saúde Pública do Distrito 
+Federal. Laurez Ferreira Vilela (coordenadora) – Brasília: Secretaria de Estado de Saúde do Distrito Federal, 2008.
+FLORIANÓPOLIS. Secretaria Municipal de Saúde. Diretoria de Atenção Primária. Gerência de Programas Es­
+tratégicos. Protocolo de Atenção Integral às Vítimas de Violência Sexual. Florianópolis, 2010.
+MANAUS. Secretaria Municipal de Saúde. Maternidade Dr. Moura Tapajós. Serviço de Atendimento à Vítima 
+de Violência Sexual – SAVVIS. Manaus, 2014.
+MINAS GERAIS. Polícia Civil do Estado de Minas Gerais. Superintendência de Polícia Técnico Científica. Ins­
+tituto Médico Legal. Protocolo de Coleta de Material Biológico das Vítimas de Violência Sexual e Cadeia de 
+Custódia. Minas Gerais, 2013.
+PARANÁ. Secretaria de Estado da Saúde. Linha Guia de Atenção à Mulher em Situação de Violência para Área 
+da Saúde. Paraná, 2011.
+RIO GRANDE DO NORTE. Secretaria de Estado de Saúde Pública. Protocolo estadual de atendimento às pes­
+soas em situação de violência: orientações para a prática em serviço. Rio Grande do Norte, 2002.
+WORLD HEALTH ORGANIZATION. Guidelines for medico-legal care of victims of sexual violence. Geneva, 
+2003.
+_______. World Report on Violence and Health. Geneva, 2002.
+
+33
+ANEXO A 
+TERMO DE CONSENTIMENTO INFORMADO 
+PROCEDIMENTOS PROFILÁTICOS E COLETA DE VESTÍGIOS 
+ 
+Nome:__________________________________________________________ 
+Idade:_____ Sexo:___________ 
+Prontuário:______________ 
+Responsável:_________________________________Parentesco:________________ 
+ 
+O abaixo assinado _____________________________________, ou pessoa responsável
+pelo(a) paciente __________________________________, declara ter recebido informações 
+do(a) proﬁssional de saúde a respeito dos seguintes procedimentos e seus possíveis efeitos
+colaterais. 
+ 
+Contracepção de Emergência 
+Pílulas de hormônios que vão diminuir a chance de que haja gravidez em decorrência de 
+estupro – se a vítima for mulher em idade fértil: 
+                                                                    (  ) Aceitou                     (  ) Não aceitou            
+ 
+ 
+Prevenção das Infecções Sexualmente Transmissíveis 
+Medicamentos utilizados para prevenir doenças que podem ser adquiridas pelo contato
+sexual. 
+Síﬁlis              
+ 
+                                               (  ) Aceitou      
+(  ) Não aceitou 
+Gonorreia  
+ 
+                                               (  ) Aceitou      
+(  ) Não aceitou 
+Infecção por Clamídia                                                (  ) Aceitou                   (  ) Não aceitou 
+Infecção por Tricomonas 
+                                 (  ) Aceitou                   (  ) Não aceitou 
+Hepatite B  
+ 
+                                               (  ) Aceitou      
+(  ) Não aceitou 
+
+34
+Prevenção da Infecção pelo HIV  
+Medicamentos usados para diminuir a possibilidade de contrair o HIV após o contato sexual. 
+                                                  (   ) Aceitou     (   ) Não aceitou 
+Realização de Exames 
+Sorologia para síﬁlis         
+               (   ) Aceitou    (   ) Não aceitou 
+Sorologia para hepatite B e C                    (   ) Aceitou    (   ) Não aceitou 
+Sorologia anti-HIV 
+ 
+               (   ) Aceitou    (   ) Não aceitou 
+Teste de Gravidez                                        (   ) Aceitou    (   ) Não aceitou   
+                                                                       (   ) Não se aplica (crianças e homens) 
+Coleta 
+Secreção Vaginal 
+                                          (   ) Aceitou    (   ) Não aceitou 
+Secreção Oral                                                            (   ) Aceitou    (   ) Não aceitou 
+Secreção Anal                                                           (   ) Aceitou    (   ) Não aceitou 
+Material Subungueal                                               (   ) Aceitou    (   ) Não aceitou 
+ 
+Declara que foi devidamente orientada sobre a importância de registrar a ocorrência policial ou caso já
+tenha registrado ou venha registrar ocorrência, estar ciente que a presente documentação e o material
+coletado serão encaminhados à autoridade policial, se requisitados. 
+ 
+_____________________________________________________________ 
+Assinatura da pessoa em situação de violência ou responsável 
+ 
+1a:________________________________                  
+ 
+2a:________________________________ 
+Testemunhas 
+ 
+______________________________________ 
+Assinatura  proﬁssional de saúde 
+Data:_____________________
+
+35
+ANEXO B - FICHA DE ATENDIMENTO MULTIPROFISSIONAL ÀS PESSOAS EM SITUAÇÃO DE VIOLÊNCIA 
+SEXUAL 
+ESTABELECIMENTO DE SAÚDE:_________________CNES: ___________ 
+ 
+1. DADOS DE IDENTIFICAÇÃO 
+* Ver detalhamento no prontuário ou ficha de notificação de violência  
+Data do Atendimento: ___/___/___ Hora do Atendimento: ___:___  
+Cartão Nacional da Saúde (CNS) l__l__l__l__l__l__l__l__l__l__l__l__l__l__l__l__l__l__l 
+Nome completo _____________________________________________________________________________________ 
+Data de Nascimento ___/___/___ 
+        Idade ____ anos                       Sexo: Masculino (    )        Feminino (    ) 
+Raça/Cor (autodeclarada):        branca (    )       preta  (    )      amarela (    )           parda (    )        indígena (    )    ignorado (    ) 
+Orientação sexual (autodeclarada): Heterossexual (    ) 
+ Homossexual (    )   Bissexual (    ) 
+  Não se aplica (    ) 
+Identidade de Gênero: Travesti (    )           Homem Transexual (    )        Mulher Transexual (    )       Não se aplica (    ) 
+ 
+Pessoa com deficiência ou transtorno? Não (    )   Sim(  )     Especifique:_________________________________________ 
+Município de Residência: __________________________________________ Telefone (      ) _______________________ 
+Representante Legal (apenas para ocorrências com crianças, adolescentes ou incapazes)  
+Vínculo: ________________________________________________________________________  
+Nome: _________________________________________________________ Telefone (      ) ______________________ 
+ 
+2. DADOS SOBRE A OCORRÊNCIA DA VIOLÊNCIA SEXUAL 
+Data da Ocorrência: ___/___/___  Hora da Ocorrência: ___:___   
+Município da Ocorrência: _______________________________________________________UF: ___________________ 
+Local da Ocorrência: __________________________________________________________________________________ 
+Violência de Repetição? Não (    )    
+Sim (    )   Se sim, início há ____ anos____ meses      
+Houve ameaças? Não (    )    Sim (    )   Especifique:_________________________________________________ 
+Houve violência física?  Não (    )    
+Sim (  ) Qual o Tipo de Agressão? Informar tipo de agressão, uso de arma ou meio utilizado 
+pelo agressor:  ________________________________________________________________________________ 
+Relata ter sofrido violência sexual? Não (    )    
+Sim (    )   Ignorado (    ) 
+Se houve penetração, qual tipo? vaginal (    ) anal (    )  oral (    )   Outra (    )  ____________________________________ 
+Houve ejaculação?                     Não (    )    
+Sim (    )   Não sabe (    )   
+Local do corpo (especificar): ____________________________ 
+O agressor usou preservativo?  Não (    )   Sim (    )  Não  sabe (    )  
+Houve contato do agressor com alguma parte do corpo que não os órgãos genitais? Não (   )      Sim (   ) 
+Local do corpo: seios (    ) Nádegas (   ) Coxas (   ) Pescoço (    ) Outros (    ) Especificar: ____________ 
+
+36
+Após a agressão e antes deste exame:  
+Tomou Banho?   Não (    )    Sim (    )  
+ Fez uso de ducha vaginal?  Não (    )    Sim (    ) 
+Trocou de roupa?  Não (    )    Sim (    )  
+Trouxe a roupa ou objeto ?   Não (    )    Sim (    ) 
+Qual?_______________________________________________________________________________ 
+Utilizou (    ) ou foi forçada(o) (    ) a utilizar na últimas 24 horas algum tipo de: 
+(    ) álcool, que tipo de bebida? _________________________________________________________________________ 
+(    ) drogas, lembra qual substância? _____________________________________________________________________ 
+(    ) medicamento que acha que possa afetar o comportamento, consciência ou sono - Qual (is)?_____________________       
+ 
+Durante a violência sexual estava: 
+ Consciente (  ) Inconsciente (   ) Sonolenta (   ) Em coma (   ) 
+Relação com a pessoa que cometeu a violência sexual:  
+                                 
+Desconhecido (    )      Nº de envolvidos   (   ) 1  
+(   ) 2 ou mais  
+Conhecido do ciclo de relacionamento: Não (    )    
+Sim (    ) ________________________________________ 
+Conhecido, mas não do ciclo de relacionamento Não (    )    Sim (   ) _________________________________ 
+Descrição da Ocorrência da violência sexual relatada pela pessoa agredida  
+É importante que o registro da fala da pessoa que sofreu violência sexual seja anotado de forma completa e textual, com 
+todos os dados referidos, em especial se ela recorda o que aconteceu antes, durante e depois da violência sexual, tendo 
+cuidado para não prejulgar, interpretar ou substituir palavras: 
+             
+____________________________________________________________________________________________________
+____________________________________________________________________________________________________
+____________________________________________________________________________________________________
+____________________________________________________________________________________________________
+____________________________________________________________________________________________________
+____________________________________________________________________________________________________ 
+ 
+3. HISTÓRIA GINECOLÓGICA PREGRESSA 
+ 
+Menarca: Não (    )    
+Sim (    )       ____ anos                          Data da última menstruação: ___/___/___           
+Nunca manteve relações sexuais antes da violência sexual  (    )    
+ 
+Gestante Não (    )          Sim (    )       Período Gestacional: _________________________________________ 
+ 
+Usa algum método Contraceptivo?  Não (    )   Sim (    ) Qual: _______________________________________ 
+ 
+Teve relação sexual consentida (marido, noivo, namorado, amigo, outro) em data próxima da violência sexual?  
+Não (    )    
+Sim (    )  
+ 
+Data da última relação sexual consentida: ___/___/___  Hora: ___:___   
+ 
+ 
+4. EXAME FÍSICO 
+Anotar achados do exame físico geral, sinais vitais, situação vacinal. Descrever com detalhes as lesões encontradas (tipo, 
+aspecto, tamanho, localização, etc). Utilizar o mapa de lesões (anexo). 
+Peso: ____Kg 
+ 
+Pressão arterial: ________mmHg 
+ 
+Pulso: ____ 
+ 
+Temp.: ____°C 
+Estado clínico geral: 
+____________________________________________________________________________________________________
+
+37
+Situação Vacinal:            
+   Tétano (    )não (    )   sim        Hepatite B  (    )   
+não (    )   sim      
+Lesões na cabeça e pescoço:    Não (    )         Sim (    ) _______________________________________ 
+Lesões na mama D(    )   mama E     (    )  ____________________________________________ 
+ 
+Lesões no tórax e abdome         Não (    )          Sim (    )  _______________________________________ 
+ 
+Lesões em membros superiores  Não (    )    
+Sim (    )    ______________________________________ 
+ 
+Lesões em membros inferiores:   Não (    )    
+Sim (    )   _______________________________________ 
+ 
+Lesões genitais ou extragenitais: Não (    )    
+Sim (    )   ______________________________________ 
+Registrar outros achados do exame físico: 
+____________________________________________________________________________________________________
+____________________________________________________________________________________________________
+____________________________________________________________________________________________________
+____________________________________________________________________________________________________
+____________________________________________________________________________________________________ 
+ 
+5. EXAMES SOLICITADOS 
+Hemograma(   )  Transaminases(   )   Anti-HIV(  )   HBsAg(   )   Anti-HCV(   )   VDRL ou RPR (    )  
+Conteúdo Vaginal: bacterioscopia (    )   cultura (    )   biologia molecular (    )    
+Investigação endocervical para gonococo (    )   clamídia (    )   HPV (    )    
+Rx (    )   Partes do corpo____________________     Ultrassom (    )   Partes do corpo     ________________ 
+Tomografia Computadorizada (    )   Partes do corpo__________ Outros exames (    )   __________________ 
+6. FÁRMACOS/ IMUNOBIOLÓGICOS ADMINISTRADOS 
+Contracepção de Emergência  Não (    )    
+Sim (    )        
+ 
+ 
+Profilaxia HIV                            Não (    )    
+Sim (    )        
+Imunoprofilaxia Hepatite B        Não (    )    
+Sim (    )        
+        
+Profilaxia do Tétano:                 Não (    )    
+Sim (    )        
+Profilaxia IST                           Não (    )    
+Sim (    ) 
+Detalhar________________________________________________ 
+7. COLETA DE MATERIAL/VESTÍGIOS 
+Coleta de material/vestígios de interesse pericial:                                                        Não (    )   Sim (    )        
+          
+Swab vaginal:                                                                                                                             Não (    )   Sim (    )        
+Swab anal:                                                                                                                                 Não (    )   Sim (    )       
+           
+Swab oral:                                                                                                                                 Não (    )   Sim (    )        
+            
+Swab outros locais.     Não (    )   Sim (    )       Especificar:_______________________________________________ 
+Armazenado em Papel Filtro: Não (    )   Sim (    )        
+Outro suporte: Não (    )   Sim (    )       Especificar:____________________________________________________________ 
+
+38
+8. ATENDIMENTO PSICOLÓGICO  
+*Durante o primeiro atendimento (   ) ou no seguimento ambulatorial (   ) 
+____________________________________________________________________________________________________
+____________________________________________________________________________________________________
+____________________________________________________________________________________________________
+____________________________________________________________________________________________________ 
+9. ATENDIMENTO DO SERVIÇO SOCIAL 
+*Durante o primeiro atendimento (   ) ou no seguimento ambulatorial (   ) 
+ 
+____________________________________________________________________________________________________
+____________________________________________________________________________________________________
+____________________________________________________________________________________________________
+____________________________________________________________________________________________________ 
+10. ATENDIMENTOS REALIZADOS EM OUTROS SERVIÇOS 
+Registrou Boletim de Ocorrência?                             Não (    )   Sim (    )  Data: ___/___/___  Hora: ___:___    
+BO n°________________________________  
+Caso não, deseja realizar o registro?                         Não (    )      Sim (    )        
+Realizado atendimento no IML?                                 Não (    )  Sim (    )  Data:: ___/___/___ Hora: ___:___  
+ 
+Comunicação ao Conselho tutelar:                             Não (    ) Sim (    )  Não se aplica  (     )  
+Comunicação ao Conselho do Idoso / Ministério Público / Defensoria Pública / Delegacia:  
+                                                                                   Não (    )            Sim (    )          Não se aplica (     )  
+Oferecimento proteção/abrigo:                                   Não (    )           Sim (    )          Não se aplica (     ) Especifique: 
+___________ 
+          
+Atendimento em outro serviço:                                   Não (    )           Sim (    )          Especifique: ___________ 
+11. ENCAMINHAMENTOS, CONDUTAS E OBSERVAÇÕES ADICIONAIS 
+____________________________________________________________________________________________________ 
+____________________________________________________________________________________________________
+____________________________________________________________________________________________________
+____________________________________________________________________________________________________
+____________________________________________________________________________________________________
+____________________________________________________________________________________________________ 
+ 
+ 
+CID 10 – Cap. XX________________________ 
+ 
+ 
+ 
+________________________________                         _________________________________ 
+ 
+Assinatura e carimbo do(a) Médico(a)                            Assinatura e carimbo do(a) Enfermeiro(a) 
+ 
+ 
+ 
+_________________________________                        ___________________________________ 
+Assinatura e carimbo do(a) Psicólogo(a)                       Assinatura e carimbo do(a) Assistente Social 
+
+39
+1
+3
+3
+4
+4
+5
+7
+7
+6
+8
+8
+10
+11
+11
+21
+21
+13
+12
+13
+22
+22
+15
+14
+15
+17
+17
+16
+18
+19
+19
+23
+23
+24
+24
+20
+25
+25
+26
+26
+27
+27
+28
+28
+1
+1
+3
+3
+2
+4
+6
+6
+5
+5
+10
+7
+7
+17
+17
+18
+18
+19
+19
+20
+20
+8
+8
+11
+9
+9
+12
+12
+21
+21
+13
+13
+14
+14
+15
+15
+16
+16
+1 - Frontal
+2 - Orbitárias
+3 - Malares
+4 - Mandibular
+5 - Mentoniana
+6 - Cervical anterior
+7 - Carotidianas
+8 - Supraclaviculares
+9 - Infraclaviculares
+10 - Esternal
+11 - Torácicas
+12 - Epigástricas
+13 - Hipocôndrios
+14 - Mesogástrica
+15 - Flancos
+16 - Hipogástrica
+17 - Fossas ilíacas
+18 - Pubiana
+19 - Inguinal
+20 - Escrotal
+21 - Braço
+22 - Cubital
+23 - Antebraço
+24 - Palmar
+25 - Coxa
+26 - Joelho
+27 - Perna
+28 - Dorso do pé
+1 - Parietal
+2 - Occipital
+3 - Temporal
+4 - Cervical
+5 - Supra
+Escapular
+6 - Escapular
+7 - Dorsal
+8 - Lombar
+9 - Ilíaca
+10 - Espondiléia
+11 - Sacro
+coccígea
+12 - Glútea
+13 - Coxa
+14 - Poplitéia
+15 - Perna
+16 - Pé
+17 Deltoidiana
+18 - Braço
+19 - Cotovelo
+20 - Antebraço
+21 - Face dorsal 
+mão
+9
+9
+ANEXO C - MAPA DE LESÕES
+GRÁFICO FEMININO
+Nome:_______________________________________________________	
+Data: ___/___/___  
+Profissional:______________________________________________________________________
+
+40
+Mapa Anatômico
+Genitália Feminina
+Regiôes:
+1. Do Monte de Vênus
+2. Clitoriana
+3. Dos Grandes Lábios
+4. Da Raiz da Coxa
+5. Do Rafe do Períneo
+6. Perineal
+7. Anal
+8. Perianal
+9. Glútea
+10. Do vestíbulo Vaginal
+11. Dos Pequenos Lábios
+GRÁFICO FEMININO – GENITÁLIA FEMININA
+Nome:_______________________________________________________	
+Data: ___/___/___  
+Profissional:______________________________________________________________________
+
+41
+GRÁFICO MASCULINO
+Nome:_______________________________________________________	
+Data: ___/___/___  
+Profissional:______________________________________________________________________
+1
+3
+3
+4
+4
+5
+7
+7
+6
+8
+8
+10
+11
+11
+21
+21
+13
+12
+13
+22
+22
+15
+14
+15
+17
+17
+16
+18
+19
+19
+23
+23
+24
+24
+20
+25
+25
+26
+26
+27
+27
+28
+28
+1
+1
+3
+3
+2
+4
+6
+6
+5
+5
+10
+7
+7
+17
+17
+18
+18
+19
+19
+20
+20
+8
+8
+11
+9
+9
+12
+12
+21
+21
+13
+13
+14
+14
+15
+15
+16
+16
+1 - Frontal
+2 - Orbitárias
+3 - Malares
+4 - Mandibular
+5 - Mentoniana
+6 - Cervical anterior
+7 - Carotidianas
+8 - Supraclaviculares
+9 - Infraclaviculares
+10 - Esternal
+11 - Torácicas
+12 - Epigástricas
+13 - Hipocôndrios
+14 - Mesogástrica
+15 - Flancos
+16 - Hipogástrica
+17 - Fossas ilíacas
+18 - Pubiana
+19 - Inguinal
+20 - Escrotal
+21 - Braço
+22 - Cubital
+23 - Antebraço
+24 - Palmar
+25 - Coxa
+26 - Joelho
+27 - Perna
+28 - Dorso do pé
+1 - Parietal
+2 - Occipital
+3 - Temporal
+4 - Cervical
+5 - Supra
+Escapular
+6 - Escapular
+7 - Dorsal
+8 - Lombar
+9 - Ilíaca
+10 - Espondiléia
+11 - Sacro
+coccígea
+12 - Glútea
+13 - Coxa
+14 - Poplitéia
+15 - Perna
+16 - Pé
+17 Deltoidiana
+18 - Braço
+19 - Cotovelo
+20 - Antebraço
+21 - Face dorsal mão
+9
+9
+
+42
+GRÁFICO MASCULINO – GENITÁLIA MASCULINA
+Nome:_______________________________________________________	
+Data: ___/___/___  
+Profissional:______________________________________________________________________
+Mapa Anatômico
+Genitália Masculina
+Regiões:
+1. Suprapúbica
+2. Peniana
+3. Escrotal
+4. Da Raiz da Coxa
+5. Da Rafe da Perineal
+6. Perineal
+7. Anal
+8. Perianal
+9. Glútea
+1
+2
+3
+4
+5
+6
+7
+8
+9
+
+43
+ANEXO D - IMAGEM CRONOMÉTRICA PARA EXAME GINECOLÓGICO
+Desenhe no esquema abaixo o aspecto do hímen (forma, localização de rupturas – como um mostra­
+dor de relógio, etc). Descrever no espaço abaixo.
+Hímen:                                       (      ) Roto      (     ) Íntegro   (    ) Complacente*   
+Bordas da ruptura:                     (     ) Sangrantes/equimóticas (    ) Cicatrizadas   (    ) Não se aplica   
+Local da ruptura(s) às: 
+(     ) 1  (     ) 2  (     ) 3  (     ) 4   (    ) 5  (     ) 6 (     ) 7  (     ) 8   (     ) 9 (     ) 10 (     ) 11 (     ) 12 horas  
+(     ) Reduzido a carúnculas  (     ) Não se aplica
+Outras informações relevantes: 
+___________________________________________________________________________________
+___________________________________________________________________________________
+___________________________________________________________________________________
+___________________________________________________________________________________
+________________________
+ 
+*Complacente é o hímen íntegro que, devido às dimensões do óstio, permitiria a penetração peniana 
+sem a ruptura da borda.  
+SISTEMAS
+CRONOMÉTRICO
+12 horas
+6 horas
+
+44

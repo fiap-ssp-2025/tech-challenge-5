@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Atendimento #{{ row.id if row else analysis_id }} · Guardiã AI{% endblock %}
+{% block content %}
+{% if not row %}
+<div class="alert" data-variant="destructive"><h2>Atendimento não encontrado</h2><section>Não existe registro com o id {{ analysis_id }}. <a class="underline" href="/historico">Voltar ao histórico</a>.</section></div>
+{% else %}
+{% set r = row.response_json or {} %}
+<section class="flex flex-wrap items-start justify-between gap-3">
+  <div class="grid gap-1">
+    <h1 class="text-2xl font-semibold tracking-tight">Atendimento #{{ row.id }}</h1>
+    <p class="text-sm text-muted-foreground">{{ row.ts.replace('T', ' ') }} · relato com {{ row.input_length }} caracteres (hash <code class="text-xs">{{ (row.input_hash or '')[:12] }}…</code>, texto não gravado){% if total_ms %} · {{ (total_ms / 1000)|round(1) }} s no total{% endif %}</p>
+  </div>
+  <div class="flex items-center gap-2"><span class="risk-chip risk-{{ row.risk_level }}">risco {{ row.risk_level }}</span><a href="/historico" class="btn" data-variant="outline" data-size="sm">← Histórico</a></div>
+</section>
+
+<div class="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] items-start">
+  <section class="card p-5 grid gap-3">
+    <h2 class="font-semibold">O que aconteceu, etapa por etapa</h2>
+    {% if steps %}
+    <ol class="timeline">
+      {% for s in steps %}
+      <li class="tl-item">
+        <span class="tl-dot" data-status="{{ s.status }}">{{ loop.index }}</span>
+        <div class="grid gap-0.5 min-w-0">
+          <div class="flex flex-wrap items-baseline gap-x-2"><span class="text-sm font-medium">{{ s.label }}</span><span class="text-xs text-muted-foreground tabular-nums">{% if s.duration_ms is not none %}{{ s.duration_ms }} ms{% else %}{{ s.status }}{% endif %}</span></div>
+          {% if s.digest %}<p class="text-xs text-muted-foreground break-words">{{ s.digest }}</p>{% endif %}
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+    {% else %}
+    <p class="text-sm text-muted-foreground">Esta análise foi feita antes da linha do tempo por etapa. Abaixo, o que foi registrado.</p>
+    <ol class="timeline">
+      <li class="tl-item"><span class="tl-dot">1</span><div class="grid gap-0.5"><span class="text-sm font-medium">Risco por regras</span><p class="text-xs text-muted-foreground">{{ row.risk_level }} · {{ (row.risk_factors or [])|join('; ') or 'sem fatores' }}</p></div></li>
+      <li class="tl-item"><span class="tl-dot">2</span><div class="grid gap-0.5"><span class="text-sm font-medium">Modelo</span><p class="text-xs text-muted-foreground">{% if row.ml_probability is not none %}{{ (row.ml_probability * 100)|round|int }}% · {{ 'sugere encaminhar' if row.ml_suggest_referral else 'sem sugestão' }} · {{ row.ml_model }}{% else %}não rodou{% endif %}</p></div></li>
+      <li class="tl-item"><span class="tl-dot">3</span><div class="grid gap-0.5"><span class="text-sm font-medium">Protocolos</span><p class="text-xs text-muted-foreground">{{ (row.sources or [])|map(attribute='title')|join(', ') or 'nenhum' }}</p></div></li>
+      <li class="tl-item"><span class="tl-dot">4</span><div class="grid gap-0.5"><span class="text-sm font-medium">LLM</span><p class="text-xs text-muted-foreground">{{ row.llm_backend }} · {{ row.llm_model }} · {{ row.llm_latency_ms }} ms · {{ row.final_status }}</p></div></li>
+      <li class="tl-item"><span class="tl-dot">5</span><div class="grid gap-0.5"><span class="text-sm font-medium">Validador</span><p class="text-xs text-muted-foreground">{% if row.judge_approved == 1 %}aprovou{% elif row.judge_approved == 0 %}reprovou{% else %}não avaliou{% endif %}</p></div></li>
+    </ol>
+    {% endif %}
+  </section>
+
+  <div class="grid gap-4">
+    <section class="card p-5 grid gap-2">
+      <h2 class="font-semibold">Nota de apoio</h2>
+      {% if r.get('resumo') %}<p class="text-sm leading-relaxed">{{ r.resumo }}</p>{% endif %}
+      {% if r.get('leitura_do_modelo') %}<p class="text-sm text-muted-foreground">{{ r.leitura_do_modelo }}</p>{% endif %}
+      {% if r.get('bloqueio') %}<div class="alert" data-variant="destructive"><h2>Nota bloqueada</h2><section>{{ r.bloqueio }}</section></div>{% endif %}
+      {% if r.get('erro') %}<div class="alert" data-variant="destructive"><h2>LLM indisponível</h2><section>{{ r.erro }}</section></div>{% endif %}
+      {% if r.get('acoes_sugeridas') %}<h3 class="text-sm font-semibold mt-1">Ações sugeridas</h3><ol class="list-decimal ps-5 text-sm grid gap-0.5">{% for a in r.acoes_sugeridas %}<li>{{ a }}</li>{% endfor %}</ol>{% endif %}
+      {% if r.get('encaminhamentos') %}<h3 class="text-sm font-semibold mt-1">Encaminhamentos</h3><ul class="list-disc ps-5 text-sm grid gap-0.5">{% for e in r.encaminhamentos %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+      {% if r.get('perguntas_pendentes') %}<h3 class="text-sm font-semibold mt-1">O que ainda perguntar</h3><ul class="list-disc ps-5 text-sm grid gap-0.5">{% for p in r.perguntas_pendentes %}<li>{{ p }}</li>{% endfor %}</ul>{% endif %}
+      {% if row.sources %}<h3 class="text-sm font-semibold mt-1">Protocolos</h3><ul class="flex flex-wrap gap-1">{% for s in row.sources %}<li><span class="badge" data-variant="{{ 'default' if (s.title if s.title is defined else s) in (r.get('fontes_citadas') or []) else 'outline' }}">{{ s.title if s.title is defined else s }}</span></li>{% endfor %}</ul>{% endif %}
+    </section>
+    <section class="card p-5 grid gap-2">
+      <h2 class="font-semibold">Modelo e ficha</h2>
+      <dl class="grid grid-cols-[9rem_minmax(0,1fr)] gap-x-3 gap-y-1 text-sm">
+        <dt class="text-muted-foreground">Probabilidade</dt><dd>{% if row.ml_probability is not none %}{{ (row.ml_probability * 100)|round|int }}% (limiar {{ (row.ml_threshold * 100)|round|int }}%) → {{ 'sugere encaminhar' if row.ml_suggest_referral else 'sem sugestão' }}{% else %}—{% endif %}</dd>
+        <dt class="text-muted-foreground">Fatores SHAP</dt><dd><ul class="grid gap-0.5">{% for t in row.ml_top_features or [] %}<li>{{ t.label }} = {{ t.value }} ({{ '%+.3f'|format(t.shap) }})</li>{% else %}<li>—</li>{% endfor %}</ul></dd>
+        <dt class="text-muted-foreground">Ficha informada</dt><dd><ul class="grid gap-0.5">{% for l, v in case_summary(row.case_fields) %}<li>{{ l }}: {{ v }}</li>{% else %}<li>—</li>{% endfor %}</ul></dd>
+      </dl>
+    </section>
+    <details class="card p-4 text-xs"><summary class="cursor-pointer font-semibold">Validador: critérios</summary><pre class="mt-2 whitespace-pre-wrap break-words rounded-md bg-muted p-2">{{ json_dumps(row.judge_checks) }}</pre></details>
+    <details class="card p-4 text-xs"><summary class="cursor-pointer font-semibold">Nota completa (JSON)</summary><pre class="mt-2 whitespace-pre-wrap break-words rounded-md bg-muted p-2">{{ json_dumps(row.response_json) }}</pre></details>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

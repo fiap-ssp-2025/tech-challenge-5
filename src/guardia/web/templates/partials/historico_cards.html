@@ -1,0 +1,31 @@
+{% for r in rows %}
+<article class="card p-4 hist-card">
+  <header class="flex flex-wrap items-start justify-between gap-2">
+    <div class="grid gap-0.5">
+      <a class="font-semibold underline-offset-2 hover:underline" href="/historico/{{ r.id }}">Atendimento #{{ r.id }}</a>
+      <span class="text-xs text-muted-foreground">{{ r.ts[:16].replace('T', ' ') }} UTC · relato com {{ r.input_length }} caracteres</span>
+    </div>
+    <span class="risk-chip risk-{{ r.risk_level }}">risco {{ r.risk_level or '—' }}</span>
+  </header>
+  {% if r.relato_resumo %}<p class="text-sm leading-snug">{{ r.relato_resumo[:220] }}{% if r.relato_resumo|length > 220 %}…{% endif %}</p>
+  {% elif r.risk_factors %}<p class="text-sm text-muted-foreground">Fatores: {{ r.risk_factors|join('; ') }}</p>{% endif %}
+  <div class="flex flex-wrap items-center gap-1.5">
+    {% if r.ml_probability is not none %}<span class="badge" data-variant="{{ 'destructive' if r.ml_suggest_referral else 'secondary' }}">modelo {{ (r.ml_probability * 100)|round|int }}% · {{ 'sugere encaminhar' if r.ml_suggest_referral else 'sem sugestão' }}</span>{% endif %}
+    {% if r.judge_approved == 1 %}<span class="badge" data-variant="secondary">validador aprovou</span>{% elif r.judge_approved == 0 %}<span class="badge" data-variant="destructive">validador reprovou</span>{% else %}<span class="badge" data-variant="outline">sem validação</span>{% endif %}
+    {% if r.final_status and r.final_status.startswith('blocked') %}<span class="badge" data-variant="destructive">bloqueada</span>{% elif r.final_status == 'llm_error' %}<span class="badge" data-variant="outline">LLM indisponível</span>{% endif %}
+  </div>
+  <div class="meta">
+    <span>{{ (r.sources or [])|length }} protocolo(s)</span>
+    <span>{{ r.llm_backend or 'sem LLM' }}{% if r.llm_latency_ms %} · {{ (r.llm_latency_ms / 1000)|round(1) }} s{% endif %}</span>
+    {% if r.total_ms %}<span>total {{ (r.total_ms / 1000)|round(1) }} s</span>{% endif %}
+    {% if r.steps %}<span>{{ r.steps|selectattr('status', 'equalto', 'done')|list|length }}/{{ r.steps|length }} etapas</span>{% endif %}
+  </div>
+</article>
+{% else %}
+<div class="card p-6 text-center text-sm text-muted-foreground md:col-span-2">Nenhum atendimento analisado ainda. Faça uma triagem para ver a linha do tempo aqui.</div>
+{% endfor %}
+{% if has_more %}
+<div id="more-row" class="md:col-span-2 text-center">
+  <button type="button" class="btn" data-variant="outline" data-size="sm" hx-get="/historico?page={{ page + 1 }}" hx-target="#more-row" hx-swap="outerHTML" hx-indicator="this">Carregar mais</button>
+</div>
+{% endif %}

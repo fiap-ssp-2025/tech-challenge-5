@@ -1,0 +1,75 @@
+/* Estados de carregamento do htmx 4: .htmx-indicator fica oculto até a requisição começar. */
+.htmx-indicator { display: none; }
+.htmx-request .htmx-indicator, .htmx-request.htmx-indicator { display: inline-flex; }
+.htmx-request .hide-on-request { display: none; }
+.htmx-request button[type="submit"] { opacity: .7; pointer-events: none; }
+
+/* Barras SHAP: largura proporcional, cor pelo sinal (tokens do Basecoat para contraste nos dois temas) */
+.shap-track { height: .55rem; border-radius: .25rem; background: var(--color-muted); position: relative; overflow: hidden; }
+.shap-fill { position: absolute; top: 0; bottom: 0; }
+.shap-fill[data-dir="aumenta"] { background: var(--color-destructive); left: 50%; }
+.shap-fill[data-dir="reduz"] { background: var(--color-primary); right: 50%; }
+
+.risk-critico { --risk: #a2353f; }
+.risk-alto { --risk: #b45309; }
+.risk-moderado { --risk: #a16207; }
+.risk-baixo { --risk: #15803d; }
+.dark .risk-critico { --risk: #f08a92; }
+.dark .risk-alto { --risk: #f59e0b; }
+.dark .risk-moderado { --risk: #facc15; }
+.dark .risk-baixo { --risk: #4ade80; }
+.risk-chip { color: var(--risk); border: 1px solid var(--risk); border-radius: 999px; padding: .15rem .6rem; font-weight: 600; font-size: .8rem; white-space: nowrap; }
+
+.prob-ring { --p: 0; width: 5.5rem; height: 5.5rem; border-radius: 50%; display: grid; place-items: center;
+  background: conic-gradient(var(--color-primary) calc(var(--p) * 1%), var(--color-muted) 0); }
+.prob-ring > span { width: 4.3rem; height: 4.3rem; border-radius: 50%; background: var(--color-card); display: grid; place-items: center; font-weight: 700; }
+
+:focus-visible { outline: 2px solid var(--color-ring); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+/* ── Composer (caixa de relato no estilo chat) ───────────────────────────── */
+.composer-box { position: relative; border: 1px solid var(--color-border); border-radius: .9rem; background: var(--color-background); padding: .75rem .9rem .5rem; display: grid; gap: .4rem; }
+.composer-box:focus-within { outline: 2px solid var(--color-ring); outline-offset: 1px; }
+.composer-box[data-invalid="true"] { border-color: var(--color-destructive); }
+.composer-text { width: 100%; border: 0; background: transparent; resize: vertical; min-height: 6.5rem; max-height: 40vh; font: inherit; line-height: 1.5; color: inherit; outline: none; }
+.composer-interim { display: block; min-height: 0; color: var(--color-muted-foreground); font-style: italic; font-size: .95rem; }
+.composer-interim:empty { display: none; }
+.composer-bar { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; border-top: 1px solid var(--color-border); padding-top: .5rem; }
+.mic-on { background: var(--color-destructive) !important; color: var(--color-background) !important; border-color: var(--color-destructive) !important; animation: micpulse 1.4s ease-in-out infinite; }
+@keyframes micpulse { 0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-destructive) 45%, transparent); } 50% { box-shadow: 0 0 0 8px transparent; } }
+#live-indicator { display: none; } .htmx-request #live-indicator, #live-indicator.htmx-request { display: inline-flex; }
+
+/* ── Ficha com revelação progressiva ───────────────────────────────────── */
+.field-summary { cursor: pointer; display: flex; align-items: center; gap: .5rem; font-size: .9rem; font-weight: 600; list-style: none; padding: .4rem 0; }
+.field-summary::-webkit-details-marker { display: none; }
+.field-summary::before { content: ""; width: .45rem; height: .45rem; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform .15s; margin-inline: .1rem .2rem; opacity: .7; }
+details[open] > .field-summary::before { transform: rotate(45deg); }
+details + details { border-top: 1px solid var(--color-border); }
+
+/* ── Progresso honesto por etapa ───────────────────────────────────────── */
+.progress-track { height: .5rem; border-radius: 999px; background: var(--color-muted); overflow: hidden; }
+.progress-fill { height: 100%; background: var(--color-primary); border-radius: 999px; transition: width .4s ease; }
+.step { display: grid; grid-template-columns: 1rem minmax(0, 11rem) minmax(0, 1fr); gap: .5rem; align-items: baseline; font-size: .8rem; }
+@media (max-width: 520px) { .step { grid-template-columns: 1rem minmax(0, 1fr); } .step-meta { grid-column: 2; } }
+.step-dot { width: .6rem; height: .6rem; border-radius: 50%; background: var(--color-muted); display: inline-block; align-self: center; }
+.step-done .step-dot { background: var(--color-primary); }
+.step-running .step-dot { background: var(--color-primary); animation: micpulse 1.2s ease-in-out infinite; }
+.step-error .step-dot { background: var(--color-destructive); }
+.step-pending { color: var(--color-muted-foreground); }
+.step-meta { color: var(--color-muted-foreground); overflow-wrap: anywhere; }
+.skeleton-card { display: grid; gap: .5rem; padding-top: .25rem; }
+.sk { height: .8rem; border-radius: .3rem; background: linear-gradient(90deg, var(--color-muted) 25%, color-mix(in oklab, var(--color-muted) 60%, var(--color-background)) 50%, var(--color-muted) 75%); background-size: 200% 100%; animation: shimmer 1.6s linear infinite; }
+.sk-title { width: 45%; height: 1.1rem; } .sk-short { width: 60%; }
+@keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .sk, .mic-on, .step-running .step-dot { animation: none; } }
+
+/* ── Histórico (linha do tempo) ────────────────────────────────────────── */
+.timeline { display: grid; gap: 0; }
+.tl-item { display: grid; grid-template-columns: 1.4rem minmax(0, 1fr); gap: .6rem; position: relative; padding-bottom: .9rem; }
+.tl-item::before { content: ""; position: absolute; left: .62rem; top: 1rem; bottom: 0; width: 2px; background: var(--color-border); }
+.tl-item:last-child::before { display: none; }
+.tl-dot { width: 1.3rem; height: 1.3rem; border-radius: 50%; display: grid; place-items: center; font-size: .65rem; font-weight: 700; background: var(--color-primary); color: var(--color-primary-foreground); }
+.tl-dot[data-status="error"] { background: var(--color-destructive); }
+.tl-dot[data-status="pending"] { background: var(--color-muted); color: var(--color-muted-foreground); }
+.hist-card { display: grid; gap: .5rem; }
+.hist-card .meta { display: flex; flex-wrap: wrap; gap: .4rem .8rem; font-size: .78rem; color: var(--color-muted-foreground); }

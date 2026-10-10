@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Histórico · Guardiã AI{% endblock %}
+{% block content %}
+<section class="grid gap-1">
+  <h1 class="text-2xl font-semibold tracking-tight">Histórico de atendimentos</h1>
+  <p class="text-sm text-muted-foreground max-w-prose">Cada análise anterior, com o que o grafo fez em cada etapa, o que o modelo estimou, os protocolos consultados e o veredito do validador. O relato nunca é gravado: fica só o hash.</p>
+</section>
+<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+  <div class="card p-4"><p class="text-xs text-muted-foreground">Atendimentos analisados</p><p class="text-2xl font-semibold tabular-nums">{{ stats.total }}</p></div>
+  <div class="card p-4"><p class="text-xs text-muted-foreground">Com sugestão de encaminhamento</p><p class="text-2xl font-semibold tabular-nums">{{ stats.suggested_referral }}</p></div>
+  <div class="card p-4"><p class="text-xs text-muted-foreground">Aprovadas pelo validador</p><p class="text-2xl font-semibold tabular-nums">{{ stats.judge_approved }} / {{ stats.judged }}</p></div>
+  <div class="card p-4"><p class="text-xs text-muted-foreground">Bloqueadas · latência média da LLM</p><p class="text-2xl font-semibold tabular-nums">{{ stats.blocked }} · {{ (stats.avg_llm_latency_ms / 1000)|round(1) }} s</p></div>
+</div>
+<div id="hist-list" class="grid gap-3 md:grid-cols-2">
+  {% include "partials/historico_cards.html" %}
+</div>
+{% endblock %}

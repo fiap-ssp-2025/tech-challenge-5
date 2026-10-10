@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.env
+.DS_Store
+data/raw/
+data/generated/
+data/processed/*.parquet
+!data/processed/.gitkeep
+logs/
+*.log
+notebooks/.ipynb_checkpoints/
+models/README.md

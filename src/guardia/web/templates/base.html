@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{% block title %}Guardiã AI{% endblock %}</title>
+  <script>
+    // Tema antes do CSS carregar (evita flash). Basecoat usa a classe `dark` no <html>.
+    try {
+      const stored = localStorage.getItem("themeMode");
+      if (stored ? stored === "dark" : matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark");
+      }
+    } catch (e) {}
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.3"></script>
+  <style type="text/tailwindcss">
+    @custom-variant dark (&:where(.dark, .dark *));
+  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basecoat-css@1.0.2/dist/basecoat.cdn.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/basecoat-css@1.0.2/dist/js/all.min.js" defer></script>
+  <!-- htmx 4 aborta requisições após 60 s por padrão; a análise com a LLM pode passar disso -->
+  <meta name="htmx-config" content='{"defaultTimeout": 240000}'>
+  <script src="https://cdn.jsdelivr.net/npm/htmx.org@4.0.0" integrity="sha384-BvJpBiO8Kh31EqtJe5DRIeWrHWnCGkwytKs9NKFi86Hhw96dEqdEMzZDeK9iEGTc" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body class="min-h-screen bg-background text-foreground">
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 btn">Ir para o conteúdo</a>
+  <header class="border-b border-border bg-card/80 backdrop-blur sticky top-0 z-40">
+    <div class="mx-auto max-w-6xl px-4 py-3 flex items-center gap-3 flex-wrap">
+      <a href="/" class="flex items-center gap-2 font-semibold tracking-tight text-lg" aria-label="Guardiã AI, página inicial">
+        <span class="inline-grid size-8 place-items-center rounded-md bg-primary text-primary-foreground text-sm font-bold">G</span>
+        Guardiã AI
+      </a>
+      <nav aria-label="Principal" class="flex gap-1 flex-wrap ms-2" hx-boost:inherited="true" hx-target="body" hx-swap="innerHTML show:none">
+        {% for href, text, key in nav %}
+        <a href="{{ href }}" class="btn" data-variant="{{ 'secondary' if active == key else 'ghost' }}" data-size="sm" {% if active == key %}aria-current="page"{% endif %}>{{ text }}</a>
+        {% endfor %}
+      </nav>
+      <div class="ms-auto flex items-center gap-2">
+        <span class="badge" data-variant="outline" title="Apoio à decisão profissional; a decisão é humana">apoio, não decisão</span>
+        <button type="button" class="btn" data-variant="ghost" data-size="icon-sm" aria-label="Alternar tema claro/escuro" onclick="window.basecoat && window.basecoat.theme.toggle()">
+          <span class="hidden dark:block" aria-hidden="true">☀</span>
+          <span class="block dark:hidden" aria-hidden="true">☾</span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main id="main" class="mx-auto max-w-6xl px-4 py-6 grid gap-6">
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="mx-auto max-w-6xl px-4 py-8 text-xs text-muted-foreground">
+    Guardiã AI · Tech Challenge 5 · FIAP Pós IA para Devs · grupo fiap-ssp-2025. Dados: SINAN/DATASUS 2024 (públicos, anonimizados).
+    O sistema não decide encaminhamentos, não diagnostica e não prescreve.
+  </footer>
+  <div id="toaster" class="toaster" data-align="end"></div>
+</body>
+</html>

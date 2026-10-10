@@ -1,0 +1,8 @@
+﻿Proteção de dados sensíveis:
+
+- Dados relacionados à saúde e violência doméstica são sensíveis;
+- O acesso deve ser restrito;
+- O sistema deve registrar auditoria de acesso;
+- Informações devem ser tratadas com confidencialidade;
+- Compartilhamento deve seguir princípios da LGPD;
+- Casos de violência contra a mulher exigem cuidado especial para evitar exposição indevida da vítima.

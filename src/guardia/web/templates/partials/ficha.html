@@ -1,0 +1,93 @@
+{# The structured record. Progressive disclosure: what the report filled is shown first as chips; the full
+   fields live in collapsible groups with a count in each summary. Re-rendered by /estruturar (live) and on 422. #}
+{% set groups = ["Tipo de violência", "Meio de agressão", "Relação com o provável autor"] %}
+{% set n_ctx = (FORM.selects|selectattr(0, 'in', case)|list|length) %}
+<section id="ficha" class="card grid gap-4 p-4 sm:p-5" hx-on:htmx:after:swap="window.guardiaFicha && window.guardiaFicha.reset()">
+  <input type="hidden" id="ficha_editada" name="ficha_editada" value="{{ '1' if ficha_editada else '0' }}">
+  <header class="flex flex-wrap items-start justify-between gap-2">
+    <div class="grid gap-0.5">
+      <h2 class="text-base font-semibold">Ficha do atendimento</h2>
+      <p class="text-xs text-muted-foreground">
+        {% if structured %}Preenchida pela LLM ({{ structured.model }} · {{ structured.latency_ms }} ms){% if structured.live %} enquanto você escrevia{% endif %}. Confira e ajuste.
+        {% elif ficha_editada %}Ajustada por você. A extração automática está pausada.
+        {% else %}Será preenchida a partir do relato; você pode ajustar qualquer campo.{% endif %}
+      </p>
+    </div>
+    <button type="button" class="btn" data-variant="ghost" data-size="sm" hx-post="/estruturar" hx-include="#relato" hx-target="#ficha" hx-swap="outerHTML" hx-indicator="#ficha-indicator" title="Extrair de novo a partir do relato (modelo completo)">
+      <span id="ficha-indicator" class="htmx-indicator" aria-hidden="true"><svg class="animate-spin size-4" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" opacity=".25"/><path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" stroke-width="3"/></svg></span>
+      Reextrair
+    </button>
+  </header>
+
+  {% if errors.estruturar %}<div class="alert" data-variant="destructive" role="alert"><h2>Extração indisponível</h2><section>{{ errors.estruturar }}</section></div>{% endif %}
+  {% if errors.relato and not relato %}<p class="text-sm text-destructive" role="alert">{{ errors.relato }}</p>{% endif %}
+
+  <div class="grid gap-2">
+    <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Detectado no relato</p>
+    {% if detected %}
+    <ul class="flex flex-wrap gap-1.5">
+      {% for d in detected %}<li><span class="badge" data-variant="secondary">{{ d }}</span></li>{% endfor %}
+      {% for name, _, _ in FORM.selects if case.get(name) and case.get(name) not in ('IGNORADO', None, '') %}<li><span class="badge" data-variant="outline">{{ case.get(name)|opt }}</span></li>{% endfor %}
+      {% if case.get('IDADE_ANOS') is not none and case.get('IDADE_ANOS') != '' %}<li><span class="badge" data-variant="outline">{{ case.get('IDADE_ANOS') }} anos</span></li>{% endif %}
+    </ul>
+    {% else %}
+    <p class="text-sm text-muted-foreground">Nada ainda. Continue o relato ou abra os grupos abaixo para marcar à mão.</p>
+    {% endif %}
+    {% if structured and structured.uncertain %}
+    <p class="text-xs"><strong>Conferir:</strong> {{ structured.uncertain|join(", ") }}</p>
+    {% endif %}
+  </div>
+
+  {% set n_sig = SIGNAL_FIELDS|selectattr(0, 'in', signals)|list|length %}
+  <details class="group" {% if signals.values()|select|list %}open{% endif %}>
+    <summary class="field-summary">Sinais de risco <span class="badge" data-variant="outline">{{ signals.values()|select|list|length }}/{{ SIGNAL_FIELDS|length }}</span></summary>
+    <div class="grid sm:grid-cols-2 gap-1 pt-2">
+      {% for name, text in SIGNAL_FIELDS %}
+      <div role="group" class="field" data-orientation="horizontal">
+        <input type="checkbox" id="{{ name }}" name="{{ name }}" class="input" {% if signals.get(name) %}checked{% endif %}>
+        <label for="{{ name }}">{{ text }}</label>
+      </div>
+      {% endfor %}
+    </div>
+  </details>
+
+  {% for g in groups %}
+  {% set names = FORM.checks|selectattr(0, 'equalto', g)|map(attribute=1)|list %}
+  {% set n_on = names|select('in', case)|map('string')|list %}
+  {% set count = namespace(v=0) %}{% for n in names %}{% if case.get(n) %}{% set count.v = count.v + 1 %}{% endif %}{% endfor %}
+  <details {% if count.v %}open{% endif %}>
+    <summary class="field-summary">{{ g }} <span class="badge" data-variant="outline">{{ count.v }}/{{ names|length }}</span></summary>
+    <div class="grid sm:grid-cols-2 gap-x-4 gap-y-1 pt-2">
+      {% for group, name, text in FORM.checks if group == g %}
+      <div role="group" class="field" data-orientation="horizontal">
+        <input type="checkbox" id="{{ name }}" name="{{ name }}" class="input" {% if case.get(name) %}checked{% endif %}>
+        <label for="{{ name }}">{{ text }}</label>
+      </div>
+      {% endfor %}
+    </div>
+  </details>
+  {% endfor %}
+
+  {% set count = namespace(v=0) %}{% for name, _, _ in FORM.selects %}{% if case.get(name) and case.get(name) not in ('IGNORADO', '') %}{% set count.v = count.v + 1 %}{% endif %}{% endfor %}{% if case.get('IDADE_ANOS') is not none and case.get('IDADE_ANOS') != '' %}{% set count.v = count.v + 1 %}{% endif %}
+  <details>
+    <summary class="field-summary">Contexto e perfil (ficha SINAN) <span class="badge" data-variant="outline">{{ count.v }}/{{ FORM.selects|length + 1 }}</span></summary>
+    <div class="grid sm:grid-cols-2 gap-3 pt-2">
+      <div role="group" class="field" {% if errors.IDADE_ANOS %}data-invalid="true"{% endif %}>
+        <label for="IDADE_ANOS">Idade (anos)</label>
+        <input type="number" id="IDADE_ANOS" name="IDADE_ANOS" class="input" min="0" max="120" inputmode="numeric" value="{{ case.get('IDADE_ANOS') if case.get('IDADE_ANOS') is not none else '' }}" {% if errors.IDADE_ANOS %}aria-invalid="true" aria-describedby="idade-error"{% endif %}>
+        {% if errors.IDADE_ANOS %}<p id="idade-error" role="alert">{{ errors.IDADE_ANOS }}</p>{% endif %}
+      </div>
+      {% for name, text, options in FORM.selects %}
+      <div role="group" class="field">
+        <label for="{{ name }}">{{ text }}</label>
+        <select id="{{ name }}" name="{{ name }}" class="select w-full">
+          {% for value, vlabel in options %}
+          <option value="{{ value }}" {% if (case.get(name) or ('' if name == 'ESCOLARIDADE' else 'IGNORADO')) == value %}selected{% endif %}>{{ vlabel }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      {% endfor %}
+    </div>
+  </details>
+  <p class="text-xs text-muted-foreground">Campos não informados entram como "não informado": o modelo foi treinado assim, não é preciso inventar.</p>
+</section>

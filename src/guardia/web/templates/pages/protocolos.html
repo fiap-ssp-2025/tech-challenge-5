@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Protocolos · Guardiã AI{% endblock %}
+{% block content %}
+<section class="grid gap-1">
+  <h1 class="text-2xl font-semibold tracking-tight">Consultar protocolos</h1>
+  <p class="text-sm text-muted-foreground max-w-prose">Perguntas sobre Lei Maria da Penha, medidas protetivas, canais e rede de proteção. A resposta usa só os documentos cadastrados e cita a fonte. A conversa fica no servidor, sem nomes.</p>
+</section>
+<div class="grid gap-4 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] items-start">
+  <section class="card p-5 grid gap-4">
+    <div id="chat" class="grid gap-3" aria-live="polite">
+      {% for t in turns %}
+      <article class="grid gap-2">
+        <p class="text-sm font-medium">Você: {{ t.question }}</p>
+        <div class="rounded-lg bg-muted p-3 text-sm whitespace-pre-line">{{ t.answer or '(sem resposta)' }}</div>
+        {% if t.sources %}<ul class="flex flex-wrap gap-1.5">{% for s in t.sources %}<li><span class="badge" data-variant="outline">{{ s.title }}</span></li>{% endfor %}</ul>{% endif %}
+      </article>
+      {% else %}
+      <div class="text-sm text-muted-foreground border border-dashed border-border rounded-lg p-4">Nenhuma pergunta ainda. Exemplos: <em>Como solicitar medida protetiva de urgência?</em> · <em>Quais canais existem no DF?</em> · <em>O que fazer em caso de violência sexual nas primeiras 72 horas?</em></div>
+      {% endfor %}
+    </div>
+    <form class="grid gap-2" hx-post="/protocolos/perguntar" hx-target="#chat" hx-swap="beforeend show:bottom" hx-indicator="#chat-indicator" hx-on:htmx:after:request="if(event.detail.successful){this.reset()}">
+      <input type="hidden" name="cid" value="{{ cid }}">
+      <div role="group" class="field">
+        <label for="pergunta">Pergunta</label>
+        <textarea id="pergunta" name="pergunta" class="textarea w-full" rows="3" required minlength="5" placeholder="Ex.: quais medidas protetivas podem ser pedidas?"></textarea>
+      </div>
+      <div class="flex items-center gap-2 flex-wrap">
+        <button type="submit" class="btn"><span id="chat-indicator" class="htmx-indicator" aria-hidden="true"><svg class="animate-spin size-4" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" opacity=".25"/><path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" stroke-width="3"/></svg></span>Perguntar</button>
+        <button type="submit" class="btn" data-variant="ghost" data-size="sm" formaction="/protocolos/nova" hx-post="/protocolos/nova" hx-target="body" hx-swap="innerHTML" hx-push-url="/protocolos">Nova conversa</button>
+      </div>
+    </form>
+  </section>
+  <aside class="card p-5 grid gap-2 text-sm">
+    <h2 class="font-semibold">Base de conhecimento</h2>
+    <p class="text-muted-foreground text-xs">11 documentos indexados: Lei 11.340/2006 e resumo, tipos de violência, medidas protetivas, canais nacionais e do DF, rede de proteção do DF, LGPD e a norma técnica do MS/MJ sobre violência sexual.</p>
+    <p class="text-muted-foreground text-xs">Respostas sem trecho que as sustente são sinalizadas como cobertura "nenhuma".</p>
+  </aside>
+</div>
+{% endblock %}

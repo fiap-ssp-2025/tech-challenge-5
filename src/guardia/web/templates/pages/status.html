@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Status · Guardiã AI{% endblock %}
+{% block content %}
+<section class="flex flex-wrap items-start justify-between gap-3">
+  <div class="grid gap-1">
+    <h1 class="text-2xl font-semibold tracking-tight">Status dos componentes</h1>
+    <p class="text-sm text-muted-foreground max-w-prose">LLM geradora, juiz independente, modelo de ML e base RAG. Atualiza a cada 30 s.</p>
+  </div>
+  <button type="button" class="btn" data-variant="outline" data-size="sm" hx-get="/status" hx-target="#status-cards" hx-swap="innerHTML" hx-indicator="this">Atualizar</button>
+</section>
+<div id="status-cards" class="grid sm:grid-cols-2 gap-3" hx-get="/status" hx-trigger="every 30s" hx-swap="innerHTML">
+  {% include "partials/status_cards.html" %}
+</div>
+{% endblock %}

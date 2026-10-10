@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Triagem · Guardiã AI{% endblock %}
+{% block content %}
+<section class="grid gap-1">
+  <h1 class="text-2xl font-semibold tracking-tight">Conte o relato</h1>
+  <p class="text-sm text-muted-foreground max-w-prose">Escreva ou fale. Enquanto você conta, a Guardiã preenche a ficha; confira o que foi detectado e clique em <strong>Analisar</strong>. Nenhum nome ou documento é necessário e o texto não é armazenado.</p>
+  {% if not model.ok %}
+  <div class="alert" data-variant="destructive"><h2>Modelo de encaminhamento ausente</h2><section>{{ model.note }}</section></div>
+  {% endif %}
+</section>
+
+<form id="case-form" class="grid gap-5" hx-post="/analisar" hx-target="#result" hx-swap="innerHTML show:#result:top" hx-indicator="#analisar-indicator" hx-status:422="target:#ficha swap:outerHTML">
+  <div class="card p-3 sm:p-4 grid gap-3" id="composer">
+    <div class="composer-box" {% if errors.relato %}data-invalid="true"{% endif %}>
+      <label for="relato" class="sr-only">Relato do atendimento</label>
+      <textarea id="relato" name="relato" rows="4" class="composer-text" required minlength="20" maxlength="6000" placeholder="Ex.: Ela conta que o companheiro a ameaçou com uma faca ontem à noite, que não é a primeira vez e que tem dois filhos pequenos em casa…" hx-post="/estruturar" hx-trigger="input changed delay:2500ms" hx-vals='{"live": "1"}' hx-include="#ficha_editada" hx-target="#ficha" hx-swap="outerHTML" hx-sync="this:replace" hx-indicator="#live-indicator" {% if errors.relato %}aria-invalid="true" aria-describedby="relato-error"{% endif %}>{{ relato }}</textarea>
+      <span id="interim" class="composer-interim" aria-live="polite"></span>
+      <div class="composer-bar">
+        <button type="button" id="mic" class="btn" data-variant="outline" data-size="sm" aria-pressed="false" aria-label="Ditar o relato" title="Ditar (pt-BR)">
+          <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+          <span class="mic-label">Falar</span>
+        </button>
+        <span id="mic-status" class="text-xs text-muted-foreground" aria-live="polite"></span>
+        <span id="live-indicator" class="htmx-indicator text-xs text-muted-foreground items-center gap-1"><svg class="animate-spin size-3" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" opacity=".25"/><path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" stroke-width="3"/></svg> lendo o relato…</span>
+        <span class="ms-auto text-xs text-muted-foreground tabular-nums"><span id="charcount">{{ relato|length }}</span>/6000</span>
+        <button type="submit" class="btn" data-size="sm">
+          <span id="analisar-indicator" class="htmx-indicator" aria-hidden="true"><svg class="animate-spin size-4" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" opacity=".25"/><path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" stroke-width="3"/></svg></span>
+          Analisar
+        </button>
+      </div>
+    </div>
+    {% if errors.relato %}<p id="relato-error" role="alert" class="text-sm text-destructive">{{ errors.relato }}</p>{% endif %}
+  </div>
+
+  <div class="grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] items-start">
+    {% include "partials/ficha.html" %}
+    <section id="result" class="grid gap-4" aria-live="polite">
+      {% include "partials/empty.html" %}
+    </section>
+  </div>
+</form>
+<script src="/static/voice.js" defer></script>
+{% endblock %}

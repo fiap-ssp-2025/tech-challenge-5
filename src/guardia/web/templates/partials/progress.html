@@ -1,0 +1,24 @@
+{# Honest waiting: real per-node progress polled from the job, elapsed time and the typical total. #}
+<div class="card p-5 grid gap-4" hx-get="/analisar/{{ job.id }}" hx-trigger="every 2s" hx-target="#result" hx-swap="innerHTML" aria-busy="true">
+  <header class="flex flex-wrap items-center justify-between gap-2">
+    <div class="grid gap-0.5">
+      <h2 class="text-base font-semibold">Analisando o caso</h2>
+      <p class="text-xs text-muted-foreground">Etapa {{ [job.done_count + 1, job.steps|length]|min }} de {{ job.steps|length }} · {{ job.elapsed_s|round|int }} s · costuma levar entre 40 e 60 s (a LLM é a etapa mais longa)</p>
+    </div>
+    <span class="htmx-indicator-always inline-flex items-center gap-2 text-xs text-muted-foreground"><svg class="animate-spin size-4" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" opacity=".25"/><path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" stroke-width="3"/></svg> em andamento</span>
+  </header>
+  <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="{{ job.steps|length }}" aria-valuenow="{{ job.done_count }}"><div class="progress-fill" style="width: {{ (100 * job.done_count / (job.steps|length))|round(1) }}%"></div></div>
+  <ol class="grid gap-1.5">
+    {% for s in job.steps %}
+    <li class="step step-{{ s.status }}">
+      <span class="step-dot" aria-hidden="true"></span>
+      <span class="step-label">{{ s.label }}</span>
+      <span class="step-meta">{% if s.status == 'done' %}{{ s.duration_ms }} ms{% if s.digest %} · {{ s.digest }}{% endif %}{% elif s.status == 'running' %}em andamento…{% elif s.status == 'error' %}falhou{% else %}aguardando{% endif %}</span>
+    </li>
+    {% endfor %}
+  </ol>
+  <div class="skeleton-card" aria-hidden="true">
+    <div class="sk sk-title"></div><div class="sk"></div><div class="sk"></div><div class="sk sk-short"></div>
+  </div>
+  <p class="text-xs text-muted-foreground">Você pode continuar ajustando a ficha; a nota aparece aqui quando o juiz terminar.</p>
+</div>

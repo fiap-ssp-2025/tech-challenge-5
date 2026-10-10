@@ -1,0 +1,125 @@
+{% set r = s.response or {} %}
+{% set ml = s.ml or {} %}
+{% set log = s.audit_log or {} %}
+{% set risk = s.risk_level or 'indeterminado' %}
+<article class="card p-5 grid gap-4 risk-{{ risk }}" aria-label="Resultado da análise">
+  <header class="flex flex-wrap items-start justify-between gap-3">
+    <div class="grid gap-1">
+      <h2 class="text-lg font-semibold">Nota de apoio</h2>
+      <p class="text-xs text-muted-foreground">Atendimento #{{ s.audit_id or '—' }} · {{ log.get('timestamp', '')[:19] }}{% if elapsed_s %} · {{ elapsed_s|round|int }} s{% endif %} · decisão é da profissional{% if s.audit_id %} · <a class="underline" href="/historico/{{ s.audit_id }}">ver no histórico</a>{% endif %}</p>
+    </div>
+    <span class="risk-chip">risco {{ risk }}</span>
+  </header>
+
+  {% if r.get('erro') %}
+  <div class="alert" data-variant="destructive" role="alert"><h2>A LLM não respondeu</h2><section>{{ r.erro }}. As ações e encaminhamentos abaixo vêm da engine de regras.</section></div>
+  {% elif r.get('bloqueio') %}
+  <div class="alert" data-variant="destructive" role="alert"><h2>Nota bloqueada pelos guardrails</h2><section>{{ r.bloqueio }}{% if r.termos %} Termos: {{ r.termos|join(', ') }}.{% endif %}</section></div>
+  {% endif %}
+
+  <div class="grid md:grid-cols-[auto_minmax(0,1fr)] gap-4 items-start">
+    <div class="grid place-items-center gap-1">
+      {% if ml %}
+      <div class="prob-ring" style="--p: {{ (ml.probability * 100)|round|int }}" role="img" aria-label="Probabilidade {{ (ml.probability * 100)|round|int }} por cento"><span>{{ (ml.probability * 100)|round|int }}%</span></div>
+      <span class="badge" data-variant="{{ 'destructive' if ml.suggest_referral else 'secondary' }}">{{ 'sugere encaminhar' if ml.suggest_referral else 'sem sugestão automática' }}</span>
+      <span class="text-[11px] text-muted-foreground">limiar {{ (ml.threshold * 100)|round|int }}% · {{ ml.model_name }}</span>
+      {% else %}
+      <div class="prob-ring" style="--p: 0"><span>—</span></div>
+      <span class="text-[11px] text-muted-foreground">{{ s.ml_error or 'modelo não rodou' }}</span>
+      {% endif %}
+    </div>
+    <div class="grid gap-2 min-w-0">
+      <h3 class="text-sm font-semibold">O que pesou no modelo (SHAP do caso)</h3>
+      {% if ml.top_features %}
+      <ul class="grid gap-1.5">
+        {% for t in ml.top_features %}
+        <li class="grid grid-cols-[minmax(0,1fr)_7rem_3.5rem] items-center gap-2 text-xs">
+          <span class="truncate" title="{{ t.label }} = {{ t.value }}">{{ t.label }} <span class="text-muted-foreground">= {{ t.value }}</span></span>
+          <span class="shap-track" aria-hidden="true"><i class="shap-fill" data-dir="{{ t.direction }}" style="width: {{ ([t.shap|abs * 60, 50]|min)|round(1) }}%"></i></span>
+          <span class="tabular-nums text-end">{{ '%+.2f'|format(t.shap) }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+      <p class="text-xs text-muted-foreground">Vermelho aumenta e azul reduz a probabilidade de perfil encaminhado em 2024. O modelo aprende a prática registrada, inclusive sub-encaminhamento.</p>
+      {% else %}
+      <p class="text-xs text-muted-foreground">Sem atribuições para este caso.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if r.resumo %}
+  <section class="grid gap-2">
+    <h3 class="text-sm font-semibold">Resumo para a profissional</h3>
+    <p class="text-sm leading-relaxed">{{ r.resumo }}</p>
+    {% if r.leitura_do_modelo %}<p class="text-sm text-muted-foreground">{{ r.leitura_do_modelo }}</p>{% endif %}
+  </section>
+  {% endif %}
+
+  <div class="grid md:grid-cols-2 gap-4">
+    <section class="grid gap-1">
+      <h3 class="text-sm font-semibold">Fatores de atenção</h3>
+      <ul class="list-disc ps-5 text-sm grid gap-0.5">
+        {% for f in (r.fatores_de_atencao or s.risk_factors or []) %}<li>{{ f }}</li>{% else %}<li class="text-muted-foreground">nenhum fator explícito</li>{% endfor %}
+      </ul>
+    </section>
+    <section class="grid gap-1">
+      <h3 class="text-sm font-semibold">Ações sugeridas</h3>
+      <ol class="list-decimal ps-5 text-sm grid gap-0.5">
+        {% for a in (r.acoes_sugeridas or s.recommended_actions or []) %}<li>{{ a }}</li>{% endfor %}
+      </ol>
+    </section>
+    <section class="grid gap-1">
+      <h3 class="text-sm font-semibold">Encaminhamentos possíveis</h3>
+      <ul class="list-disc ps-5 text-sm grid gap-0.5">
+        {% for e in (r.encaminhamentos or s.referrals or []) %}<li>{{ e }}</li>{% endfor %}
+      </ul>
+    </section>
+    <section class="grid gap-1">
+      <h3 class="text-sm font-semibold">O que ainda perguntar</h3>
+      <ul class="list-disc ps-5 text-sm grid gap-0.5">
+        {% for p in (r.perguntas_pendentes or []) %}<li>{{ p }}</li>{% else %}<li class="text-muted-foreground">—</li>{% endfor %}
+      </ul>
+    </section>
+  </div>
+
+  <section class="grid gap-2">
+    <h3 class="text-sm font-semibold">Protocolos consultados (RAG)</h3>
+    {% if s.protocol_sources %}
+    <ul class="flex flex-wrap gap-1.5">
+      {% for src in s.protocol_sources %}
+      <li><span class="badge" data-variant="{{ 'default' if src.title in (r.fontes_citadas or []) else 'outline' }}" title="{{ src.file }}">{{ src.title }}</span></li>
+      {% endfor %}
+    </ul>
+    <p class="text-xs text-muted-foreground">Preenchido = citado na nota. Contorno = recuperado, não citado.</p>
+    <details class="text-xs">
+      <summary class="cursor-pointer">Ver trechos recuperados ({{ s.protocol_hits|length }})</summary>
+      <ul class="grid gap-2 mt-2">
+        {% for h in s.protocol_hits %}<li class="rounded-md bg-muted p-2"><strong>{{ h.title }}</strong> <span class="text-muted-foreground">(score {{ h.score }})</span><br>{{ h.text }}</li>{% endfor %}
+      </ul>
+    </details>
+    {% else %}<p class="text-xs text-muted-foreground">Nenhum trecho recuperado.</p>{% endif %}
+  </section>
+
+  <p class="text-xs border-t border-border pt-3 text-muted-foreground">{{ r.aviso }}</p>
+
+  {% if steps %}
+  <details class="text-xs">
+    <summary class="cursor-pointer font-semibold">Etapas ({{ steps|length }})</summary>
+    <ol class="grid gap-1 mt-2">{% for st in steps %}<li class="step step-{{ st.status }}"><span class="step-dot" aria-hidden="true"></span><span class="step-label">{{ st.label }}</span><span class="step-meta">{{ st.duration_ms }} ms{% if st.digest %} · {{ st.digest }}{% endif %}</span></li>{% endfor %}</ol>
+  </details>
+  {% endif %}
+  <details class="text-xs">
+    <summary class="cursor-pointer font-semibold">Rastro técnico</summary>
+    <dl class="grid grid-cols-[9rem_minmax(0,1fr)] gap-x-3 gap-y-1 mt-2">
+      <dt class="text-muted-foreground">Geradora</dt><dd>{{ log.get('llm_backend') }} · {{ log.get('llm_model') }} · {{ log.get('llm_latency_ms') }} ms · {{ log.get('llm_tokens') }} tokens</dd>
+      <dt class="text-muted-foreground">Blocklist</dt><dd>{{ log.get('safety_validation') }}{% if log.get('blocked_terms') %} · {{ log.blocked_terms|join(', ') }}{% endif %}</dd>
+      {% set j = log.get('llm_judge') or {} %}
+      <dt class="text-muted-foreground">Juiz</dt>
+      <dd>{{ j.get('backend') }} · {{ j.get('model') or '' }} · {% if j.get('approved') is none %}não avaliado{% elif j.get('approved') %}aprovou{% else %}reprovou{% endif %}{% if j.get('confidence') %} (confiança {{ (j.confidence * 100)|round|int }}%){% endif %}{% if j.get('error') %} · {{ j.error }}{% endif %}
+        {% if j.get('checks') %}<ul class="mt-1 grid gap-0.5">{% for k, c in j.checks.items() %}<li>{{ '✓' if c.get('pass') else '✗' }} {{ k }}: {{ c.get('reason', '') }}{% if c.get('_override') %} <em>(revisto: {{ c._override }})</em>{% endif %}</li>{% endfor %}</ul>{% endif %}
+      </dd>
+      <dt class="text-muted-foreground">Explicação</dt><dd>{{ s.explanation }}</dd>
+      <dt class="text-muted-foreground">Hash do relato</dt><dd class="break-all">sha256 (texto não armazenado)</dd>
+    </dl>
+  </details>
+</article>
