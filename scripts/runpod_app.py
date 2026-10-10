@@ -68,7 +68,7 @@ def _registry_auth_id() -> str:
 
 def _app_env() -> dict[str, str]:
     env = {k: os.environ[k] for k in ("LLM_BASE_URL", "LLM_MODEL", "JUDGE_BASE_URL", "JUDGE_MODEL", "FAST_BASE_URL", "FAST_MODEL",
-                                      "OPENROUTER_API_KEY", "LANGSMITH_API_KEY", "LANGSMITH_ENDPOINT") if os.environ.get(k)}
+                                      "TRANSCRIBE_BASE_URL", "TRANSCRIBE_MODEL", "OPENROUTER_API_KEY", "LANGSMITH_API_KEY", "LANGSMITH_ENDPOINT") if os.environ.get(k)}
     key = os.environ.get("OPENROUTER_API_KEY", "")
     for k in ("LLM_API_KEY", "JUDGE_API_KEY", "FAST_API_KEY"):
         v = os.environ.get(k, "")

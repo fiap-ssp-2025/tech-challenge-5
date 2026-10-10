@@ -41,8 +41,14 @@ def rag_status() -> dict[str, Any]:
 
 
 def speech_status() -> dict[str, Any]:
-    ok = transcribe.available()
-    return {"ok": True, "fallback": ok, "note": "faster-whisper no servidor (fallback do navegador)" if ok else "só Web Speech API do navegador"}
+    d = transcribe.describe()
+    if d["backend"] == "remote":
+        note = f"servidor: {d['model']} via OpenRouter" + (" (whisper de reserva)" if d["whisper_fallback"] else "")
+    elif d["backend"] == "whisper":
+        note = f"servidor: faster-whisper `{d['model']}` na CPU"
+    else:
+        note = "só Web Speech API do navegador"
+    return {"ok": True, "fallback": d["backend"] is not None, "backend": d["backend"], "model": d["model"], "note": note}
 
 
 def full_status(include_rag: bool = True) -> dict[str, Any]:

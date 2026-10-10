@@ -1,6 +1,8 @@
 // Guardiã AI — ditado do relato.
 // 1) Web Speech API (Chrome/Edge/Safari): resultados provisórios em cinza, finais entram no texto.
-// 2) Fallback: MediaRecorder grava blocos de ~6 s e envia para /transcrever (faster-whisper no servidor).
+// 2) Fallback: MediaRecorder grava sem parar, corta nas pausas e envia cada trecho para /transcrever
+//    (modelo de áudio via OpenRouter, whisper de reserva). Ao parar, o áudio inteiro é transcrito de novo com
+//    contexto completo e substitui o texto ditado, desde que a profissional não o tenha editado no meio.
 // Nada é enviado automaticamente: o texto só vai para análise quando a profissional clica em Analisar.
 (function () {
   const ta = document.getElementById('relato');
@@ -68,9 +70,10 @@
   // Um único MediaRecorder (sem parar/reiniciar). Guardamos o segmento inicial do webm e, a cada pausa
   // detectada (ou a cada MAX_SEG s), enviamos init + blocos acumulados para /transcrever. Os textos
   // entram na ordem em que foram falados, mesmo que uma transcrição demore mais que a outra.
-  const SLICE_MS = 500, SILENCE_MS = 650, MIN_SPEECH_MS = 900, MAX_SEG_MS = 9000, RMS_ON = 0.018;
+  const SLICE_MS = 500, SILENCE_MS = 700, MIN_SPEECH_MS = 900, MAX_SEG_MS = 15000, RMS_ON = 0.018, FINAL_MIN_SEGMENTS = 2;
   let audioCtx = null, analyser = null, vadTimer = null, initChunk = null, pending = [], segStart = 0, lastVoice = 0, hadVoice = false;
   let queue = Promise.resolve(), firstFlushDone = false;
+  let allChunks = [], segments = 0, dictStart = 0, dictated = '';  // para a passada final sobre o áudio inteiro
 
   async function startRecorder(note) {
     if (!navigator.mediaDevices || !window.MediaRecorder) { setStatus('Este navegador não suporta ditado.'); setListening(false); return; }
@@ -81,10 +84,11 @@
     const mime = MediaRecorder.isTypeSupported('audio/webm;codecs=opus') ? 'audio/webm;codecs=opus' : (MediaRecorder.isTypeSupported('audio/ogg') ? 'audio/ogg' : '');
     recorder = new MediaRecorder(stream, mime ? { mimeType: mime, audioBitsPerSecond: 32000 } : undefined);
     initChunk = null; pending = []; segStart = Date.now(); lastVoice = 0; hadVoice = false; firstFlushDone = false;
+    allChunks = []; segments = 0; dictStart = ta.value.length; dictated = '';
     recorder.ondataavailable = (e) => {
       if (!e.data || !e.data.size) return;
       if (!initChunk) { initChunk = e.data; return; }   // primeiro bloco: cabeçalho do contêiner
-      pending.push(e.data);
+      pending.push(e.data); allChunks.push(e.data);
     };
     recorder.start(SLICE_MS);
     // detector de pausa: nível RMS do microfone
@@ -110,21 +114,48 @@
     pending = []; segStart = Date.now(); hadVoice = false; lastVoice = 0;
     const fd = new FormData(); fd.append('audio', blob, 'trecho.webm');
     fd.append('skip_ms', firstFlushDone ? String(SLICE_MS) : '0'); // trechos seguintes repetem o áudio do cabeçalho
-    firstFlushDone = true;
+    firstFlushDone = true; segments++;
     queue = queue.then(async () => {
       setStatus('Ouvindo… transcrevendo o trecho anterior.');
       try {
         const r = await fetch('/transcrever', { method: 'POST', body: fd });
         const j = await r.json();
-        if (j.text) commit(j.text);
+        if (j.text) { commit(j.text); dictated = ta.value.slice(dictStart); }
       } catch (_) { setStatus('Falha ao transcrever um trecho.'); return; }
       if (listening) setStatus('Ouvindo… cada pausa vira um trecho transcrito.');
     });
   }
+  // Passada final: o áudio completo, com contexto, substitui os trechos (só se o texto ditado não foi editado).
+  function finalPass(init, chunks, mime) {
+    if (!init || chunks.length < 2 || segments < FINAL_MIN_SEGMENTS) return;
+    const blob = new Blob([init, ...chunks], { type: mime || 'audio/webm' });
+    const fd = new FormData(); fd.append('audio', blob, 'completo.webm'); fd.append('skip_ms', '0');
+    queue = queue.then(async () => {
+      setStatus('Revisando a transcrição completa…');
+      try {
+        const r = await fetch('/transcrever', { method: 'POST', body: fd });
+        const j = await r.json();
+        const current = ta.value.slice(dictStart);
+        if (j.text && current.trim() === dictated.trim()) {
+          const head = ta.value.slice(0, dictStart), sep = head && !/\s$/.test(head) ? ' ' : '';
+          ta.value = (head + sep + j.text.trim()).slice(0, 6000);
+          ta.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+        setStatus('');
+      } catch (_) { setStatus('A revisão final da transcrição falhou; o texto ditado foi mantido.'); }
+    });
+  }
   function stopRecorder() {
     clearInterval(vadTimer); vadTimer = null;
-    if (recorder && recorder.state === 'recording') { recorder.requestData(); flushSegment(); recorder.stop(); }
-    recorder = null; initChunk = null; pending = [];
+    if (recorder && recorder.state === 'recording') {
+      const rec0 = recorder, init = initChunk, mime = recorder.mimeType;
+      rec0.onstop = () => {  // o último ondataavailable chega antes do onstop
+        flushSegment(); finalPass(init, allChunks, mime);  // último trecho + revisão completa
+        initChunk = null; pending = []; allChunks = [];
+      };
+      rec0.stop();
+    } else { initChunk = null; pending = []; allChunks = []; }
+    recorder = null;
     if (analyser) { try { analyser.disconnect(); } catch (_) {} analyser = null; }
     if (audioCtx) { audioCtx.close().catch(() => {}); audioCtx = null; }
     if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }

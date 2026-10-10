@@ -1,7 +1,9 @@
-"""OpenAI-compatible LLM client with two roles.
+"""OpenAI-compatible LLM client with four roles.
 
-generator → LLM_BASE_URL / LLM_MODEL (vLLM on RunPod); optional fallback to OpenAI (OPENAI_API_KEY)
-judge     → JUDGE_BASE_URL / JUDGE_MODEL (a different model/server, so the judge never audits itself)
+generator  → LLM_BASE_URL / LLM_MODEL (OpenRouter or vLLM on RunPod); optional fallback to OpenAI (OPENAI_API_KEY)
+judge      → JUDGE_BASE_URL / JUDGE_MODEL (a different model/server, so the judge never audits itself)
+fast       → FAST_* (live extraction while the user types; defaults to the judge server)
+transcribe → TRANSCRIBE_* (audio-capable model for dictation; defaults to google/gemini-2.5-flash on OpenRouter)
 
 Structured output: when a JSON schema is given we ask the server for ``response_format=json_schema``
 (vLLM applies constrained decoding; OpenAI applies structured outputs). If the server rejects it we
@@ -65,6 +67,10 @@ def _key(*names: str, base_url: str | None) -> str:
 
 
 def endpoint(role: str) -> Endpoint:
+    if role == "transcribe":  # audio-capable model for the dictation fallback; defaults to the fast/judge server (OpenRouter)
+        url = os.getenv("TRANSCRIBE_BASE_URL") or os.getenv("FAST_BASE_URL") or os.getenv("JUDGE_BASE_URL")
+        model = os.getenv("TRANSCRIBE_MODEL") or ("google/gemini-2.5-flash" if "openrouter.ai" in (url or "") else None)
+        return Endpoint("transcribe", url, model, _key("TRANSCRIBE_API_KEY", "FAST_API_KEY", "JUDGE_API_KEY", base_url=url))
     if role == "fast":  # small model for live, low-latency extraction while the user types; defaults to the judge server
         url = os.getenv("FAST_BASE_URL") or os.getenv("JUDGE_BASE_URL")
         return Endpoint("fast", url, os.getenv("FAST_MODEL") or os.getenv("JUDGE_MODEL"), _key("FAST_API_KEY", "JUDGE_API_KEY", base_url=url))
@@ -167,13 +173,16 @@ def _call(ep: Endpoint, messages: list[dict], *, schema: dict | None, schema_nam
 
 @traceable(name="llm.chat", run_type="llm")
 def chat(messages: list[dict], *, role: str = "generator", schema: dict | None = None, schema_name: str = "resposta",
-         temperature: float = 0.2, max_tokens: int = 1200, allow_fallback: bool = True) -> LLMResult:
-    """Send a chat to the role's endpoint. Generator falls back to OpenAI when configured."""
+         temperature: float = 0.2, max_tokens: int = 1200, allow_fallback: bool = True, disable_thinking: bool | None = None) -> LLMResult:
+    """Send a chat to the role's endpoint. Generator falls back to OpenAI when configured.
+    ``disable_thinking`` defaults to True for the generator and the transcriber (thinking only adds latency there)."""
     ep = endpoint(role)
     errors: list[str] = []
+    if disable_thinking is None:
+        disable_thinking = role in ("generator", "transcribe")
     if ep.configured:
         res = _call(ep, messages, schema=schema, schema_name=schema_name, temperature=temperature, max_tokens=max_tokens,
-                    disable_thinking=(role == "generator"))
+                    disable_thinking=disable_thinking)
         if res.backend != "error":
             return res
         errors.append(f"{ep.role}: {res.error}")

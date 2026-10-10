@@ -39,7 +39,7 @@ HERE = Path(__file__).resolve().parent
 @asynccontextmanager
 async def _lifespan(_: FastAPI):
     CACHE.start()  # background probes; pages never wait for the LLM endpoints
-    if transcribe.available():  # warm the speech model so the first dictated chunk is not slow
+    if transcribe.backend() == "whisper":  # warm the local speech model so the first dictated chunk is not slow
         threading.Thread(target=transcribe.warm, daemon=True, name="guardia-whisper-warm").start()
     yield
 
@@ -152,10 +152,10 @@ def analisar_progresso(request: Request, job_id: str):
 
 @app.post("/transcrever")
 async def transcrever(audio: UploadFile, skip_ms: int = Form(0)):
-    """Speech-to-text fallback for browsers without the Web Speech API (faster-whisper on the server).
+    """Speech-to-text fallback for browsers without the Web Speech API (audio model via OpenRouter, whisper as reserve).
     ``skip_ms`` trims the audio carried by the webm header that the browser prepends to later chunks."""
     if not transcribe.available():
-        return JSONResponse({"error": "transcrição no servidor indisponível (instale com `uv sync --group audio`)"}, status_code=503)
+        return JSONResponse({"error": "transcrição no servidor indisponível (configure TRANSCRIBE_*/FAST_* ou instale com `uv sync --group audio`)"}, status_code=503)
     data = await audio.read()
     if len(data) < 2000:
         return JSONResponse({"text": ""})

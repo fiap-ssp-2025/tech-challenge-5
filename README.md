@@ -188,7 +188,7 @@ Marcelo Arruda de Siqueira · Leonardo Barbosa Nogueira · Jose Flavio Neto · P
 | LLM geradora | OpenRouter · `openai/gpt-4o-mini` | ~US$ 0,001 por nota |
 | Juiz independente | OpenRouter · `mistralai/mistral-small-3.2-24b-instruct` | ~US$ 0,0005 por veredito |
 | Extração ao vivo (F2) | OpenRouter · `google/gemini-2.5-flash-lite` | ~US$ 0,0001 por chamada |
-| Voz | Web Speech API no navegador; fallback whisper `base` no pod | — |
+| Voz | Web Speech API no navegador; fallback OpenRouter · `google/gemini-2.5-flash` (whisper `base` de reserva no pod) | ~US$ 0,005 por relato ditado |
 | Alternativa auto-hospedada | vLLM no RunPod (Qwen3.6-27B + Qwen2.5-7B), `make pod-create` | US$ 0,59/h |
 
 **URL atual:** https://y5iscqd4fej0cn-8000.proxy.runpod.net (muda se o pod for recriado; `make app-status` mostra a vigente).

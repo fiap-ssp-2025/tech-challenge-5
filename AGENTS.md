@@ -18,12 +18,12 @@ Instruções para qualquer agente de IA que trabalhe neste repositório.
 | `src/guardia/rag/` | Chroma + MiniLM multilíngue sobre `data/protocols` (F1) e chat com memória (F3) |
 | `src/guardia/guardrails/`, `audit/` | blocklist + aviso; SQLite com hash do relato |
 | `src/guardia/web/` | FastAPI + Jinja2 + htmx 4 + Tailwind 4 + Basecoat (páginas e partials); `jobs.py` roda a análise em background com progresso por nó; `static/voice.js` faz o ditado |
-| `src/guardia/llm/transcribe.py` | fallback de voz no servidor (faster-whisper + ffmpeg); grupo `audio` do uv |
+| `src/guardia/llm/transcribe.py` | fallback de voz no servidor: modelo de áudio via OpenRouter (papel `transcribe`, Gemini 2.5 Flash) com faster-whisper de reserva (grupo `audio` do uv); ffmpeg obrigatório |
 | `scripts/` | RunPod (vLLM), relatos sintéticos, avaliação em lote, publicação no Hugging Face |
 
 ## Regras
 - **Alvo do ML é `ENCAMINHA_PROTECAO`.** Nunca reintroduzir `OUT_VEZES` como alvo (ver spec §3.1).
-- **Dois provedores de LLM distintos:** geradora (`LLM_*`) e juiz (`JUDGE_*`). O juiz nunca audita a si mesmo.
+- **Dois provedores de LLM distintos:** geradora (`LLM_*`) e juiz (`JUDGE_*`). O juiz nunca audita a si mesmo. Papéis auxiliares: `FAST_*` (extração ao vivo) e `TRANSCRIBE_*` (voz), ambos com padrão no OpenRouter.
 - **Nada de dado pessoal persistido.** O relato vira hash; a nota gerada e os campos da ficha podem ser gravados.
 - **Interface:** HTML renderizado no servidor. htmx 4.0.0 fixo (sintaxe 4: herança explícita `:inherited`, eventos `htmx:fase:ação`, `hx-status:422`). Tailwind CSS 4 e Basecoat 1.0.2 por CDN com versão fixa. Sem React/Vue/Svelte/bundler/SPA. HTML nativo antes de JS (`<dialog>`, `<details>`); Alpine só se o nativo não resolver (hoje não é usado).
 - Mesma URL devolve página completa no acesso direto e fragmento quando `HX-Request: true` (função `render` em `web/app.py`). Erro de formulário = 422 com a ficha re-renderizada. Toda interação tem estado carregando (`.htmx-indicator`), vazio, erro e sucesso.

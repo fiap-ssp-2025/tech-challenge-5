@@ -12,7 +12,7 @@
     <li class="flex items-center gap-2"><span class="dot {{ 'dot-ok' if j.ok else ('dot-checking' if st.pending else 'dot-down') }}"></span><span><b>Juiz</b> · {{ j.model or '—' }}</span></li>
     <li class="flex items-center gap-2"><span class="dot {{ 'dot-ok' if st.model.ok else 'dot-down' }}"></span><span><b>Modelo</b> · {{ st.model.get('model', '—') }}</span></li>
     <li class="flex items-center gap-2"><span class="dot {{ 'dot-ok' if st.rag.ok else ('dot-checking' if st.pending else 'dot-down') }}"></span><span><b>RAG</b> · {{ (st.rag.chunks|string ~ ' trechos') if st.rag.ok else st.rag.get('note', '') }}</span></li>
-    <li class="flex items-center gap-2"><span class="dot dot-ok"></span><span><b>Voz</b> · {{ 'navegador + servidor' if st.speech.fallback else 'só navegador' }}</span></li>
+    <li class="flex items-center gap-2"><span class="dot dot-ok"></span><span><b>Voz</b> · {{ ('navegador + ' ~ (st.speech.model or 'servidor')) if st.speech.fallback else 'só navegador' }}</span></li>
   </ul>
   <p class="text-muted-foreground">{% if st.pending %}Primeira verificação em andamento.{% elif st.age_s is not none %}Verificado há {{ st.age_s }} s.{% endif %} {% if not st.llm_ready and not st.pending %}Sem a LLM, a análise sai só com regras e modelo.{% endif %}</p>
   <a href="/status" class="underline">Ver detalhes</a>
