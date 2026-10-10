@@ -53,7 +53,7 @@ eval: ## Avalia o pipeline nos relatos sintéticos (juiz, latência, citação)
 publish-hf: ## Publica modelo e métricas na org do Hugging Face
 	uv run python scripts/publish_hf.py
 
-app-create: ## Sobe o app num pod de CPU do RunPod (imagem do GHCR, LLM via OpenRouter)
+app-create: ## Sobe o app num pod de CPU do RunPod (clona o repo; --image usa o GHCR; LLM via OpenRouter)
 	uv run --env-file .env python scripts/runpod_app.py create
 
 app-status: ## Status e URL pública do app no RunPod
@@ -64,6 +64,9 @@ app-stop: ## Para o app no RunPod (custo zero)
 
 app-start: ## Religa o app no RunPod
 	uv run --env-file .env python scripts/runpod_app.py start
+
+app-redeploy: ## Publica a main no app público: para, religa (o pod refaz o clone) e espera o /api/health
+	uv run --env-file .env python scripts/runpod_app.py stop && sleep 5 && uv run --env-file .env python scripts/runpod_app.py start && uv run --env-file .env python scripts/runpod_app.py wait
 
 docker-push: ## Publica a imagem no GHCR (precisa de `gh auth refresh -s write:packages`)
 	gh auth token | docker login ghcr.io -u $$(gh api user --jq .login) --password-stdin
@@ -80,4 +83,4 @@ notebooks: ## Exporta os scripts de dados/treino como notebooks (jupytext)
 	uv run jupytext --to ipynb src/guardia/data/features.py -o notebooks/02_preprocessing.ipynb
 	uv run jupytext --to ipynb src/guardia/ml/train.py -o notebooks/03_model_comparison.ipynb
 
-.PHONY: help install env data train serve status demo test lint pod-create pod-status pod-stop pod-start app-create app-status app-stop app-start docker-push synth eval publish-hf docker-build docker-run notebooks
+.PHONY: help install env data train serve status demo test lint pod-create pod-status pod-stop pod-start app-create app-status app-stop app-start app-redeploy docker-push synth eval publish-hf docker-build docker-run notebooks

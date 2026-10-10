@@ -110,9 +110,13 @@ def create(args: argparse.Namespace) -> None:
     if r.status_code >= 300:
         sys.exit(f"Falha ao criar pod: {r.status_code} {r.text[:600]}")
     pod = r.json()
+    if not args.image and not pod.get("volumeInGb"):  # the API has ignored volumeInGb on CPU pods: attach it afterwards
+        p = requests.patch(f"{API}/pods/{pod['id']}", headers=_headers(), json={"volumeInGb": 20, "volumeMountPath": "/workspace"}, timeout=90)
+        pod["volumeInGb"] = p.json().get("volumeInGb") if p.status_code < 300 else 0
+        print("volume anexado após a criação:", pod["volumeInGb"], "GB")
     STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
     STATE_FILE.write_text(json.dumps({"id": pod["id"], "created": time.time()}, indent=2))
-    print(json.dumps({k: pod.get(k) for k in ("id", "name", "desiredStatus", "costPerHr")}, indent=2))
+    print(json.dumps({k: pod.get(k) for k in ("id", "name", "desiredStatus", "costPerHr", "volumeInGb")}, indent=2))
     print("URL pública:", _url(pod["id"]))
 
 
@@ -140,7 +144,9 @@ def status(args: argparse.Namespace) -> None:
     pod_id = _pod_id(args)
     r = requests.get(f"{API}/pods/{pod_id}", headers=_headers(), timeout=30)
     pod = r.json() if r.status_code == 200 else {}
-    print(json.dumps({k: pod.get(k) for k in ("id", "desiredStatus", "costPerHr", "lastStatusChange")}, indent=2, default=str))
+    print(json.dumps({k: pod.get(k) for k in ("id", "desiredStatus", "costPerHr", "volumeInGb", "lastStatusChange")}, indent=2, default=str))
+    if pod and not pod.get("volumeInGb"):
+        print("  AVISO: pod sem volume — o histórico some a cada restart (ver spec 002, E5)")
     ok, info = _ready(pod_id)
     print(f"  app {_url(pod_id)} → {'READY' if ok else 'not ready'} ({info})")
 

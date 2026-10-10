@@ -184,19 +184,23 @@ Marcelo Arruda de Siqueira · Leonardo Barbosa Nogueira · Jose Flavio Neto · P
 
 | Componente | Onde roda | Custo |
 |---|---|---|
-| App (web, modelo de ML, RAG, whisper) | Pod de CPU no RunPod (2 vCPU, 4 GB) que clona este repositório num volume persistente | US$ 0,06/h ligado, zero parado |
+| App (web, modelo de ML, RAG, histórico) | Pod de CPU no RunPod (2 vCPU, 4 GB) que clona este repositório num volume de 20 GB; o histórico (SQLite) sobrevive a stop/start | US$ 0,066/h ligado, zero parado |
 | LLM geradora | OpenRouter · `openai/gpt-4o-mini` | ~US$ 0,001 por nota |
 | Juiz independente | OpenRouter · `mistralai/mistral-small-3.2-24b-instruct` | ~US$ 0,0005 por veredito |
 | Extração ao vivo (F2) | OpenRouter · `google/gemini-2.5-flash-lite` | ~US$ 0,0001 por chamada |
 | Voz | Web Speech API no navegador; fallback OpenRouter · `google/gemini-2.5-flash` (whisper `base` de reserva no pod) | ~US$ 0,005 por relato ditado |
 | Alternativa auto-hospedada | vLLM no RunPod (Qwen3.6-27B + Qwen2.5-7B), `make pod-create` | US$ 0,59/h |
 
+Preços do OpenRouter em 2026-10-10, por milhão de tokens (entrada / saída): gpt-4o-mini 0,15 / 0,60; Mistral Small 3.2 0,094 / 0,25;
+Gemini 2.5 Flash Lite 0,10 / 0,40; Gemini 2.5 Flash 0,30 / 2,50 (áudio 1,00). Uma análise completa usa cerca de 6 mil tokens;
+a avaliação de 30 relatos custou menos de US$ 0,50.
+
 **URL atual:** https://y5iscqd4fej0cn-8000.proxy.runpod.net (muda se o pod for recriado; `make app-status` mostra a vigente).
 Medido pela URL pública em 2026-10-10: páginas em < 1 s, análise completa em 18 s, transcrição de 10 s de áudio em 2,3 s.
 
 Três famílias de modelo distintas (OpenAI, Mistral, Google) garantem juiz ≠ geradora. O pod clona este repositório num volume
 persistente ao subir (`scripts/runpod_app.py`, sem registro de imagens); `make app-create` cria e imprime a URL, `make app-status`,
-`make app-stop` (custo zero) e `make app-start` (religa em ~2 min). Alternativa com a imagem Docker, publicada (privada, 5,5 GB) em `ghcr.io/fiap-ssp-2025/guardia-ai:latest`:
+`make app-stop` (custo zero), `make app-start` (religa em ~2 min) e `make app-redeploy` (publica a `main`: o pod refaz o clone ao subir). Alternativa com a imagem Docker, publicada (privada, 5,5 GB) em `ghcr.io/fiap-ssp-2025/guardia-ai:latest`:
 `make docker-push` + `app-create --image` (exige token do GitHub com `write:packages`; o RunPod guarda a credencial de registro). O Hugging Face
 Spaces foi descartado porque Spaces com Docker passaram a exigir plano pago (Team na org, PRO na conta pessoal); o script
 `scripts/deploy_space.py` fica no repositório caso o grupo assine. Detalhes e decisões em
