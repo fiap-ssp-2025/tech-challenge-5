@@ -1,4 +1,4 @@
-# Guardiã AI — Especificação (v1.0, 2026-10-10)
+# Guardiã AI — Especificação (v1.1, 2026-10-10)
 
 Tech Challenge 5 · FIAP Pós IA para Devs · grupo fiap-ssp-2025. Substitui as decisões do [analise-base-tc5.md](analise-base-tc5.md) onde houver conflito.
 
@@ -19,6 +19,9 @@ Tech Challenge 5 · FIAP Pós IA para Devs · grupo fiap-ssp-2025. Substitui as 
 | D12 | **Status em cache.** Sondagens da LLM/juiz/RAG rodam numa thread a cada 20 s; indicador no cabeçalho (popover nativo, abre no hover/clique) e página `/status` leem o cache. Assets com `?v=mtime`. | A página de status travava 10 s sondando o pod na requisição; navegador segurava CSS antigo. |
 | D13 | **Identidade visual = Viva Flor.** Roxo #925C98 (medido no app do grupo) como cor primária, cabeçalho roxo, flor no logo; tema escuro em lavanda sobre roxo profundo. Cores de risco continuam semânticas. | Pedido do grupo: app sem cor; alinhar com o produto Viva Flor. |
 | D14 | **Voz com gravação contínua.** Web Speech API quando existe; fallback grava sem parar, corta nos silêncios (RMS) e transcreve cada trecho em fila ordenada no servidor (faster-whisper `small`, CPU, ffmpeg), com `skip_ms` para o cabeçalho do webm. | O corte fixo a cada 6 s travava entre pausas. |
+| D15 | **LLM padrão via OpenRouter**, três famílias: geradora `openai/gpt-4o-mini`, juiz `mistralai/mistral-small-3.2-24b-instruct`, extração ao vivo `google/gemini-2.5-flash-lite`. O pod vLLM (Qwen) vira alternativa auto-hospedada documentada. | Latência: 26 s por análise contra 52 s no pod; custo por token irrisório; nada a manter ligado. Exigiu liberar todos os provedores em openrouter.ai/settings/privacy (com a lista restrita tudo ia para a DeepInfra, 13–30 s). |
+| D16 | **Extração ao vivo com schema esparso** (`marcados: [...]` em vez de 25 booleanos). | ~4x menos tokens de saída; 1,7 s no Gemini Flash Lite. O botão "Reextrair" usa o schema completo. |
+| D17 | **App público num pod de CPU do RunPod** (imagem `ghcr.io/fiap-ssp-2025/guardia-ai`, cpu3c 2 vCPU/4 GB, US$ 0,12/h), ligado só quando necessário. HF Spaces descartado. | HF passou a cobrar Spaces com Docker (Team na org, PRO na conta pessoal). RunPod usa créditos já existentes e a API já integrada (`scripts/runpod_app.py`). |
 | D10 | **Pacote novo `guardia`** (não `saude_mulher`): os módulos do TC3 foram portados e enxugados, não copiados. | A interface mudou inteira (D8) e o grafo perdeu os fluxos de saúde; portar foi mais barato que limpar. |
 
 ## 2. Produto
@@ -186,6 +189,6 @@ https://huggingface.co/fiap-ssp-2025/tc5-guardia-encaminhamento. Apresentação:
 | Docs | README, `docs/relatorio_tecnico.md` (falta exportar PDF), `docs/roteiro_video.md`, AGENTS.md, esta spec. |
 
 **Pendências de entrega (humanas):** PDF do relatório, vídeo, revisão final pelo grupo.
-**Próxima etapa:** `specs/002-deploy-hf-spaces-openrouter.md` (app no Hugging Face Spaces, LLM via OpenRouter).
+**Deploy (spec 002, executada em 2026-10-10):** LLM via OpenRouter (D15), app no RunPod CPU (D17); URL e custos no README.
 
 **Operação do pod (enquanto não há deploy):** `make pod-status`; se `pod-start` falhar por "not enough free GPUs", `make pod-create` (Secure Cloud é mais estável que Community) e atualizar `LLM_BASE_URL`/`JUDGE_BASE_URL` no `.env`; `make pod-stop` ao terminar (US$ 0,59/h ligado; volume parado custa US$ 0,017/h). Saldo em 2026-10-10: ~US$ 11.

@@ -1,6 +1,6 @@
 # Roteiro do vídeo (≤ 15 min)
 
-Objetivo do roteiro do TC5: "acompanhar uma jornada completa, desde a entrada das informações até a análise realizada pela IA e a apresentação do resultado". Gravar com o pod do RunPod ligado (`make pod-status` mostra os dois servidores prontos).
+Objetivo do roteiro do TC5: "acompanhar uma jornada completa, desde a entrada das informações até a análise realizada pela IA e a apresentação do resultado". Gravar com o app público ligado (`make app-start` + `make app-status` mostra a URL) ou localmente com `make serve`; a LLM vai pelo OpenRouter, sem pod de GPU.
 
 | Tempo | Cena | O que mostrar / dizer |
 |---|---|---|
@@ -16,4 +16,4 @@ Objetivo do roteiro do TC5: "acompanhar uma jornada completa, desde a entrada da
 | 13:30–14:30 | Avaliação | `docs/eval_pipeline.json`: concordância do F2 por campo, aprovação do juiz, latência mediana, fontes citadas. Modelo publicado no Hugging Face (`fiap-ssp-2025/tc5-guardia-encaminhamento`). |
 | 14:30–15:00 | Limites e fechamento | O modelo aprende a prática de 2024 (inclusive sub-encaminhamento); base RAG pequena; decisão humana. Próximos passos: Laya como classificador local, whisper para relato por áudio. |
 
-Checklist antes de gravar: pod ligado, `.env` apontando para ele, `make serve` sem `--reload`, auditoria com 3 a 5 análises prévias, relatos sintéticos à mão, tema claro para contraste na gravação.
+Checklist antes de gravar: `make app-status` READY (ou `make serve` local), créditos no OpenRouter, `make serve` sem `--reload`, auditoria com 3 a 5 análises prévias, relatos sintéticos à mão, tema claro para contraste na gravação.

@@ -145,3 +145,46 @@ Relato:
 \"\"\"{text.strip()}\"\"\"
 
 Extraia os campos em JSON."""
+
+
+# Sparse variant used live (while typing): list only the binary fields that apply instead of 25 booleans.
+BINARY_FIELDS = list(VIOL) + list(AG) + list(REL_GROUPS)
+STRUCTURE_SCHEMA_SPARSE: dict[str, Any] = {
+    "type": "object",
+    "additionalProperties": False,
+    "properties": {
+        "marcados": {"type": "array", "items": {"type": "string", "enum": BINARY_FIELDS}, "description": "Campos binários presentes no relato."},
+        **{name: {"type": "string", "enum": list(mapping.values()) + ["IGNORADO"]} for name, (_, mapping) in CATEGORICAL.items()},
+        "SG_UF": {"type": "string", "enum": list(UF_OPTIONS) + ["IGNORADO"]},
+        "ESCOLARIDADE": {"type": "string", "enum": list(ESCOLARIDADE_LABELS.values()) + ["IGNORADO"]},
+        "IDADE_ANOS": {"type": ["integer", "null"], "minimum": 0, "maximum": 120},
+        "arma_mencionada": {"type": "boolean"},
+        "ameaca_de_morte": {"type": "boolean"},
+        "filhos_envolvidos": {"type": "boolean"},
+        "local_seguro": {"type": ["boolean", "null"]},
+        "resumo_objetivo": {"type": "string"},
+        "campos_incertos": {"type": "array", "items": {"type": "string"}},
+    },
+    "required": ["marcados"] + list(CATEGORICAL) + ["SG_UF", "ESCOLARIDADE", "IDADE_ANOS", "arma_mencionada", "ameaca_de_morte",
+                                                     "filhos_envolvidos", "local_seguro", "resumo_objetivo", "campos_incertos"],
+}
+
+
+def build_structure_prompt_sparse(text: str) -> str:
+    legend = "\n".join(
+        [f"- {k}: {v}" for k, v in VIOL.items()] + [f"- {k}: {v}" for k, v in AG.items()] + [f"- {k}: {label}" for k, (label, _) in REL_GROUPS.items()]
+    )
+    cats = "\n".join(f"- {k}: {label} (opções: {', '.join(m.values())}, IGNORADO)" for k, (label, m) in CATEGORICAL.items())
+    return f"""Campos binários (coloque em "marcados" só os que o relato afirma ou implica claramente):
+{legend}
+
+Campos de contexto (uma opção cada; IGNORADO quando o relato não diz):
+{cats}
+- SG_UF: sigla da UF de residência ou IGNORADO · ESCOLARIDADE: {', '.join(ESCOLARIDADE_LABELS.values())} ou IGNORADO · IDADE_ANOS: inteiro ou null
+- arma_mencionada / ameaca_de_morte / filhos_envolvidos / local_seguro: sinais de risco do relato
+- resumo_objetivo: 1 frase, sem nomes próprios · campos_incertos: nomes dos campos em dúvida
+
+Relato:
+\"\"\"{text.strip()}\"\"\"
+
+Responda só com o JSON."""

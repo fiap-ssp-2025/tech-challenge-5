@@ -97,10 +97,13 @@ Detalhes em `docs/eval_pipeline.json` e no relatório.
 
 ## LLM, RAG e segurança
 
-- **Geradora:** `QuantTrio/Qwen3.6-27B-AWQ` servido por vLLM num pod RunPod (`scripts/runpod_vllm.py`); saída JSON
-  restrita por schema (`response_format=json_schema`). Fallback opcional: OpenAI.
-- **Juiz:** `Qwen/Qwen2.5-7B-Instruct-AWQ` em outro servidor do mesmo pod. Audita cada nota em 6 critérios
-  (prescrição, diagnóstico, decisão automática, rede de proteção, linguagem, privacidade) com exigência de trecho literal.
+- **Geradora, juiz e extração ao vivo** em qualquer endpoint compatível com OpenAI (`LLM_*`, `JUDGE_*`, `FAST_*`).
+  Configuração padrão: OpenRouter com `openai/gpt-4o-mini` (nota), `mistralai/mistral-small-3.2-24b-instruct` (juiz) e
+  `google/gemini-2.5-flash-lite` (F2). Configuração auto-hospedada validada: `QuantTrio/Qwen3.6-27B-AWQ` e
+  `Qwen/Qwen2.5-7B-Instruct-AWQ` em vLLM num pod RunPod (`scripts/runpod_vllm.py`). Saída JSON restrita por schema
+  (`response_format=json_schema`, com fallback `json_object`).
+- **Juiz** audita cada nota em 6 critérios (prescrição, diagnóstico, decisão automática, rede de proteção, linguagem,
+  privacidade) com exigência de trecho literal; sempre num modelo de família diferente da geradora.
 - **RAG:** 11 documentos (Lei 11.340/2006 e resumo, tipos de violência, medidas protetivas, canais nacionais e do DF,
   rede de proteção do DF, LGPD, norma técnica MS/MJ de violência sexual) em Chroma com embeddings multilíngues;
   a nota cita os títulos usados e a interface mostra quais foram recuperados e quais foram citados.
@@ -175,6 +178,19 @@ tests/                  features · regras do grafo · juiz · rotas web
 
 Marcelo Arruda de Siqueira · Leonardo Barbosa Nogueira · Jose Flavio Neto · Pedro Matias dos Santos · Wellington Oliveira de Andrade
 
-## Próxima etapa
+## Deploy público
 
-Deploy público (app no Hugging Face Spaces, LLM via OpenRouter): ver [`specs/002-deploy-hf-spaces-openrouter.md`](specs/002-deploy-hf-spaces-openrouter.md).
+| Componente | Onde roda | Custo |
+|---|---|---|
+| App (web, modelo de ML, RAG, whisper) | Pod de CPU no RunPod (2 vCPU, 4 GB) com a imagem `ghcr.io/fiap-ssp-2025/guardia-ai` | US$ 0,12/h ligado, zero parado |
+| LLM geradora | OpenRouter · `openai/gpt-4o-mini` | ~US$ 0,001 por nota |
+| Juiz independente | OpenRouter · `mistralai/mistral-small-3.2-24b-instruct` | ~US$ 0,0005 por veredito |
+| Extração ao vivo (F2) | OpenRouter · `google/gemini-2.5-flash-lite` | ~US$ 0,0001 por chamada |
+| Voz | Web Speech API no navegador; fallback whisper `base` no pod | — |
+| Alternativa auto-hospedada | vLLM no RunPod (Qwen3.6-27B + Qwen2.5-7B), `make pod-create` | US$ 0,59/h |
+
+Três famílias de modelo distintas (OpenAI, Mistral, Google) garantem juiz ≠ geradora. Comandos: `make docker-build docker-push`
+(imagem), `make app-create` (cria o pod e imprime a URL), `make app-status`, `make app-stop`, `make app-start`. O Hugging Face
+Spaces foi descartado porque Spaces com Docker passaram a exigir plano pago (Team na org, PRO na conta pessoal); o script
+`scripts/deploy_space.py` fica no repositório caso o grupo assine. Detalhes e decisões em
+[`specs/002-deploy-hf-spaces-openrouter.md`](specs/002-deploy-hf-spaces-openrouter.md).

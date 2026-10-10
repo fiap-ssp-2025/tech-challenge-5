@@ -1,29 +1,29 @@
 {
   "summary": {
-    "n": 30,
+    "n": 10,
     "f2": {
-      "ok": 30,
-      "field_precision": 0.916,
-      "field_recall": 0.932,
+      "ok": 10,
+      "field_precision": 0.95,
+      "field_recall": 0.927,
       "out_vezes_accuracy": 1.0,
-      "median_latency_ms": 21953.0
+      "median_latency_ms": 16415.0
     },
     "f1": {
-      "n": 30,
-      "llm_ok": 30,
-      "judge_evaluated": 30,
-      "judge_approved": 29,
-      "blocked": 1,
-      "median_llm_latency_ms": 24938.0,
-      "median_total_s": 51.6,
-      "ml_agreement_with_sinan_label": 0.767,
-      "mean_sources": 2.77,
-      "mean_cited": 2.07,
+      "n": 10,
+      "llm_ok": 10,
+      "judge_evaluated": 10,
+      "judge_approved": 10,
+      "blocked": 0,
+      "median_llm_latency_ms": 17771.0,
+      "median_total_s": 44.9,
+      "ml_agreement_with_sinan_label": 0.7,
+      "mean_sources": 3,
+      "mean_cited": 2.6,
       "risk_distribution": {
         "baixo": 0,
         "moderado": 0,
-        "alto": 24,
-        "critico": 6
+        "alto": 5,
+        "critico": 5
       }
     }
   },
@@ -31,71 +31,68 @@
     {
       "id": "syn-42-000",
       "ok": true,
-      "latency_ms": 28694,
+      "latency_ms": 20333,
       "uncertain": [],
       "error": null
     },
     {
       "id": "syn-42-001",
       "ok": true,
-      "latency_ms": 21030,
+      "latency_ms": 16313,
       "uncertain": [],
       "error": null
     },
     {
       "id": "syn-42-002",
       "ok": true,
-      "latency_ms": 21638,
-      "uncertain": [
-        "VIOL_MOTIV",
-        "ameaca_de_morte"
-      ],
+      "latency_ms": 17929,
+      "uncertain": [],
       "error": null
     },
     {
       "id": "syn-42-003",
       "ok": true,
-      "latency_ms": 22835,
-      "uncertain": [
-        "CICL_VID",
-        "VIOL_MOTIV",
-        "ameaca_de_morte"
-      ],
+      "latency_ms": 16517,
+      "uncertain": [],
       "error": null
     },
     {
       "id": "syn-42-004",
       "ok": true,
-      "latency_ms": 21785,
+      "latency_ms": 14075,
       "uncertain": [],
       "error": null
     },
     {
       "id": "syn-42-005",
       "ok": true,
-      "latency_ms": 21843,
+      "latency_ms": 15463,
       "uncertain": [
-        "REL_CONHECIDO",
+        "REL_OUTROS_FLAG",
         "LOCAL_OCOR",
-        "VIOL_MOTIV",
         "OUT_VEZES",
         "NUM_ENVOLV",
-        "AUTOR_SEXO"
+        "AUTOR_SEXO",
+        "SIT_CONJUG",
+        "DEF_TRANS",
+        "ORIENT_SEX",
+        "IDENT_GEN",
+        "SG_UF"
       ],
       "error": null
     },
     {
       "id": "syn-42-006",
       "ok": true,
-      "latency_ms": 22198,
+      "latency_ms": 17051,
       "uncertain": [
+        "NUM_ENVOLV",
         "SIT_CONJUG",
         "CS_GESTANT",
         "ORIENT_SEX",
         "IDENT_GEN",
         "LOCAL_OCOR",
         "VIOL_MOTIV",
-        "ESCOLARIDADE",
         "IDADE_ANOS"
       ],
       "error": null
@@ -103,242 +100,22 @@
     {
       "id": "syn-42-007",
       "ok": true,
-      "latency_ms": 27550,
-      "uncertain": [
-        "AG_OBJETO vs AG_CORTE: O relato diz 'objeto contundente' mas menciona 'arma branca' (cortante/perfurante) na análise de gravidade. Classifiquei como AG_OBJETO (contundente) conforme a descrição da ação, mas há ambiguidade.",
-        "REL_CONHECIDO: O agressor é descrito como 'de outra relação'. Não é parceiro íntimo (casada) nem familiar. Classifiquei como conhecido/desconhecido, mas a natureza exata da relação não é explícita.",
-        "VIOL_MOTIV: O relato afirma explicitamente 'conflito geracional', o que é atípico para violência doméstica entre adultos não familiares, mas foi extraído conforme o texto."
-      ],
+      "latency_ms": 18577,
+      "uncertain": [],
       "error": null
     },
     {
       "id": "syn-42-008",
       "ok": true,
-      "latency_ms": 23103,
-      "uncertain": [
-        "CS_RACA",
-        "ORIENT_SEX",
-        "ameaca_de_morte",
-        "local_seguro"
-      ],
+      "latency_ms": 15559,
+      "uncertain": [],
       "error": null
     },
     {
       "id": "syn-42-009",
       "ok": true,
-      "latency_ms": 25591,
-      "uncertain": [
-        "OUT_VEZES: O relato menciona 'padrão de violência', o que sugere recorrência, mas não afirma explicitamente que ocorreu 'outras vezes' no sentido de episódios anteriores distintos confirmados para o campo SIM/NAO. Mantido como IGNORADO por segurança.",
-        "LOCAL_OCOR: Inferido como RESIDENCIA pelo termo 'âmbito doméstico', mas o local exato não foi especificado (pode ser rua, trabalho, etc., dentro do contexto doméstico). Assumido RESIDENCIA como padrão para violência doméstica, mas há leve incerteza."
-      ],
-      "error": null
-    },
-    {
-      "id": "syn-42-010",
-      "ok": true,
-      "latency_ms": 20712,
+      "latency_ms": 13580,
       "uncertain": [],
-      "error": null
-    },
-    {
-      "id": "syn-42-011",
-      "ok": true,
-      "latency_ms": 23151,
-      "uncertain": [
-        "VIOL_OUTR",
-        "REL_CONHECIDO",
-        "VIOL_MOTIV"
-      ],
-      "error": null
-    },
-    {
-      "id": "syn-42-012",
-      "ok": true,
-      "latency_ms": 26212,
-      "uncertain": [
-        "CICL_VID: Relato afirma 'ciclo de vida adulto' mas idade é 9 anos. Para SINAN, 9 anos é CRIANCA. O campo foi marcado como IGNORADO para revisão, pois há contradição explícita no texto.",
-        "REL_FAMILIAR: O texto lista 'pai, mãe, padrasto, madrasta, irmão ou filho' como identificação do autor. Como a vítima é criança, 'filho' como autor é improvável, mas o texto não especifica qual dos familiares é o agressor real, apenas que é um deles. Assumiu-se true por ser familiar, mas a relação exata é incerta."
-      ],
-      "error": null
-    },
-    {
-      "id": "syn-42-013",
-      "ok": true,
-      "latency_ms": 23139,
-      "uncertain": [
-        "VIOL_MOTIV",
-        "SG_UF",
-        "arma_mencionada",
-        "ameaca_de_morte",
-        "filhos_envolvidos",
-        "local_seguro"
-      ],
-      "error": null
-    },
-    {
-      "id": "syn-42-014",
-      "ok": true,
-      "latency_ms": 20058,
-      "uncertain": [
-        "CICL_VID",
-        "VIOL_MOTIV"
-      ],
-      "error": null
-    },
-    {
-      "id": "syn-42-015",
-      "ok": true,
-      "latency_ms": 22084,
-      "uncertain": [],
-      "error": null
-    },
-    {
-      "id": "syn-42-016",
-      "ok": true,
-      "latency_ms": 20357,
-      "uncertain": [],
-      "error": null
-    },
-    {
-      "id": "syn-42-017",
-      "ok": true,
-      "latency_ms": 23222,
-      "uncertain": [
-        "ameaca_de_morte",
-        "local_seguro",
-        "CS_GESTANT"
-      ],
-      "error": null
-    },
-    {
-      "id": "syn-42-018",
-      "ok": true,
-      "latency_ms": 21382,
-      "uncertain": [],
-      "error": null
-    },
-    {
-      "id": "syn-42-019",
-      "ok": true,
-      "latency_ms": 22002,
-      "uncertain": [
-        "VIOL_MOTIV",
-        "AG_AMEACA",
-        "local_seguro"
-      ],
-      "error": null
-    },
-    {
-      "id": "syn-42-020",
-      "ok": true,
-      "latency_ms": 21174,
-      "uncertain": [
-        "LOCAL_OCOR",
-        "OUT_VEZES",
-        "SIT_CONJUG"
-      ],
-      "error": null
-    },
-    {
-      "id": "syn-42-021",
-      "ok": true,
-      "latency_ms": 20741,
-      "uncertain": [],
-      "error": null
-    },
-    {
-      "id": "syn-42-022",
-      "ok": true,
-      "latency_ms": 21401,
-      "uncertain": [
-        "VIOL_MOTIV",
-        "CS_GESTANT",
-        "ORIENT_SEX",
-        "IDENT_GEN",
-        "ameaca_de_morte"
-      ],
-      "error": null
-    },
-    {
-      "id": "syn-42-023",
-      "ok": true,
-      "latency_ms": 21064,
-      "uncertain": [
-        "AUTOR_SEXO",
-        "SIT_CONJUG",
-        "ESCOLARIDADE",
-        "IDADE_ANOS"
-      ],
-      "error": null
-    },
-    {
-      "id": "syn-42-024",
-      "ok": true,
-      "latency_ms": 21622,
-      "uncertain": [
-        "VIOL_MOTIV",
-        "CS_GESTANT",
-        "ORIENT_SEX",
-        "IDENT_GEN",
-        "local_seguro"
-      ],
-      "error": null
-    },
-    {
-      "id": "syn-42-025",
-      "ok": true,
-      "latency_ms": 26480,
-      "uncertain": [
-        "ESCOLARIDADE: O relato menciona 'escolaridade incompleta', mas não especifica se é fundamental ou médio. O SINAN exige a especificação do nível (FUNDAMENTAL_INCOMPLETO ou ENSINO_MEDIO_INCOMPLETO).",
-        "AUTOR_SEXO: O relato menciona 'parceiro íntimo' e 'familiar', mas não especifica o gênero dos agressores (embora o contexto de violência doméstica contra mulher frequentemente implique homens, não é explícito no texto).",
-        "AG_FORCA: O relato menciona 'outras formas de agressão' além de ameaças. Não está claro se houve uso de força corporal (socos, empurrões) ou apenas violência verbal/psicológica."
-      ],
-      "error": null
-    },
-    {
-      "id": "syn-42-026",
-      "ok": true,
-      "latency_ms": 25035,
-      "uncertain": [
-        "LOCAL_OCOR: O relato diz 'local não especificado', o que impede a classificação precisa entre RESIDENCIA, VIA_PUBLICA, etc. Mantido como IGNORADO.",
-        "CS_GESTANT: Não há menção sobre gravidez. Mantido como IGNORADO.",
-        "ORIENT_SEX: Não há menção sobre orientação sexual. Mantido como IGNORADO.",
-        "IDENT_GEN: Não há menção sobre identidade de gênero. Mantido como IGNORADO."
-      ],
-      "error": null
-    },
-    {
-      "id": "syn-42-027",
-      "ok": true,
-      "latency_ms": 21648,
-      "uncertain": [],
-      "error": null
-    },
-    {
-      "id": "syn-42-028",
-      "ok": true,
-      "latency_ms": 22224,
-      "uncertain": [
-        "CS_GESTANT",
-        "DEF_TRANS",
-        "ORIENT_SEX",
-        "IDENT_GEN",
-        "SG_UF",
-        "ESCOLARIDADE"
-      ],
-      "error": null
-    },
-    {
-      "id": "syn-42-029",
-      "ok": true,
-      "latency_ms": 21904,
-      "uncertain": [
-        "VIOL_MOTIV",
-        "AG_FORCA",
-        "AG_OUTROS",
-        "REL_CONHECIDO",
-        "REL_OUTROS_FLAG"
-      ],
       "error": null
     }
   ],
@@ -350,17 +127,15 @@
       "ml_probability": 0.3214,
       "ml_suggest": true,
       "llm_backend": "generator",
-      "llm_latency_ms": 24363,
+      "llm_latency_ms": 18234,
       "status": "approved",
       "judge_backend": "judge",
       "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: trecho não existe na nota"
-      ],
+      "judge_overrides": [],
       "n_sources": 4,
       "n_cited": 3,
-      "audit_id": 24,
-      "total_s": 66.1
+      "audit_id": 84,
+      "total_s": 60.0
     },
     {
       "id": "syn-42-001",
@@ -369,93 +144,83 @@
       "ml_probability": 0.3214,
       "ml_suggest": true,
       "llm_backend": "generator",
-      "llm_latency_ms": 23561,
+      "llm_latency_ms": 15242,
       "status": "approved",
       "judge_backend": "judge",
       "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: justificativa nega o problema"
-      ],
+      "judge_overrides": [],
       "n_sources": 1,
       "n_cited": 1,
-      "audit_id": 25,
-      "total_s": 48.3
+      "audit_id": 85,
+      "total_s": 70.3
     },
     {
       "id": "syn-42-002",
       "target": 0,
-      "risk_level": "alto",
+      "risk_level": "critico",
       "ml_probability": 0.1421,
       "ml_suggest": false,
       "llm_backend": "generator",
-      "llm_latency_ms": 26187,
+      "llm_latency_ms": 22119,
       "status": "approved",
       "judge_backend": "judge",
       "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: justificativa nega o problema"
-      ],
+      "judge_overrides": [],
       "n_sources": 1,
       "n_cited": 1,
-      "audit_id": 26,
-      "total_s": 51.7
+      "audit_id": 86,
+      "total_s": 53.2
     },
     {
       "id": "syn-42-003",
       "target": 0,
       "risk_level": "critico",
-      "ml_probability": 0.3257,
+      "ml_probability": 0.3536,
       "ml_suggest": true,
       "llm_backend": "generator",
-      "llm_latency_ms": 24099,
+      "llm_latency_ms": 20665,
       "status": "approved",
       "judge_backend": "judge",
       "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: trecho não existe na nota"
-      ],
+      "judge_overrides": [],
       "n_sources": 4,
-      "n_cited": 2,
-      "audit_id": 27,
-      "total_s": 51.4
+      "n_cited": 4,
+      "audit_id": 87,
+      "total_s": 46.3
     },
     {
       "id": "syn-42-004",
       "target": 1,
-      "risk_level": "alto",
+      "risk_level": "critico",
       "ml_probability": 0.9516,
       "ml_suggest": true,
       "llm_backend": "generator",
-      "llm_latency_ms": 25036,
+      "llm_latency_ms": 17308,
       "status": "approved",
       "judge_backend": "judge",
       "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: justificativa nega o problema"
-      ],
+      "judge_overrides": [],
       "n_sources": 3,
       "n_cited": 3,
-      "audit_id": 28,
-      "total_s": 51.0
+      "audit_id": 88,
+      "total_s": 41.3
     },
     {
       "id": "syn-42-005",
       "target": 0,
       "risk_level": "alto",
-      "ml_probability": 0.0123,
+      "ml_probability": 0.0073,
       "ml_suggest": false,
       "llm_backend": "generator",
-      "llm_latency_ms": 22159,
+      "llm_latency_ms": 14660,
       "status": "approved",
       "judge_backend": "judge",
       "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: a nota cita a rede de proteção"
-      ],
+      "judge_overrides": [],
       "n_sources": 1,
       "n_cited": 1,
-      "audit_id": 29,
-      "total_s": 48.3
+      "audit_id": 89,
+      "total_s": 38.9
     },
     {
       "id": "syn-42-006",
@@ -464,36 +229,32 @@
       "ml_probability": 0.0492,
       "ml_suggest": false,
       "llm_backend": "generator",
-      "llm_latency_ms": 24748,
+      "llm_latency_ms": 20016,
       "status": "approved",
       "judge_backend": "judge",
       "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: a nota cita a rede de proteção"
-      ],
+      "judge_overrides": [],
       "n_sources": 4,
-      "n_cited": 3,
-      "audit_id": 30,
-      "total_s": 51.5
+      "n_cited": 4,
+      "audit_id": 90,
+      "total_s": 55.5
     },
     {
       "id": "syn-42-007",
       "target": 0,
       "risk_level": "critico",
-      "ml_probability": 0.4181,
+      "ml_probability": 0.4557,
       "ml_suggest": true,
       "llm_backend": "generator",
-      "llm_latency_ms": 25493,
+      "llm_latency_ms": 18708,
       "status": "approved",
       "judge_backend": "judge",
       "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: a nota cita a rede de proteção"
-      ],
+      "judge_overrides": [],
       "n_sources": 4,
       "n_cited": 3,
-      "audit_id": 31,
-      "total_s": 57.6
+      "audit_id": 91,
+      "total_s": 43.5
     },
     {
       "id": "syn-42-008",
@@ -502,417 +263,34 @@
       "ml_probability": 0.6676,
       "ml_suggest": true,
       "llm_backend": "generator",
-      "llm_latency_ms": 24615,
+      "llm_latency_ms": 16522,
       "status": "approved",
       "judge_backend": "judge",
       "judge_approved": true,
-      "judge_overrides": [
-        "nao_decide_sozinha: trecho não existe na nota",
-        "encaminha_rede_protecao: justificativa nega o problema"
-      ],
+      "judge_overrides": [],
       "n_sources": 4,
       "n_cited": 3,
-      "audit_id": 32,
-      "total_s": 52.4
+      "audit_id": 92,
+      "total_s": 42.6
     },
     {
       "id": "syn-42-009",
       "target": 0,
       "risk_level": "alto",
-      "ml_probability": 0.5193,
+      "ml_probability": 0.5484,
       "ml_suggest": true,
       "llm_backend": "generator",
-      "llm_latency_ms": 26192,
+      "llm_latency_ms": 17247,
       "status": "approved",
       "judge_backend": "judge",
       "judge_approved": true,
       "judge_overrides": [
-        "encaminha_rede_protecao: a nota cita a rede de proteção"
+        "evita_diagnostico: trecho não existe na nota"
       ],
       "n_sources": 4,
       "n_cited": 3,
-      "audit_id": 33,
-      "total_s": 55.9
-    },
-    {
-      "id": "syn-42-010",
-      "target": 0,
-      "risk_level": "alto",
-      "ml_probability": 0.086,
-      "ml_suggest": false,
-      "llm_backend": "generator",
-      "llm_latency_ms": 26470,
-      "status": "approved",
-      "judge_backend": "judge",
-      "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: justificativa nega o problema"
-      ],
-      "n_sources": 1,
-      "n_cited": 1,
-      "audit_id": 34,
-      "total_s": 51.1
-    },
-    {
-      "id": "syn-42-011",
-      "target": 0,
-      "risk_level": "alto",
-      "ml_probability": 0.0492,
-      "ml_suggest": false,
-      "llm_backend": "generator",
-      "llm_latency_ms": 26354,
-      "status": "approved",
-      "judge_backend": "judge",
-      "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: a nota cita a rede de proteção"
-      ],
-      "n_sources": 4,
-      "n_cited": 4,
-      "audit_id": 35,
-      "total_s": 53.8
-    },
-    {
-      "id": "syn-42-012",
-      "target": 0,
-      "risk_level": "alto",
-      "ml_probability": 0.1499,
-      "ml_suggest": true,
-      "llm_backend": "generator",
-      "llm_latency_ms": 23806,
-      "status": "approved",
-      "judge_backend": "judge",
-      "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: justificativa nega o problema"
-      ],
-      "n_sources": 1,
-      "n_cited": 1,
-      "audit_id": 36,
-      "total_s": 53.5
-    },
-    {
-      "id": "syn-42-013",
-      "target": 1,
-      "risk_level": "alto",
-      "ml_probability": 0.6096,
-      "ml_suggest": true,
-      "llm_backend": "generator",
-      "llm_latency_ms": 25813,
-      "status": "approved",
-      "judge_backend": "judge",
-      "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: a nota cita a rede de proteção"
-      ],
-      "n_sources": 3,
-      "n_cited": 2,
-      "audit_id": 37,
-      "total_s": 53.1
-    },
-    {
-      "id": "syn-42-014",
-      "target": 0,
-      "risk_level": "alto",
-      "ml_probability": 0.0981,
-      "ml_suggest": false,
-      "llm_backend": "generator",
-      "llm_latency_ms": 23322,
-      "status": "blocked_by_judge",
-      "judge_backend": "judge",
-      "judge_approved": false,
-      "judge_overrides": [
-        "encaminha_rede_protecao: justificativa nega o problema"
-      ],
-      "n_sources": 4,
-      "n_cited": 0,
-      "audit_id": 38,
-      "total_s": 47.4
-    },
-    {
-      "id": "syn-42-015",
-      "target": 1,
-      "risk_level": "alto",
-      "ml_probability": 0.4557,
-      "ml_suggest": true,
-      "llm_backend": "generator",
-      "llm_latency_ms": 23137,
-      "status": "approved",
-      "judge_backend": "judge",
-      "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: trecho não existe na nota"
-      ],
-      "n_sources": 4,
-      "n_cited": 3,
-      "audit_id": 39,
-      "total_s": 49.3
-    },
-    {
-      "id": "syn-42-016",
-      "target": 1,
-      "risk_level": "alto",
-      "ml_probability": 0.1813,
-      "ml_suggest": true,
-      "llm_backend": "generator",
-      "llm_latency_ms": 29850,
-      "status": "approved",
-      "judge_backend": "judge",
-      "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: trecho não existe na nota"
-      ],
-      "n_sources": 3,
-      "n_cited": 3,
-      "audit_id": 40,
-      "total_s": 54.4
-    },
-    {
-      "id": "syn-42-017",
-      "target": 1,
-      "risk_level": "critico",
-      "ml_probability": 0.3536,
-      "ml_suggest": true,
-      "llm_backend": "generator",
-      "llm_latency_ms": 25760,
-      "status": "approved",
-      "judge_backend": "judge",
-      "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: trecho não existe na nota"
-      ],
-      "n_sources": 1,
-      "n_cited": 1,
-      "audit_id": 41,
-      "total_s": 53.1
-    },
-    {
-      "id": "syn-42-018",
-      "target": 0,
-      "risk_level": "alto",
-      "ml_probability": 0.2058,
-      "ml_suggest": true,
-      "llm_backend": "generator",
-      "llm_latency_ms": 26325,
-      "status": "approved",
-      "judge_backend": "judge",
-      "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: justificativa nega o problema"
-      ],
-      "n_sources": 1,
-      "n_cited": 1,
-      "audit_id": 42,
-      "total_s": 51.4
-    },
-    {
-      "id": "syn-42-019",
-      "target": 1,
-      "risk_level": "alto",
-      "ml_probability": 0.5193,
-      "ml_suggest": true,
-      "llm_backend": "generator",
-      "llm_latency_ms": 26591,
-      "status": "approved",
-      "judge_backend": "judge",
-      "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: trecho não existe na nota"
-      ],
-      "n_sources": 4,
-      "n_cited": 3,
-      "audit_id": 43,
-      "total_s": 53.0
-    },
-    {
-      "id": "syn-42-020",
-      "target": 0,
-      "risk_level": "alto",
-      "ml_probability": 0.0073,
-      "ml_suggest": false,
-      "llm_backend": "generator",
-      "llm_latency_ms": 24439,
-      "status": "approved",
-      "judge_backend": "judge",
-      "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: justificativa nega o problema"
-      ],
-      "n_sources": 3,
-      "n_cited": 1,
-      "audit_id": 44,
-      "total_s": 49.6
-    },
-    {
-      "id": "syn-42-021",
-      "target": 1,
-      "risk_level": "alto",
-      "ml_probability": 0.3257,
-      "ml_suggest": true,
-      "llm_backend": "generator",
-      "llm_latency_ms": 23542,
-      "status": "approved",
-      "judge_backend": "judge",
-      "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: trecho não existe na nota"
-      ],
-      "n_sources": 4,
-      "n_cited": 3,
-      "audit_id": 45,
-      "total_s": 48.6
-    },
-    {
-      "id": "syn-42-022",
-      "target": 0,
-      "risk_level": "critico",
-      "ml_probability": 0.3822,
-      "ml_suggest": true,
-      "llm_backend": "generator",
-      "llm_latency_ms": 23180,
-      "status": "approved",
-      "judge_backend": "judge",
-      "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: trecho não existe na nota"
-      ],
-      "n_sources": 1,
-      "n_cited": 1,
-      "audit_id": 46,
-      "total_s": 48.6
-    },
-    {
-      "id": "syn-42-023",
-      "target": 0,
-      "risk_level": "alto",
-      "ml_probability": 0.0492,
-      "ml_suggest": false,
-      "llm_backend": "generator",
-      "llm_latency_ms": 25325,
-      "status": "approved",
-      "judge_backend": "judge",
-      "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: justificativa nega o problema"
-      ],
-      "n_sources": 4,
-      "n_cited": 3,
-      "audit_id": 47,
-      "total_s": 49.4
-    },
-    {
-      "id": "syn-42-024",
-      "target": 1,
-      "risk_level": "alto",
-      "ml_probability": 0.3822,
-      "ml_suggest": true,
-      "llm_backend": "generator",
-      "llm_latency_ms": 25348,
-      "status": "approved",
-      "judge_backend": "judge",
-      "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: justificativa nega o problema"
-      ],
-      "n_sources": 1,
-      "n_cited": 1,
-      "audit_id": 48,
-      "total_s": 50.8
-    },
-    {
-      "id": "syn-42-025",
-      "target": 0,
-      "risk_level": "alto",
-      "ml_probability": 0.5193,
-      "ml_suggest": true,
-      "llm_backend": "generator",
-      "llm_latency_ms": 24840,
-      "status": "approved",
-      "judge_backend": "judge",
-      "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: justificativa nega o problema"
-      ],
-      "n_sources": 4,
-      "n_cited": 3,
-      "audit_id": 49,
-      "total_s": 55.1
-    },
-    {
-      "id": "syn-42-026",
-      "target": 1,
-      "risk_level": "alto",
-      "ml_probability": 0.1813,
-      "ml_suggest": true,
-      "llm_backend": "generator",
-      "llm_latency_ms": 22870,
-      "status": "approved",
-      "judge_backend": "judge",
-      "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: trecho não existe na nota"
-      ],
-      "n_sources": 1,
-      "n_cited": 1,
-      "audit_id": 50,
-      "total_s": 53.2
-    },
-    {
-      "id": "syn-42-027",
-      "target": 1,
-      "risk_level": "alto",
-      "ml_probability": 0.3214,
-      "ml_suggest": true,
-      "llm_backend": "generator",
-      "llm_latency_ms": 26492,
-      "status": "approved",
-      "judge_backend": "judge",
-      "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: a nota cita a rede de proteção"
-      ],
-      "n_sources": 4,
-      "n_cited": 3,
-      "audit_id": 51,
-      "total_s": 52.0
-    },
-    {
-      "id": "syn-42-028",
-      "target": 1,
-      "risk_level": "critico",
-      "ml_probability": 0.3214,
-      "ml_suggest": true,
-      "llm_backend": "generator",
-      "llm_latency_ms": 23601,
-      "status": "approved",
-      "judge_backend": "judge",
-      "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: a nota cita a rede de proteção"
-      ],
-      "n_sources": 4,
-      "n_cited": 3,
-      "audit_id": 52,
-      "total_s": 49.9
-    },
-    {
-      "id": "syn-42-029",
-      "target": 0,
-      "risk_level": "alto",
-      "ml_probability": 0.0278,
-      "ml_suggest": false,
-      "llm_backend": "generator",
-      "llm_latency_ms": 31088,
-      "status": "approved",
-      "judge_backend": "judge",
-      "judge_approved": true,
-      "judge_overrides": [
-        "encaminha_rede_protecao: a nota cita a rede de proteção"
-      ],
-      "n_sources": 1,
-      "n_cited": 1,
-      "audit_id": 53,
-      "total_s": 56.4
+      "audit_id": 93,
+      "total_s": 42.6
     }
   ]
 }

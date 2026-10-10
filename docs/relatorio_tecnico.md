@@ -165,11 +165,11 @@ F2, concordância por campo entre o extraído e a ficha de origem; F1, aprovaç�
 recuperadas e citadas, distribuição de risco e concordância entre a sugestão do modelo e o encaminhamento real.
 
 <!-- EVAL:START -->
-Relatos sintéticos avaliados: **30**.
+Relatos sintéticos avaliados: **10**.
 
-**F2 (estruturar relato).** 30/30 extrações válidas; concordância por campo binário com a ficha de origem: precisão 0.916, recall 0.932; acerto de `OUT_VEZES` 1.000; latência mediana 21953 ms.
+**F2 (estruturar relato).** 10/10 extrações válidas; concordância por campo binário com a ficha de origem: precisão 0.950, recall 0.927; acerto de `OUT_VEZES` 1.000; latência mediana 16415 ms.
 
-**F1 (grafo completo).** 30/30 notas geradas pela LLM; juiz avaliou 30 e aprovou 29; 1 bloqueadas (blocklist ou juiz). Latência mediana da LLM 24938 ms, tempo mediano total 51.6 s. Fontes recuperadas por nota: 2.8 (citadas 2.1). Concordância entre sugestão do modelo e encaminhamento real da ficha: 0.767. Distribuição de risco por regras: {'baixo': 0, 'moderado': 0, 'alto': 24, 'critico': 6}.
+**F1 (grafo completo).** 10/10 notas geradas pela LLM; juiz avaliou 10 e aprovou 10; 0 bloqueadas (blocklist ou juiz). Latência mediana da LLM 17771 ms, tempo mediano total 44.9 s. Fontes recuperadas por nota: 3.0 (citadas 2.6). Concordância entre sugestão do modelo e encaminhamento real da ficha: 0.700. Distribuição de risco por regras: {'baixo': 0, 'moderado': 0, 'alto': 5, 'critico': 5}.
 <!-- EVAL:END -->
 
 ## 7. Execução e entrega

@@ -7,7 +7,14 @@ from typing import Any
 
 from guardia.data.features import CATEGORICAL, ESCOLARIDADE_LABELS, FORM_DEFAULTS, UF_OPTIONS
 from guardia.llm.client import chat
-from guardia.llm.prompts import STRUCTURE_SCHEMA, STRUCTURE_SYSTEM, build_structure_prompt
+from guardia.llm.prompts import (
+    BINARY_FIELDS,
+    STRUCTURE_SCHEMA,
+    STRUCTURE_SCHEMA_SPARSE,
+    STRUCTURE_SYSTEM,
+    build_structure_prompt,
+    build_structure_prompt_sparse,
+)
 
 
 @dataclass
@@ -50,21 +57,26 @@ def _normalise(parsed: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
     return case, signals
 
 
+def _expand_sparse(parsed: dict[str, Any]) -> dict[str, Any]:
+    """Sparse output ("marcados": [...]) → the dense shape `_normalise` expects."""
+    marked = {str(x) for x in (parsed.get("marcados") or [])}
+    dense = {k: (k in marked) for k in BINARY_FIELDS}
+    dense.update({k: v for k, v in parsed.items() if k != "marcados"})
+    return dense
+
+
 def structure_report(text: str, *, fast: bool = False) -> Structured:
-    """`fast=True` uses the small model (FAST_* / judge server) for live extraction while the user types."""
-    res = chat(
-        [{"role": "system", "content": STRUCTURE_SYSTEM}, {"role": "user", "content": build_structure_prompt(text)}],
-        role="fast" if fast else "generator", schema=STRUCTURE_SCHEMA, schema_name="ficha", temperature=0.0, max_tokens=900,
-        allow_fallback=not fast,
-    )
+    """`fast=True` → live extraction while the user types: the FAST_* endpoint (or the generator) with the sparse
+    schema, which is ~4x shorter to generate. The full schema is used by the explicit "Reextrair" button."""
+    schema, prompt = (STRUCTURE_SCHEMA_SPARSE, build_structure_prompt_sparse(text)) if fast else (STRUCTURE_SCHEMA, build_structure_prompt(text))
+    msgs = [{"role": "system", "content": STRUCTURE_SYSTEM}, {"role": "user", "content": prompt}]
+    res = chat(msgs, role="fast" if fast else "generator", schema=schema, schema_name="ficha", temperature=0.0, max_tokens=600 if fast else 900,
+               allow_fallback=not fast)
     if fast and res.backend == "error":  # no fast endpoint configured → use the generator
-        res = chat(
-            [{"role": "system", "content": STRUCTURE_SYSTEM}, {"role": "user", "content": build_structure_prompt(text)}],
-            role="generator", schema=STRUCTURE_SCHEMA, schema_name="ficha", temperature=0.0, max_tokens=900,
-        )
+        res = chat(msgs, role="generator", schema=schema, schema_name="ficha", temperature=0.0, max_tokens=600)
     if res.backend == "error" or not res.parsed:
         return Structured(case={}, signals={}, summary="", backend="error", model=res.model, error=res.error or "sem JSON")
-    case, signals = _normalise(res.parsed)
+    case, signals = _normalise(_expand_sparse(res.parsed) if fast else res.parsed)
     return Structured(
         case=case, signals=signals, summary=str(res.parsed.get("resumo_objetivo") or ""),
         uncertain=[str(x) for x in (res.parsed.get("campos_incertos") or [])][:10],

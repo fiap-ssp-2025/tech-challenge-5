@@ -31,7 +31,9 @@ except ImportError:  # pragma: no cover
             return fn
         return deco
 
-UA = {"User-Agent": "guardia-ai/1.0"}
+UA = {"User-Agent": "guardia-ai/1.0",
+      # OpenRouter uses these for attribution; other OpenAI-compatible servers ignore them
+      "HTTP-Referer": os.getenv("APP_PUBLIC_URL", "https://github.com/fiap-ssp-2025/tech-challenge-5"), "X-Title": "Guardia AI"}
 
 
 @dataclass
@@ -46,13 +48,31 @@ class Endpoint:
         return bool(self.base_url and self.model)
 
 
+def _key(*names: str, base_url: str | None) -> str:
+    """First non-empty key among `names`; `${VAR}` placeholders are resolved; OpenRouter/HF endpoints fall back to their own keys."""
+    for n in names:
+        v = (os.getenv(n) or "").strip()
+        if v.startswith("${") and v.endswith("}"):
+            v = (os.getenv(v[2:-1]) or "").strip()
+        if v:
+            return v
+    url = base_url or ""
+    if "openrouter.ai" in url and os.getenv("OPENROUTER_API_KEY"):
+        return os.environ["OPENROUTER_API_KEY"]
+    if "huggingface.co" in url and os.getenv("HF_TOKEN"):
+        return os.environ["HF_TOKEN"]
+    return "none"
+
+
 def endpoint(role: str) -> Endpoint:
     if role == "fast":  # small model for live, low-latency extraction while the user types; defaults to the judge server
-        return Endpoint("fast", os.getenv("FAST_BASE_URL") or os.getenv("JUDGE_BASE_URL"), os.getenv("FAST_MODEL") or os.getenv("JUDGE_MODEL"),
-                        os.getenv("FAST_API_KEY") or os.getenv("JUDGE_API_KEY") or "none")
+        url = os.getenv("FAST_BASE_URL") or os.getenv("JUDGE_BASE_URL")
+        return Endpoint("fast", url, os.getenv("FAST_MODEL") or os.getenv("JUDGE_MODEL"), _key("FAST_API_KEY", "JUDGE_API_KEY", base_url=url))
     if role == "judge":
-        return Endpoint("judge", os.getenv("JUDGE_BASE_URL"), os.getenv("JUDGE_MODEL"), os.getenv("JUDGE_API_KEY") or os.getenv("HF_TOKEN") or "none")
-    return Endpoint("generator", os.getenv("LLM_BASE_URL"), os.getenv("LLM_MODEL"), os.getenv("LLM_API_KEY") or "none")
+        url = os.getenv("JUDGE_BASE_URL")
+        return Endpoint("judge", url, os.getenv("JUDGE_MODEL"), _key("JUDGE_API_KEY", base_url=url))
+    url = os.getenv("LLM_BASE_URL")
+    return Endpoint("generator", url, os.getenv("LLM_MODEL"), _key("LLM_API_KEY", base_url=url))
 
 
 def fallback_endpoint() -> Endpoint | None:
@@ -110,7 +130,11 @@ def _call(ep: Endpoint, messages: list[dict], *, schema: dict | None, schema_nam
     client = _client(ep.base_url, ep.api_key)
     extra: dict[str, Any] = {}
     if disable_thinking:
-        extra["chat_template_kwargs"] = {"enable_thinking": False}
+        extra["chat_template_kwargs"] = {"enable_thinking": False}  # vLLM / Qwen3 chat template
+    if "openrouter.ai" in (ep.base_url or ""):
+        extra["provider"] = {"sort": "latency"}                      # route to the fastest provider available
+        if disable_thinking:
+            extra["reasoning"] = {"enabled": False}                  # OpenRouter's switch for thinking models
     kwargs: dict[str, Any] = {"model": ep.model, "messages": messages, "temperature": temperature, "max_tokens": max_tokens}
     if extra:
         kwargs["extra_body"] = extra

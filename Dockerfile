@@ -22,6 +22,9 @@ RUN uv sync --frozen --no-dev --group audio --no-cache
 RUN uv run --no-sync python -c "from guardia.rag.retriever import vectorstore; print('chunks', vectorstore()._collection.count())" \
     && rm -rf /root/.cache /app/data/generated/hf/hub/.locks
 
+# só data/generated precisa ser gravável em runtime (o chmod no .venv duplicava a camada de 3 GB)
+RUN mkdir -p /app/data/generated && chmod -R a+rwX /app/data/generated
 EXPOSE 8000
-HEALTHCHECK --interval=30s --timeout=5s --start-period=40s CMD curl -fs http://localhost:8000/api/health || exit 1
-CMD ["uv", "run", "--no-sync", "uvicorn", "guardia.web.app:app", "--host", "0.0.0.0", "--port", "8000"]
+HEALTHCHECK --interval=30s --timeout=5s --start-period=60s CMD curl -fs http://localhost:${PORT:-8000}/api/health || exit 1
+# PORT é lido do ambiente (Hugging Face Spaces usa 7860); padrão 8000
+CMD ["sh", "-c", "uv run --no-sync uvicorn guardia.web.app:app --host 0.0.0.0 --port ${PORT:-8000}"]
