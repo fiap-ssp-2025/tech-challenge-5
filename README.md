@@ -184,7 +184,7 @@ Marcelo Arruda de Siqueira · Leonardo Barbosa Nogueira · Jose Flavio Neto · P
 
 | Componente | Onde roda | Custo |
 |---|---|---|
-| App (web, modelo de ML, RAG, whisper) | Pod de CPU no RunPod (2 vCPU, 4 GB) com a imagem `ghcr.io/fiap-ssp-2025/guardia-ai` | US$ 0,12/h ligado, zero parado |
+| App (web, modelo de ML, RAG, whisper) | Pod de CPU no RunPod (2 vCPU, 4 GB) que clona este repositório num volume persistente | US$ 0,06/h ligado, zero parado |
 | LLM geradora | OpenRouter · `openai/gpt-4o-mini` | ~US$ 0,001 por nota |
 | Juiz independente | OpenRouter · `mistralai/mistral-small-3.2-24b-instruct` | ~US$ 0,0005 por veredito |
 | Extração ao vivo (F2) | OpenRouter · `google/gemini-2.5-flash-lite` | ~US$ 0,0001 por chamada |
@@ -196,8 +196,8 @@ Medido pela URL pública em 2026-10-10: páginas em < 1 s, análise completa em 
 
 Três famílias de modelo distintas (OpenAI, Mistral, Google) garantem juiz ≠ geradora. O pod clona este repositório num volume
 persistente ao subir (`scripts/runpod_app.py`, sem registro de imagens); `make app-create` cria e imprime a URL, `make app-status`,
-`make app-stop` (custo zero) e `make app-start` (religa em ~2 min). Alternativa com imagem do GHCR: `make docker-push` + `app-create --image`
-(exige token do GitHub com `write:packages`). O Hugging Face
+`make app-stop` (custo zero) e `make app-start` (religa em ~2 min). Alternativa com a imagem Docker, publicada (privada, 5,5 GB) em `ghcr.io/fiap-ssp-2025/guardia-ai:latest`:
+`make docker-push` + `app-create --image` (exige token do GitHub com `write:packages`; o RunPod guarda a credencial de registro). O Hugging Face
 Spaces foi descartado porque Spaces com Docker passaram a exigir plano pago (Team na org, PRO na conta pessoal); o script
 `scripts/deploy_space.py` fica no repositório caso o grupo assine. Detalhes e decisões em
 [`specs/002-deploy-hf-spaces-openrouter.md`](specs/002-deploy-hf-spaces-openrouter.md).

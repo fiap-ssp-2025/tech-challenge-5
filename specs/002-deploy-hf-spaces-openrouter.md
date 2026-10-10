@@ -14,7 +14,7 @@ LLM continua sendo "qualquer endpoint compatível com OpenAI".
 
 | # | Decisão | Motivo |
 |---|---|---|
-| E1 | ~~App no Hugging Face Spaces~~ → **App num pod de CPU do RunPod** (cpu3c, 2 vCPU, 4 GB, US$ 0,12/h), imagem privada no GHCR com credencial de registro salva no RunPod. | HF cobra Spaces Docker; RunPod usa créditos existentes e API já integrada. |
+| E1 | ~~App no Hugging Face Spaces~~ → **App num pod de CPU do RunPod** (cpu3c, 2 vCPU, 4 GB, US$ 0,06/h), o pod clona o repositório público num volume persistente (`uv sync` + uvicorn); a imagem Docker fica publicada no GHCR (privada, `ghcr.io/fiap-ssp-2025/guardia-ai:latest`) como alternativa via `app-create --image`, com credencial de registro salva no RunPod. | HF cobra Spaces Docker; RunPod usa créditos existentes e API já integrada. |
 | E2 | **LLM via OpenRouter**: geradora `openai/gpt-4o-mini` (3,9 s), juiz `mistralai/mistral-small-3.2-24b-instruct` (4,8 s), extração ao vivo `google/gemini-2.5-flash-lite` (1,7 s). | Medido em 2026-10-10 após liberar todos os provedores; Qwen3-32B ficou em 11–15 s e inconsistente na extração. |
 | E3 | **RunPod permanece como opção auto-hospedada documentada** (`scripts/runpod_vllm.py`), não como padrão. | Já validado; serve ao relatório como alternativa "dado não sai da nossa GPU". |
 | E4 | **Voz:** Web Speech API no Chrome dos usuários; fallback whisper `base` no Space (2 vCPU). | `small` leva 2–3 s por trecho em 2 vCPU; `base` fica abaixo de 1,5 s. Variável `WHISPER_MODEL=base`. |
