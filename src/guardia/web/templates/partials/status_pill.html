@@ -15,5 +15,4 @@
     <li class="flex items-center gap-2"><span class="dot dot-ok"></span><span><b>Voz</b> · {{ ('navegador + ' ~ (st.speech.model or 'servidor')) if st.speech.fallback else 'só navegador' }}</span></li>
   </ul>
   <p class="text-muted-foreground">{% if st.pending %}Primeira verificação em andamento.{% elif st.age_s is not none %}Verificado há {{ st.age_s }} s.{% endif %} {% if not st.llm_ready and not st.pending %}Sem a LLM, a análise sai só com regras e modelo.{% endif %}</p>
-  <a href="/status" class="underline">Ver detalhes</a>
 </div>

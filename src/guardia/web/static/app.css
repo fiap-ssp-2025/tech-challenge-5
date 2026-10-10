@@ -136,3 +136,14 @@ h1 { color: oklch(34% 0.11 318); }
 .hist-card header a, .card h2 { color: oklch(34% 0.09 318); }
 .dark .hist-card header a, .dark .card h2 { color: oklch(90% 0.05 318); }
 .composer-box { border-color: color-mix(in oklab, var(--color-primary) 35%, var(--color-border)); }
+
+/* ── Chat de protocolos: pergunta, resposta e fontes separadas ── */
+#chat:has(.chat-turn) .chat-empty { display: none; }
+.chat-q { display: flex; gap: .5rem; align-items: baseline; font-weight: 500; }
+.chat-who { font-size: .7rem; text-transform: uppercase; letter-spacing: .04em; color: var(--primary); flex: none; }
+.chat-sources > summary { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; cursor: pointer; list-style: none; padding: .35rem .5rem; border-radius: .5rem; border: 1px solid var(--border); }
+.chat-sources > summary::-webkit-details-marker { display: none; }
+.chat-sources > summary::before { content: "▸"; color: var(--muted-foreground); }
+.chat-sources[open] > summary::before { content: "▾"; }
+.chat-source-list { display: grid; gap: .5rem; margin: .5rem 0 0 .5rem; padding-left: 1rem; border-left: 2px solid var(--border); }
+.chat-excerpt { margin-top: .15rem; color: var(--muted-foreground); font-style: italic; }

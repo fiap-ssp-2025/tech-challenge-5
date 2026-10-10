@@ -58,8 +58,7 @@ def asset_version() -> int:
 templates.env.globals.update(FORM=FORM, SIGNAL_FIELDS=SIGNAL_FIELDS, case_summary=case_summary, asset_version=asset_version,
                              json_dumps=lambda v: json.dumps(v, ensure_ascii=False, indent=2, default=str))
 
-NAV = [("/", "Triagem", "triagem"), ("/protocolos", "Protocolos", "protocolos"), ("/historico", "Histórico", "historico"),
-       ("/modelo", "Modelo", "modelo"), ("/status", "Status", "status")]
+NAV = [("/", "Triagem", "triagem"), ("/protocolos", "Protocolos", "protocolos"), ("/historico", "Histórico", "historico")]
 MIN_RELATO = 20
 
 
@@ -234,28 +233,7 @@ def auditoria_detalhe_redirect(analysis_id: int):
     return RedirectResponse(f"/historico/{analysis_id}", status_code=301)
 
 
-# ── Modelo e status ────────────────────────────────────────────────────────────
-
-
-@app.get("/modelo", response_class=HTMLResponse)
-def modelo(request: Request):
-    metrics_path = ROOT / "models" / "metrics.json"
-    metrics = json.loads(metrics_path.read_text(encoding="utf-8")) if metrics_path.exists() else None
-    figures = [p.name for p in sorted((ROOT / "docs" / "figures").glob("*.png"))] if (ROOT / "docs" / "figures").exists() else []
-    return render(request, "pages/modelo.html", None, {"active": "modelo", "card": model_status(), "metrics": metrics, "figures": figures})
-
-
-@app.get("/status", response_class=HTMLResponse)
-def status(request: Request):
-    """Instant: renders the cached snapshot (the header pill and this page never probe on request)."""
-    return render(request, "pages/status.html", "partials/status_cards.html", {"active": "status", "st": CACHE.snapshot()})
-
-
-@app.post("/status/verificar", response_class=HTMLResponse)
-def status_verificar(request: Request):
-    """Forced re-check (the Atualizar button): probes now, then renders the cards."""
-    CACHE.refresh()
-    return render(request, "pages/status.html", "partials/status_cards.html", {"active": "status", "st": CACHE.snapshot()})
+# ── Status (só o indicador do cabeçalho; sem página própria) ───────────────────
 
 
 @app.get("/status/pill", response_class=HTMLResponse)

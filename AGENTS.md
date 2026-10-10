@@ -29,7 +29,7 @@ Instruções para qualquer agente de IA que trabalhe neste repositório.
 - Mesma URL devolve página completa no acesso direto e fragmento quando `HX-Request: true` (função `render` em `web/app.py`). Erro de formulário = 422 com a ficha re-renderizada. Toda interação tem estado carregando (`.htmx-indicator`), vazio, erro e sucesso.
 - **Triagem:** a análise nunca bloqueia a requisição: `POST /analisar` inicia um job e devolve o fragmento de progresso, que consulta `GET /analisar/{id}` a cada 2 s até a nota. A ficha é preenchida ao vivo por `POST /estruturar` com `live=1` (modelo rápido) e só é sobrescrita enquanto a profissional não a editou (`ficha_editada`). Não mexer em arquivos do projeto durante uma análise em desenvolvimento: o `--reload` mata o job.
 - `htmx.config.defaultTimeout` é 60 s no htmx 4; o `base.html` sobe para 240 s via meta `htmx-config`.
-- **Status nunca sonda na requisição.** `web/status.py` mantém um cache atualizado por thread a cada 20 s; o indicador do cabeçalho (`/status/pill`, popover nativo) e a página `/status` leem o cache. `POST /status/verificar` força uma sondagem. Assets estáticos saem com `?v=mtime` (`asset_version()`), senão o navegador segura CSS antigo.
+- **Status nunca sonda na requisição.** `web/status.py` mantém um cache atualizado por thread a cada 20 s; o indicador do cabeçalho (`/status/pill`, popover nativo) lê o cache. Não existem páginas `/status` nem `/modelo`: métricas do modelo ficam no relatório e no README. Assets estáticos saem com `?v=mtime` (`asset_version()`), senão o navegador segura CSS antigo.
 - Componentes = partials Jinja em `web/templates/partials/`. Não repetir marcação.
 - Código em inglês, textos de interface e docs em português. Commits só quando o humano pedir.
 

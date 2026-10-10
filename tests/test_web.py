@@ -18,7 +18,7 @@ client = TestClient(app)
 RELATO = "Ela conta que o companheiro a ameaçou com uma faca ontem à noite. Não é a primeira vez e há dois filhos pequenos."
 
 
-@pytest.mark.parametrize("path", ["/", "/protocolos", "/historico", "/modelo", "/status", "/api/health"])
+@pytest.mark.parametrize("path", ["/", "/protocolos", "/historico", "/status/pill", "/api/health"])
 def test_pages_render(path):
     r = client.get(path)
     assert r.status_code == 200

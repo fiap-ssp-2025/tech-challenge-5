@@ -43,7 +43,7 @@ relato + ficha ──▶ LangGraph (F1) ──▶ nota de apoio
 | **F2 Estruturar relato** | enquanto a profissional escreve ou fala, o modelo rápido preenche a ficha (JSON por schema); o que foi detectado aparece como chips e os campos ficam em grupos recolhíveis | ao vivo em `/` |
 | **F3 Consultar protocolos** | chat com memória no servidor sobre a base RAG, sempre citando a fonte | `/protocolos` |
 | **F4 Histórico** | atendimentos anteriores com linha do tempo digerida: o que cada etapa fez, quanto levou, modelo, fontes e validador | `/historico` |
-| Modelo / Status | métricas, figuras, equidade; saúde dos componentes | `/modelo`, `/status` |
+| Status | saúde dos componentes (LLM, juiz, modelo, RAG, voz) no indicador do cabeçalho; métricas e figuras do modelo ficam no relatório e em `docs/figures` | cabeçalho |
 
 Stack: Python 3.12 · scikit-learn · SHAP · LangGraph · Chroma · sentence-transformers · vLLM (RunPod) ·
 FastAPI + Jinja2 · **htmx 4.0.0 + Tailwind CSS 4 + Basecoat** (HTML renderizado no servidor, sem SPA) · SQLite · Docker.
@@ -85,7 +85,7 @@ Top features (média |SHAP|): IDADE_ANOS, REL_PARCEIRO_INTIMO, VIOL_MOTIV_SEXISM
 Por que **recall da classe encaminhada** e não acurácia: a prevalência é 28%, "nunca sugerir" acerta 72% e não ajuda
 ninguém. Um falso negativo deixa de levar à equipe um caso com perfil de risco; um falso positivo custa uma conversa a
 mais. Por isso o limiar privilegia recall e a probabilidade exibida é calibrada. Explicabilidade: SHAP global e por caso
-(`/modelo`, nota de apoio), coeficientes da regressão logística no relatório. Equidade: recall por raça/cor.
+(nota de apoio), coeficientes da regressão logística no relatório. Equidade: recall por raça/cor.
 Limite a declarar sempre: o modelo aprende a prática registrada em 2024, inclusive sub-encaminhamento.
 
 ### Avaliação da aplicação (30 relatos sintéticos, `make eval`)

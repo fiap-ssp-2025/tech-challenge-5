@@ -1,13 +1,33 @@
-<article class="grid gap-2">
-  <p class="text-sm font-medium">Você: {{ t.question }}</p>
+{# Um turno do chat de protocolos: pergunta, resposta, fontes agrupadas por documento (recolhidas) e metadados. #}
+{% set cited = t.cited or [] %}
+{% set titles = [] %}{% set docs = [] %}
+{% for s in t.sources or [] %}{% if s.title not in titles %}{% set _ = titles.append(s.title) %}{% set _ = docs.append(s) %}{% endif %}{% endfor %}
+<article class="chat-turn grid gap-2">
+  <p class="chat-q text-sm"><span class="chat-who">Você</span>{{ t.question }}</p>
   {% if t.backend == 'error' %}
   <div class="alert" data-variant="destructive" role="alert"><h2>A LLM não respondeu</h2><section>{{ t.error }}</section></div>
   {% else %}
-  <div class="rounded-lg bg-muted p-3 text-sm whitespace-pre-line">{{ t.answer }}</div>
-  <div class="flex flex-wrap items-center gap-1.5 text-xs">
-    <span class="badge" data-variant="{{ 'secondary' if t.coverage == 'total' else ('outline' if t.coverage == 'parcial' else 'destructive') }}">cobertura {{ t.coverage }}</span>
-    {% for s in t.sources %}<span class="badge" data-variant="{{ 'default' if s.title in t.cited else 'outline' }}" title="{{ s.file }}">{{ s.title }}</span>{% endfor %}
-    <span class="text-muted-foreground">{{ t.model }} · {{ t.latency_ms }} ms</span>
+  <div class="chat-a rounded-lg bg-muted p-3 text-sm whitespace-pre-line">{{ t.answer or '(sem resposta)' }}</div>
+  <div class="chat-meta grid gap-1 text-xs">
+    {% if docs %}
+    <details class="chat-sources">
+      <summary>
+        <span>Fontes consultadas <span class="text-muted-foreground">({{ docs|length }})</span></span>
+        {% if t.coverage %}<span class="badge" data-variant="{{ 'secondary' if t.coverage == 'total' else ('outline' if t.coverage == 'parcial' else 'destructive') }}">{{ {'total': 'resposta sustentada pelos documentos', 'parcial': 'parcialmente sustentada', 'nenhuma': 'sem trecho que a sustente'}.get(t.coverage, t.coverage) }}</span>{% endif %}
+      </summary>
+      <ol class="chat-source-list">
+        {% for s in docs %}
+        <li>
+          <div class="flex flex-wrap items-center gap-1.5"><span class="font-medium">{{ s.title }}</span>{% if s.title in cited %}<span class="badge" data-variant="default">citada na resposta</span>{% endif %}<span class="text-muted-foreground">{{ s.file }}</span></div>
+          {% if s.text %}<p class="chat-excerpt">{{ s.text[:260] }}{% if s.text|length > 260 %}…{% endif %}</p>{% endif %}
+        </li>
+        {% endfor %}
+      </ol>
+    </details>
+    {% elif t.coverage %}
+    <p class="text-muted-foreground">Nenhum trecho recuperado dos documentos.</p>
+    {% endif %}
+    {% if t.model %}<p class="text-muted-foreground">{{ t.model }} · {{ t.latency_ms }} ms</p>{% endif %}
   </div>
   {% endif %}
 </article>
