@@ -50,6 +50,9 @@ synth: ## Gera relatos sintéticos com a LLM (data/synthetic)
 eval: ## Avalia o pipeline nos relatos sintéticos (juiz, latência, citação)
 	uv run python scripts/avaliar_pipeline.py
 
+eval-rag: ## Avalia a recuperação do RAG sem LLM (perguntas do chat + relatos do F1), grava docs/eval_rag.json
+	uv run python scripts/avaliar_rag.py --json docs/eval_rag.json
+
 publish-hf: ## Publica modelo e métricas na org do Hugging Face
 	uv run python scripts/publish_hf.py
 
@@ -83,4 +86,4 @@ notebooks: ## Exporta os scripts de dados/treino como notebooks (jupytext)
 	uv run jupytext --to ipynb src/guardia/data/features.py -o notebooks/02_preprocessing.ipynb
 	uv run jupytext --to ipynb src/guardia/ml/train.py -o notebooks/03_model_comparison.ipynb
 
-.PHONY: help install env data train serve status demo test lint pod-create pod-status pod-stop pod-start app-create app-status app-stop app-start app-redeploy docker-push synth eval publish-hf docker-build docker-run notebooks
+.PHONY: help install env data train serve status demo test lint pod-create pod-status pod-stop pod-start app-create app-status app-stop app-start app-redeploy docker-push synth eval eval-rag publish-hf docker-build docker-run notebooks

@@ -29,7 +29,7 @@ atendimento à mulher, Ministério Público ou Defensoria). `OUT_VEZES` virou fe
 relato + ficha ──▶ LangGraph (F1) ──▶ nota de apoio
                    ├─ assess_risk          regras determinísticas (arma, ameaça, repetição, gestação…)
                    ├─ run_model            HistGB/RF calibrado + SHAP do caso          ← models/encaminhamento.joblib
-                   ├─ retrieve_protocols   Chroma + MiniLM multilíngue, 11 documentos   ← data/protocols
+                   ├─ retrieve_protocols   Chroma + MiniLM e BM25 (RRF), 11 documentos   ← data/protocols
                    ├─ define_actions       ações e encaminhamentos por risco
                    ├─ build_explanation / prepare_audit
                    ├─ generate_note        LLM geradora, JSON por schema (vLLM no RunPod · fallback OpenAI)
@@ -107,8 +107,10 @@ juiz aprovou 30 de 30, LLM 5 s de mediana e 20 s no total por análise, concord�
 - **Juiz** audita cada nota em 6 critérios (prescrição, diagnóstico, decisão automática, rede de proteção, linguagem,
   privacidade) com exigência de trecho literal; sempre num modelo de família diferente da geradora.
 - **RAG:** 11 documentos (Lei 11.340/2006 e resumo, tipos de violência, medidas protetivas, canais nacionais e do DF,
-  rede de proteção do DF, LGPD, norma técnica MS/MJ de violência sexual) em Chroma com embeddings multilíngues;
-  a nota cita os títulos usados e a interface mostra quais foram recuperados e quais foram citados.
+  rede de proteção do DF, LGPD, norma técnica MS/MJ de violência sexual) em Chroma com embeddings multilíngues,
+  combinados com BM25 por fusão de ranks (busca híbrida) e um trecho-chave por tema (violência sexual → prazo de
+  72 h); a nota cita os títulos usados e a interface mostra quais foram recuperados e quais foram citados.
+  `scripts/avaliar_rag.py` mede a recuperação sem LLM: 18/18 perguntas no top-6 (antes 12/18), spec 005.
 - **Guardrails:** blocklist de frases proibidas, aviso fixo de apoio à decisão, juiz independente, hash do relato na
   auditoria (texto nunca persiste).
 - **Rastreabilidade:** LangSmith (`LANGCHAIN_TRACING_V2=true`) rastreia cada nó e chamada.
@@ -158,7 +160,7 @@ src/guardia/
   ml/predict.py         carrega o artefato, SHAP por caso
   graph/flow.py         LangGraph do F1
   llm/                  client (geradora/juiz), prompts e schemas, structurer (F2), judge
-  rag/                  retriever (Chroma) · chat (F3)
+  rag/                  retriever (Chroma + BM25) · chat (F3)
   guardrails/ audit/    blocklist · SQLite
   web/                  FastAPI, templates Jinja (pages/partials), CSS
 data/protocols/         11 documentos da base RAG

@@ -1,0 +1,247 @@
+{
+  "mode": "hybrid",
+  "chat": [
+    {
+      "id": "caso-sexual",
+      "hit": true,
+      "rank": 6,
+      "sources": [
+        "ms_violencia_sexual.txt",
+        "ms_violencia_sexual.txt",
+        "lei_maria_da_penha_resumo.txt",
+        "tipos_violencia_maria_da_penha.txt",
+        "lei_maria_da_penha_resumo.txt",
+        "ms_violencia_sexual.txt"
+      ]
+    },
+    {
+      "id": "primeiras-horas",
+      "hit": true,
+      "rank": 1,
+      "sources": [
+        "ms_violencia_sexual.txt",
+        "ms_violencia_sexual.txt",
+        "tipos_violencia_maria_da_penha.txt",
+        "lei_maria_da_penha.txt",
+        "lei_maria_da_penha_resumo.txt",
+        "protocolo_violencia.txt"
+      ]
+    },
+    {
+      "id": "roteiro-72h",
+      "hit": true,
+      "rank": 1,
+      "sources": [
+        "ms_violencia_sexual.txt",
+        "ms_violencia_sexual.txt",
+        "tipos_violencia_maria_da_penha.txt",
+        "lei_maria_da_penha.txt",
+        "lei_maria_da_penha_resumo.txt",
+        "medidas_protetivas.txt"
+      ]
+    },
+    {
+      "id": "roteiro-medida",
+      "hit": true,
+      "rank": 1,
+      "sources": [
+        "medidas_protetivas.txt",
+        "lei_maria_da_penha_resumo.txt",
+        "ms_violencia_sexual.txt",
+        "lei_maria_da_penha.txt",
+        "ms_violencia_sexual.txt",
+        "medidas_protetivas.txt"
+      ]
+    },
+    {
+      "id": "roteiro-df",
+      "hit": true,
+      "rank": 1,
+      "sources": [
+        "canais_apoio_mulher_df.txt",
+        "lei_maria_da_penha_resumo.txt",
+        "ms_violencia_sexual.txt",
+        "lei_maria_da_penha.txt",
+        "medidas_protetivas.txt",
+        "ms_violencia_sexual.txt"
+      ]
+    },
+    {
+      "id": "tipos",
+      "hit": true,
+      "rank": 1,
+      "sources": [
+        "lei_maria_da_penha.txt",
+        "medidas_protetivas.txt",
+        "ms_violencia_sexual.txt",
+        "lei_maria_da_penha_resumo.txt",
+        "tipos_violencia_maria_da_penha.txt",
+        "ms_violencia_sexual.txt"
+      ]
+    },
+    {
+      "id": "patrimonial",
+      "hit": true,
+      "rank": 1,
+      "sources": [
+        "tipos_violencia_maria_da_penha.txt",
+        "tipos_violencia_maria_da_penha.txt",
+        "lei_maria_da_penha.txt",
+        "ms_violencia_sexual.txt",
+        "ms_violencia_sexual.txt",
+        "lei_maria_da_penha_resumo.txt"
+      ]
+    },
+    {
+      "id": "ligue-180",
+      "hit": true,
+      "rank": 2,
+      "sources": [
+        "ms_violencia_sexual.txt",
+        "canais_apoio_mulher_df.txt",
+        "canais_atendimento_mulher_brasil.txt",
+        "ms_violencia_sexual.txt",
+        "rede_protecao_mulher_df.txt",
+        "protocolo_rede_protecao_df.txt"
+      ]
+    },
+    {
+      "id": "dna",
+      "hit": true,
+      "rank": 1,
+      "sources": [
+        "ms_violencia_sexual.txt",
+        "ms_violencia_sexual.txt",
+        "lgpd_dados_sensiveis.txt",
+        "medidas_protetivas.txt",
+        "rede_protecao_mulher_df.txt",
+        "canais_atendimento_mulher_brasil.txt"
+      ]
+    },
+    {
+      "id": "contracepcao",
+      "hit": true,
+      "rank": 1,
+      "sources": [
+        "ms_violencia_sexual.txt",
+        "ms_violencia_sexual.txt",
+        "canais_atendimento_mulher_brasil.txt",
+        "medidas_protetivas.txt",
+        "medidas_protetivas.txt",
+        "ms_violencia_sexual.txt"
+      ]
+    },
+    {
+      "id": "profilaxia",
+      "hit": true,
+      "rank": 1,
+      "sources": [
+        "ms_violencia_sexual.txt",
+        "ms_violencia_sexual.txt",
+        "tipos_violencia_maria_da_penha.txt",
+        "lei_maria_da_penha.txt",
+        "lei_maria_da_penha_resumo.txt",
+        "medidas_protetivas.txt"
+      ]
+    },
+    {
+      "id": "boletim",
+      "hit": true,
+      "rank": 1,
+      "sources": [
+        "ms_violencia_sexual.txt",
+        "ms_violencia_sexual.txt",
+        "protocolo_violencia.txt",
+        "rede_protecao_mulher_df.txt",
+        "medidas_protetivas.txt",
+        "lgpd_dados_sensiveis.txt"
+      ]
+    },
+    {
+      "id": "notificacao",
+      "hit": true,
+      "rank": 1,
+      "sources": [
+        "ms_violencia_sexual.txt",
+        "ms_violencia_sexual.txt",
+        "tipos_violencia_maria_da_penha.txt",
+        "lei_maria_da_penha.txt",
+        "medidas_protetivas.txt",
+        "ms_violencia_sexual.txt"
+      ]
+    },
+    {
+      "id": "aborto",
+      "hit": true,
+      "rank": 1,
+      "sources": [
+        "ms_violencia_sexual.txt",
+        "ms_violencia_sexual.txt",
+        "medidas_protetivas.txt",
+        "lei_maria_da_penha.txt",
+        "lei_maria_da_penha.txt",
+        "ms_violencia_sexual.txt"
+      ]
+    },
+    {
+      "id": "lgpd",
+      "hit": true,
+      "rank": 3,
+      "sources": [
+        "ms_violencia_sexual.txt",
+        "ms_violencia_sexual.txt",
+        "lgpd_dados_sensiveis.txt",
+        "rede_protecao_mulher_df.txt",
+        "protocolo_rede_protecao_df.txt",
+        "canais_apoio_mulher_df.txt"
+      ]
+    },
+    {
+      "id": "medidas-juiz",
+      "hit": true,
+      "rank": 1,
+      "sources": [
+        "medidas_protetivas.txt",
+        "lei_maria_da_penha.txt",
+        "lei_maria_da_penha_resumo.txt",
+        "ms_violencia_sexual.txt",
+        "ms_violencia_sexual.txt",
+        "canais_atendimento_mulher_brasil.txt"
+      ]
+    },
+    {
+      "id": "caso-fisica",
+      "hit": true,
+      "rank": 3,
+      "sources": [
+        "lei_maria_da_penha_resumo.txt",
+        "tipos_violencia_maria_da_penha.txt",
+        "lei_maria_da_penha_resumo.txt",
+        "lei_maria_da_penha.txt",
+        "ms_violencia_sexual.txt",
+        "protocolo_violencia.txt"
+      ]
+    },
+    {
+      "id": "adolescente",
+      "hit": true,
+      "rank": 1,
+      "sources": [
+        "ms_violencia_sexual.txt",
+        "ms_violencia_sexual.txt",
+        "tipos_violencia_maria_da_penha.txt",
+        "protocolo_violencia.txt",
+        "lei_maria_da_penha_resumo.txt",
+        "ms_violencia_sexual.txt"
+      ]
+    }
+  ],
+  "f1": {
+    "n": 60,
+    "hit": 60,
+    "sexual": 10,
+    "sexual_hit": 10,
+    "sexual_72h": 10,
+    "distinct_sources_avg": 3.85
+  }
+}

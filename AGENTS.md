@@ -4,7 +4,7 @@ Instruções para qualquer agente de IA que trabalhe neste repositório.
 
 ## Fonte da verdade
 - `spec.md` — decisões fechadas (D1–D14) e, no §10, o estado da implementação v1.0.
-- `specs/NNN-*.md` — specs das etapas (002 deploy: done; `003-interface-drawer-protocolos-guia-entrevista.md` e `004-protocolos-com-contexto-do-caso.md`: done). Ao retomar, leia a spec ativa, execute as tarefas marcando `[x]` e registre as decisões novas no `spec.md`.
+- `specs/NNN-*.md` — specs das etapas (002 deploy: done; `003-interface-drawer-protocolos-guia-entrevista.md` e `004-protocolos-com-contexto-do-caso.md`, `005-rag-busca-hibrida.md`: done). Ao retomar, leia a spec ativa, execute as tarefas marcando `[x]` e registre as decisões novas no `spec.md`.
 - `analise-base-tc5.md` — por que o TC3 é a base e o que veio de cada Tech Challenge anterior.
 - Este arquivo — convenções de código e interface.
 
@@ -15,7 +15,7 @@ Instruções para qualquer agente de IA que trabalhe neste repositório.
 | `src/guardia/ml/train.py`, `predict.py` | LR, RF (+GA), HistGB; calibração; limiar por F2; SHAP; artefato `models/encaminhamento.joblib` |
 | `src/guardia/graph/flow.py` | LangGraph do F1 (9 nós) |
 | `src/guardia/llm/` | cliente OpenAI-compatível (geradora + juiz), prompts/schemas, F2 (`structurer.py`), juiz |
-| `src/guardia/rag/` | Chroma + MiniLM multilíngue sobre `data/protocols` (F1) e chat com memória (F3) |
+| `src/guardia/rag/` | Chroma + MiniLM multilíngue e BM25 (RRF) sobre `data/protocols` (F1) e chat com memória (F3) |
 | `src/guardia/guardrails/`, `audit/` | blocklist + aviso; SQLite com hash do relato |
 | `src/guardia/web/` | FastAPI + Jinja2 + htmx 4 + Tailwind 4 + Basecoat (páginas e partials); `jobs.py` roda a análise em background com progresso por nó; `static/voice.js` faz o ditado |
 | `src/guardia/llm/transcribe.py` | fallback de voz no servidor: modelo de áudio via OpenRouter (papel `transcribe`, Gemini 2.5 Flash) com faster-whisper de reserva (grupo `audio` do uv); ffmpeg obrigatório |
@@ -31,10 +31,11 @@ Instruções para qualquer agente de IA que trabalhe neste repositório.
 - **Guia de entrevista** (`guardia/interview.py`, `partials/guia.html`): 11 tópicos fixos; volta como OOB de `/estruturar` e via `POST /guia` quando a ficha muda ou uma pergunta é marcada. Estado nos campos ocultos `guia_mencionados`/`guia_feitos`. Perguntas novas entram em `TOPICS`, não no prompt.
 - **Protocolos (F3) = painel lateral** (`partials/chat_drawer.html`, `<dialog>` não modal, em `base.html`); não há página nem item de menu. `/protocolos` com `HX-Request` devolve o fio; acesso direto abre a triagem com o painel aberto. `is_htmx` ignora `HX-Request-Type: full` (navegação com `hx-boost`). O chat recebe o caso por `hx-include="#ficha, #analise_id"` (`_chat_case` em `app.py`): só campos estruturados, nunca `relato`.
 - `topicos_abordados` na extração é lista de strings `"id: trecho"`, conferida contra o relato em `structurer._quoted_topics`. Não usar objeto aninhado nem `maxItems` nesse schema: travam Gemini e gpt-4o-mini via OpenRouter.
+- **RAG** (`rag/retriever.py`, spec 005): busca híbrida (vetor + BM25, RRF), no máximo 2 trechos por documento. Mudou o fatiamento ou a normalização: suba `INDEX_VERSION`. Ponto central que a consulta genérica não alcança vira entrada em `THEMES`, com pergunta nova em `scripts/avaliar_rag.py`; rode o script antes e depois de mexer na recuperação.
 - `htmx.config.defaultTimeout` é 60 s no htmx 4; o `base.html` sobe para 240 s via meta `htmx-config`.
 - **Status nunca sonda na requisição.** `web/status.py` mantém um cache atualizado por thread a cada 20 s; o indicador do cabeçalho (`/status/pill`, popover nativo) lê o cache. Não existem páginas `/status` nem `/modelo`: métricas do modelo ficam no relatório e no README. Assets estáticos saem com `?v=mtime` (`asset_version()`), senão o navegador segura CSS antigo.
 - Componentes = partials Jinja em `web/templates/partials/`. Não repetir marcação.
 - Código em inglês, textos de interface e docs em português. Commits só quando o humano pedir.
 
 ## Comandos
-`make help` lista tudo. Caminho do zero: `make install env data train serve`. Pod de LLM: `make pod-create`, `make pod-status`, `make pod-stop`. Testes: `make test`.
+`make help` lista tudo. Caminho do zero: `make install env data train serve`. Pod de LLM: `make pod-create`, `make pod-status`, `make pod-stop`. Testes: `make test`. Recuperação do RAG: `make eval-rag`.
