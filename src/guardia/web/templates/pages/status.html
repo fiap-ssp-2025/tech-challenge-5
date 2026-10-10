@@ -4,11 +4,14 @@
 <section class="flex flex-wrap items-start justify-between gap-3">
   <div class="grid gap-1">
     <h1 class="text-2xl font-semibold tracking-tight">Status dos componentes</h1>
-    <p class="text-sm text-muted-foreground max-w-prose">LLM geradora, juiz independente, modelo de ML e base RAG. Atualiza a cada 30 s.</p>
+    <p class="text-sm text-muted-foreground max-w-prose">LLM geradora, juiz independente, modelo de ML, base RAG e ditado. Verificado em segundo plano a cada 20 s; a página abre na hora com a última leitura.</p>
   </div>
-  <button type="button" class="btn" data-variant="outline" data-size="sm" hx-get="/status" hx-target="#status-cards" hx-swap="innerHTML" hx-indicator="this">Atualizar</button>
+  <button type="button" class="btn" data-variant="outline" data-size="sm" hx-post="/status/verificar" hx-target="#status-cards" hx-swap="innerHTML" hx-indicator="#verificar-ind">
+    <span id="verificar-ind" class="htmx-indicator" aria-hidden="true"><svg class="animate-spin size-4" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" opacity=".25"/><path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" stroke-width="3"/></svg></span>
+    Verificar agora
+  </button>
 </section>
-<div id="status-cards" class="grid sm:grid-cols-2 gap-3" hx-get="/status" hx-trigger="every 30s" hx-swap="innerHTML">
+<div id="status-cards" class="grid sm:grid-cols-2 gap-3" hx-get="/status" hx-trigger="every 20s" hx-swap="innerHTML">
   {% include "partials/status_cards.html" %}
 </div>
 {% endblock %}

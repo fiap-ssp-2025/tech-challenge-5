@@ -1,0 +1,19 @@
+{# Header indicator: one glance tells whether the LLMs are up; the popover (native) shows each component. #}
+{% set g = st.generator %}{% set j = st.judge %}
+{% set cls = 'dot-checking' if st.overall == 'checking' else ('dot-ok' if st.overall == 'ok' else ('dot-warn' if st.overall == 'degraded' else 'dot-down')) %}
+{% set label = 'verificando…' if st.overall == 'checking' else ('tudo pronto' if st.overall == 'ok' else ('LLM indisponível' if not st.llm_ready else 'parcial')) %}
+<button type="button" class="btn status-btn" data-variant="outline" data-size="sm" popovertarget="status-pop" aria-label="Estado dos componentes: {{ label }}">
+  <span class="dot {{ cls }}" aria-hidden="true"></span> {{ label }}
+</button>
+<div id="status-pop" popover="auto" class="status-pop card p-3 grid gap-2 text-xs">
+  <p class="font-semibold text-sm">Componentes</p>
+  <ul class="grid gap-1.5">
+    <li class="flex items-center gap-2"><span class="dot {{ 'dot-ok' if g.ok else ('dot-checking' if st.pending else 'dot-down') }}"></span><span><b>LLM geradora</b> · {{ g.model or '—' }}{% if not g.ok and g.note %}<br><span class="text-muted-foreground">{{ g.note }}</span>{% endif %}</span></li>
+    <li class="flex items-center gap-2"><span class="dot {{ 'dot-ok' if j.ok else ('dot-checking' if st.pending else 'dot-down') }}"></span><span><b>Juiz</b> · {{ j.model or '—' }}</span></li>
+    <li class="flex items-center gap-2"><span class="dot {{ 'dot-ok' if st.model.ok else 'dot-down' }}"></span><span><b>Modelo</b> · {{ st.model.get('model', '—') }}</span></li>
+    <li class="flex items-center gap-2"><span class="dot {{ 'dot-ok' if st.rag.ok else ('dot-checking' if st.pending else 'dot-down') }}"></span><span><b>RAG</b> · {{ (st.rag.chunks|string ~ ' trechos') if st.rag.ok else st.rag.get('note', '') }}</span></li>
+    <li class="flex items-center gap-2"><span class="dot dot-ok"></span><span><b>Voz</b> · {{ 'navegador + servidor' if st.speech.fallback else 'só navegador' }}</span></li>
+  </ul>
+  <p class="text-muted-foreground">{% if st.pending %}Primeira verificação em andamento.{% elif st.age_s is not none %}Verificado há {{ st.age_s }} s.{% endif %} {% if not st.llm_ready and not st.pending %}Sem a LLM, a análise sai só com regras e modelo.{% endif %}</p>
+  <a href="/status" class="underline">Ver detalhes</a>
+</div>

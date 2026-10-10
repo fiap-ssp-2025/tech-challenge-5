@@ -29,7 +29,7 @@ def main(argv: list[str] | None = None) -> None:
         uvicorn.run("guardia.web.app:app", host=args.host, port=args.port, reload=args.reload)
     elif args.cmd == "status":
         from guardia.web.status import full_status
-        print(json.dumps(full_status(), indent=2, ensure_ascii=False))
+        print(json.dumps(full_status(), indent=2, ensure_ascii=False, default=str))
     elif args.cmd == "demo":
         from guardia.graph.flow import run_case
         text = args.text or ("Meu companheiro me ameaçou com uma faca ontem à noite. Não é a primeira vez, já aconteceu "

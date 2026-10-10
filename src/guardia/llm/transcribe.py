@@ -8,6 +8,7 @@ the browser's webm/opus chunks; PyAV is avoided because its API drifts between r
 
 from __future__ import annotations
 
+import logging
 import os
 import shutil
 import subprocess
@@ -36,6 +37,14 @@ def _model():
     return WhisperModel(MODEL_NAME, device="cpu", compute_type="int8")
 
 
+def warm() -> None:
+    """Load the model (and run a silent decode) so the first real chunk is fast."""
+    try:
+        _model().transcribe(np.zeros(SAMPLE_RATE, dtype=np.float32), language="pt", beam_size=1)
+    except Exception as e:  # noqa: BLE001
+        logging.getLogger("guardia.transcribe").warning("não aqueceu o modelo de voz: %s", e)
+
+
 def _decode(path: Path) -> np.ndarray:
     """Any container/codec → mono float32 @16 kHz via ffmpeg."""
     cmd = ["ffmpeg", "-v", "error", "-i", str(path), "-f", "f32le", "-ac", "1", "-ar", str(SAMPLE_RATE), "-"]
@@ -43,13 +52,20 @@ def _decode(path: Path) -> np.ndarray:
     return np.frombuffer(out, dtype=np.float32)
 
 
-def transcribe_bytes(data: bytes, suffix: str = ".webm") -> dict:
-    """Return {"text": str, "language": str, "duration": float}. Raises if the dependencies are missing."""
+def transcribe_bytes(data: bytes, suffix: str = ".webm", skip_s: float = 0.0) -> dict:
+    """Return {"text": str, "language": str, "duration": float}. Raises if the dependencies are missing.
+
+    ``skip_s`` drops the first seconds of the decoded audio: the browser prepends the webm initialisation
+    segment (which also carries the first ~0.5 s of sound) to every flushed chunk, so later chunks would
+    otherwise repeat the opening words.
+    """
     with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as f:
         f.write(data)
         path = Path(f.name)
     try:
         audio = _decode(path)
+        if skip_s > 0:
+            audio = audio[int(skip_s * SAMPLE_RATE):]
         if audio.size < SAMPLE_RATE // 4:  # under 250 ms: nothing to transcribe
             return {"text": "", "language": "pt", "duration": round(audio.size / SAMPLE_RATE, 2)}
         segments, info = _model().transcribe(audio, language="pt", vad_filter=True, beam_size=1)

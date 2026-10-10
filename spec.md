@@ -1,4 +1,4 @@
-# Guardiã AI — Especificação (v0.3, 2026-10-09)
+# Guardiã AI — Especificação (v1.0, 2026-10-10)
 
 Tech Challenge 5 · FIAP Pós IA para Devs · grupo fiap-ssp-2025. Substitui as decisões do [analise-base-tc5.md](analise-base-tc5.md) onde houver conflito.
 
@@ -16,6 +16,9 @@ Tech Challenge 5 · FIAP Pós IA para Devs · grupo fiap-ssp-2025. Substitui as 
 | D8 | **Interface: HTML renderizado no servidor** (FastAPI + Jinja2) com **htmx 4.0.0, Tailwind CSS 4 e Basecoat 1.0.2** por CDN com versão fixa. Sem Streamlit, React, Vue, Svelte, bundler ou SPA. | Pedido do grupo (ver `AGENTS.md`): servidor como única fonte de verdade, fragmentos HTML, 422 com formulário re-renderizado, tema claro/escuro, responsivo a partir de 360 px. |
 | D9 | **Juiz = `Qwen/Qwen2.5-7B-Instruct-AWQ`** num segundo servidor vLLM do mesmo pod (porta 8001). | A chave OpenAI herdada do TC3 está inválida e o Hugging Face Inference Router está sem créditos. Um segundo modelo no mesmo pod mantém juiz ≠ geradora sem custo extra. |
 | D11 | **Triagem no estilo chat com extração ao vivo e progresso real.** O relato é uma caixa única (texto ou voz); a cada pausa o modelo rápido (`FAST_*`, por padrão o servidor do juiz) preenche a ficha; a análise roda como job e a página consulta o progresso por nó. | Pedido do grupo após o primeiro teste: formulário longo cansava e a espera de ~50 s sem feedback era ruim. Pesquisa de UX: revelação progressiva, espera honesta por etapas, voz com estados claros e sem envio automático. |
+| D12 | **Status em cache.** Sondagens da LLM/juiz/RAG rodam numa thread a cada 20 s; indicador no cabeçalho (popover nativo, abre no hover/clique) e página `/status` leem o cache. Assets com `?v=mtime`. | A página de status travava 10 s sondando o pod na requisição; navegador segurava CSS antigo. |
+| D13 | **Identidade visual = Viva Flor.** Roxo #925C98 (medido no app do grupo) como cor primária, cabeçalho roxo, flor no logo; tema escuro em lavanda sobre roxo profundo. Cores de risco continuam semânticas. | Pedido do grupo: app sem cor; alinhar com o produto Viva Flor. |
+| D14 | **Voz com gravação contínua.** Web Speech API quando existe; fallback grava sem parar, corta nos silêncios (RMS) e transcreve cada trecho em fila ordenada no servidor (faster-whisper `small`, CPU, ffmpeg), com `skip_ms` para o cabeçalho do webm. | O corte fixo a cada 6 s travava entre pausas. |
 | D10 | **Pacote novo `guardia`** (não `saude_mulher`): os módulos do TC3 foram portados e enxugados, não copiados. | A interface mudou inteira (D8) e o grafo perdeu os fluxos de saúde; portar foi mais barato que limpar. |
 
 ## 2. Produto
@@ -160,3 +163,29 @@ Ordenadas por relação ganho/trabalho. "Must" entra no plano; "nice" só após 
 - **Pod do RunPod fora do ar na banca**: fallback OpenAI automático; gravar o vídeo com o pod ligado.
 - **Imagem Docker grande** (torch + sentence-transformers): aceitável; opção de trocar embeddings por API se passar de 6 GB.
 - **Escopo crescer**: F5 e F6 só depois de relatório e vídeo prontos.
+
+## 10. Estado da implementação (v1.0, 2026-10-10)
+
+Repositório: https://github.com/fiap-ssp-2025/tech-challenge-5 (CI verde: ruff, pytest, docker build). Modelo publicado:
+https://huggingface.co/fiap-ssp-2025/tc5-guardia-encaminhamento. Apresentação: artefato "Guardiã AI" (claude.ai).
+
+**Entregue e testado localmente**
+
+| Item | Estado |
+|---|---|
+| Dados | `guardia.data.features`: SINAN 2024 → 280.757 linhas, 42 features, alvo `ENCAMINHA_PROTECAO` (28,3%). Notebook 02 executado. |
+| Modelos | LR, RF, RF+GA, HistGB. Implantado HistGB calibrado (0,5 MB): PR-AUC 0,674, ROC-AUC 0,816, recall 0,923 / precisão 0,392 no limiar 0,15; gap de recall por raça 0,18. SHAP global e por caso. Notebook 03 executado; figuras em `docs/figures`. |
+| Grafo | LangGraph de 9 nós (`guardia.graph.flow`), rastreado no LangSmith (projeto `guardia-ai`). |
+| LLM | Geradora Qwen3.6-27B-AWQ e juiz Qwen2.5-7B-AWQ em vLLM no RunPod (`scripts/runpod_vllm.py`: create/update/stop/start/delete; dois servidores no mesmo pod; 8k ctx; sem eager). JSON por schema em F1, F2 e F3. Modelo rápido (`FAST_*`, por padrão o juiz) para a extração ao vivo. |
+| RAG | Chroma (cosseno) + MiniLM multilíngue sobre 11 documentos, 169 trechos, com citação de fonte. |
+| Guardrails | Blocklist + aviso fixo + juiz com 6 critérios e defesas contra reprovação sem trecho literal. Auditoria SQLite com hash do relato, nota, ficha, fontes, veredito e linha do tempo por nó. |
+| Interface | FastAPI + Jinja2 + htmx 4.0.0 + Tailwind 4 + Basecoat 1.0.2. F1 (caixa única, voz, extração ao vivo, ficha com revelação progressiva, análise como job com progresso real), F3 (chat com memória), F4 (histórico com linha do tempo), Modelo, Status (cache + indicador no cabeçalho). Tema claro/escuro, 360 px sem scroll horizontal. |
+| Voz | Web Speech API + fallback faster-whisper no servidor (gravação contínua, corte por silêncio, fila). |
+| Avaliação | 60 relatos sintéticos (`data/synthetic`); sobre 30: F2 precisão 0,916 / recall 0,932 por campo, `OUT_VEZES` 100%; F1 30/30 notas, juiz aprovou 29, 1 bloqueada; LLM 25 s mediana, 52 s total; 2,8 fontes recuperadas, 2,1 citadas; concordância modelo × encaminhamento real 0,767 (`docs/eval_pipeline.json`). |
+| Qualidade | 22 testes, ruff limpo, Docker 4,6 GB (torch CPU, ffmpeg, whisper) testado em todas as rotas. |
+| Docs | README, `docs/relatorio_tecnico.md` (falta exportar PDF), `docs/roteiro_video.md`, AGENTS.md, esta spec. |
+
+**Pendências de entrega (humanas):** PDF do relatório, vídeo, revisão final pelo grupo.
+**Próxima etapa:** `specs/002-deploy-hf-spaces-openrouter.md` (app no Hugging Face Spaces, LLM via OpenRouter).
+
+**Operação do pod (enquanto não há deploy):** `make pod-status`; se `pod-start` falhar por "not enough free GPUs", `make pod-create` (Secure Cloud é mais estável que Community) e atualizar `LLM_BASE_URL`/`JUDGE_BASE_URL` no `.env`; `make pod-stop` ao terminar (US$ 0,59/h ligado; volume parado custa US$ 0,017/h). Saldo em 2026-10-10: ~US$ 11.

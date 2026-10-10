@@ -28,7 +28,7 @@
   window.guardiaFicha.reset();
 
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  let listening = false, rec = null, recorder = null, stream = null, chunkTimer = null;
+  let listening = false, rec = null, recorder = null, stream = null;
 
   function setListening(on) {
     listening = on;
@@ -64,40 +64,69 @@
   }
   function stopSR() { if (rec) { const r = rec; rec = null; try { r.onend = null; r.stop(); } catch (_) {} } interim.textContent = ''; }
 
-  // ── Fallback: gravação em blocos + /transcrever ─────────────────────────────
+  // ── Fallback: gravação contínua, corte nas pausas da fala, transcrição em fila ──────────
+  // Um único MediaRecorder (sem parar/reiniciar). Guardamos o segmento inicial do webm e, a cada pausa
+  // detectada (ou a cada MAX_SEG s), enviamos init + blocos acumulados para /transcrever. Os textos
+  // entram na ordem em que foram falados, mesmo que uma transcrição demore mais que a outra.
+  const SLICE_MS = 500, SILENCE_MS = 650, MIN_SPEECH_MS = 900, MAX_SEG_MS = 9000, RMS_ON = 0.018;
+  let audioCtx = null, analyser = null, vadTimer = null, initChunk = null, pending = [], segStart = 0, lastVoice = 0, hadVoice = false;
+  let queue = Promise.resolve(), firstFlushDone = false;
+
   async function startRecorder(note) {
     if (!navigator.mediaDevices || !window.MediaRecorder) { setStatus('Este navegador não suporta ditado.'); setListening(false); return; }
     const st = await fetch('/api/status').then(r => r.json()).catch(() => ({}));
     if (!st.speech_fallback) { setStatus('Ditado indisponível: o navegador não tem reconhecimento de voz e o servidor está sem faster-whisper.'); setListening(false); return; }
-    try { stream = await navigator.mediaDevices.getUserMedia({ audio: true }); }
+    try { stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } }); }
     catch (_) { setStatus('Microfone não autorizado.'); setListening(false); return; }
     const mime = MediaRecorder.isTypeSupported('audio/webm;codecs=opus') ? 'audio/webm;codecs=opus' : (MediaRecorder.isTypeSupported('audio/ogg') ? 'audio/ogg' : '');
-    const startOne = () => {
-      recorder = new MediaRecorder(stream, mime ? { mimeType: mime } : undefined);
-      const parts = [];
-      recorder.ondataavailable = (e) => { if (e.data && e.data.size) parts.push(e.data); };
-      recorder.onstop = async () => {
-        const blob = new Blob(parts, { type: recorder.mimeType || 'audio/webm' });
-        if (blob.size < 2000) return;
-        setStatus('Transcrevendo o trecho…');
-        const fd = new FormData(); fd.append('audio', blob, 'trecho.webm');
-        try {
-          const r = await fetch('/transcrever', { method: 'POST', body: fd });
-          const j = await r.json();
-          if (j.text) commit(j.text);
-          if (listening) setStatus('Ouvindo (transcrição no servidor a cada ~6 s)…');
-        } catch (_) { setStatus('Falha ao transcrever o trecho.'); }
-      };
-      recorder.start();
-      chunkTimer = setTimeout(() => { if (recorder && recorder.state === 'recording') recorder.stop(); if (listening) startOne(); }, 6000);
+    recorder = new MediaRecorder(stream, mime ? { mimeType: mime, audioBitsPerSecond: 32000 } : undefined);
+    initChunk = null; pending = []; segStart = Date.now(); lastVoice = 0; hadVoice = false; firstFlushDone = false;
+    recorder.ondataavailable = (e) => {
+      if (!e.data || !e.data.size) return;
+      if (!initChunk) { initChunk = e.data; return; }   // primeiro bloco: cabeçalho do contêiner
+      pending.push(e.data);
     };
-    setListening(true); setStatus((note ? note + ' ' : '') + 'Ouvindo (transcrição no servidor a cada ~6 s)…');
-    startOne();
+    recorder.start(SLICE_MS);
+    // detector de pausa: nível RMS do microfone
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const src = audioCtx.createMediaStreamSource(stream);
+    analyser = audioCtx.createAnalyser(); analyser.fftSize = 1024; src.connect(analyser);
+    const buf = new Float32Array(analyser.fftSize);
+    vadTimer = setInterval(() => {
+      analyser.getFloatTimeDomainData(buf);
+      let sum = 0; for (let i = 0; i < buf.length; i++) sum += buf[i] * buf[i];
+      const rms = Math.sqrt(sum / buf.length), now = Date.now();
+      if (rms > RMS_ON) { lastVoice = now; hadVoice = true; }
+      const segMs = now - segStart;
+      const pause = hadVoice && lastVoice && (now - lastVoice) > SILENCE_MS && (lastVoice - segStart) > MIN_SPEECH_MS;
+      if (pause || (hadVoice && segMs > MAX_SEG_MS)) flushSegment();
+      else if (!hadVoice && segMs > MAX_SEG_MS) { pending = []; segStart = now; }  // só silêncio: descarta
+    }, 100);
+    setListening(true); setStatus((note ? note + ' ' : '') + 'Ouvindo… cada pausa vira um trecho transcrito.');
+  }
+  function flushSegment() {
+    if (!initChunk || !pending.length) { segStart = Date.now(); hadVoice = false; lastVoice = 0; return; }
+    const blob = new Blob([initChunk, ...pending], { type: (recorder && recorder.mimeType) || 'audio/webm' });
+    pending = []; segStart = Date.now(); hadVoice = false; lastVoice = 0;
+    const fd = new FormData(); fd.append('audio', blob, 'trecho.webm');
+    fd.append('skip_ms', firstFlushDone ? String(SLICE_MS) : '0'); // trechos seguintes repetem o áudio do cabeçalho
+    firstFlushDone = true;
+    queue = queue.then(async () => {
+      setStatus('Ouvindo… transcrevendo o trecho anterior.');
+      try {
+        const r = await fetch('/transcrever', { method: 'POST', body: fd });
+        const j = await r.json();
+        if (j.text) commit(j.text);
+      } catch (_) { setStatus('Falha ao transcrever um trecho.'); return; }
+      if (listening) setStatus('Ouvindo… cada pausa vira um trecho transcrito.');
+    });
   }
   function stopRecorder() {
-    clearTimeout(chunkTimer); chunkTimer = null;
-    if (recorder && recorder.state === 'recording') recorder.stop();
-    recorder = null;
+    clearInterval(vadTimer); vadTimer = null;
+    if (recorder && recorder.state === 'recording') { recorder.requestData(); flushSegment(); recorder.stop(); }
+    recorder = null; initChunk = null; pending = [];
+    if (analyser) { try { analyser.disconnect(); } catch (_) {} analyser = null; }
+    if (audioCtx) { audioCtx.close().catch(() => {}); audioCtx = null; }
     if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
   }
   function stopAll() { stopSR(); stopRecorder(); setListening(false); setStatus(''); }

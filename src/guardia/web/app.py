@@ -12,11 +12,13 @@ from __future__ import annotations
 
 import json
 import logging
+import threading
 import time
+from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Any
 
-from fastapi import FastAPI, Request, UploadFile
+from fastapi import FastAPI, Form, Request, UploadFile
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -28,18 +30,32 @@ from guardia.llm.structurer import structure_report
 from guardia.rag import chat as rag_chat
 from guardia.web import jobs
 from guardia.web.forms import FORM, SIGNAL_FIELDS, case_summary, label, parse_case_form
-from guardia.web.status import full_status, model_status
+from guardia.web.status import CACHE, model_status
 
 log = logging.getLogger("guardia.web")
 ROOT = Path(__file__).resolve().parents[3]
 HERE = Path(__file__).resolve().parent
 
-app = FastAPI(title="Guardiã AI", docs_url="/api/docs", redoc_url=None)
+@asynccontextmanager
+async def _lifespan(_: FastAPI):
+    CACHE.start()  # background probes; pages never wait for the LLM endpoints
+    if transcribe.available():  # warm the speech model so the first dictated chunk is not slow
+        threading.Thread(target=transcribe.warm, daemon=True, name="guardia-whisper-warm").start()
+    yield
+
+
+app = FastAPI(title="Guardiã AI", docs_url="/api/docs", redoc_url=None, lifespan=_lifespan)
+
 app.mount("/static", StaticFiles(directory=str(HERE / "static")), name="static")
 app.mount("/figures", StaticFiles(directory=str(ROOT / "docs" / "figures"), check_dir=False), name="figures")
 templates = Jinja2Templates(directory=str(HERE / "templates"))
 templates.env.filters["opt"] = label
-templates.env.globals.update(FORM=FORM, SIGNAL_FIELDS=SIGNAL_FIELDS, case_summary=case_summary,
+def asset_version() -> int:
+    """Newest mtime among static files → cache-busting query string (browsers held stale CSS otherwise)."""
+    return int(max((p.stat().st_mtime for p in (HERE / "static").glob("*")), default=0))
+
+
+templates.env.globals.update(FORM=FORM, SIGNAL_FIELDS=SIGNAL_FIELDS, case_summary=case_summary, asset_version=asset_version,
                              json_dumps=lambda v: json.dumps(v, ensure_ascii=False, indent=2, default=str))
 
 NAV = [("/", "Triagem", "triagem"), ("/protocolos", "Protocolos", "protocolos"), ("/historico", "Histórico", "historico"),
@@ -135,8 +151,9 @@ def analisar_progresso(request: Request, job_id: str):
 
 
 @app.post("/transcrever")
-async def transcrever(audio: UploadFile):
-    """Speech-to-text fallback for browsers without the Web Speech API (faster-whisper on the server)."""
+async def transcrever(audio: UploadFile, skip_ms: int = Form(0)):
+    """Speech-to-text fallback for browsers without the Web Speech API (faster-whisper on the server).
+    ``skip_ms`` trims the audio carried by the webm header that the browser prepends to later chunks."""
     if not transcribe.available():
         return JSONResponse({"error": "transcrição no servidor indisponível (instale com `uv sync --group audio`)"}, status_code=503)
     data = await audio.read()
@@ -144,7 +161,7 @@ async def transcrever(audio: UploadFile):
         return JSONResponse({"text": ""})
     suffix = ".webm" if "webm" in (audio.content_type or "") else (".ogg" if "ogg" in (audio.content_type or "") else ".wav")
     try:
-        return JSONResponse(transcribe.transcribe_bytes(data, suffix=suffix))
+        return JSONResponse(transcribe.transcribe_bytes(data, suffix=suffix, skip_s=max(0, min(skip_ms, 2000)) / 1000))
     except Exception as e:
         log.exception("transcription failed")
         return JSONResponse({"error": f"{type(e).__name__}: {str(e)[:200]}"}, status_code=500)
@@ -230,9 +247,20 @@ def modelo(request: Request):
 
 @app.get("/status", response_class=HTMLResponse)
 def status(request: Request):
-    st = full_status(include_rag=True)
-    st["speech"] = {"ok": transcribe.available(), "note": "faster-whisper no servidor (fallback do navegador)" if transcribe.available() else "só Web Speech API do navegador"}
-    return render(request, "pages/status.html", "partials/status_cards.html", {"active": "status", "st": st})
+    """Instant: renders the cached snapshot (the header pill and this page never probe on request)."""
+    return render(request, "pages/status.html", "partials/status_cards.html", {"active": "status", "st": CACHE.snapshot()})
+
+
+@app.post("/status/verificar", response_class=HTMLResponse)
+def status_verificar(request: Request):
+    """Forced re-check (the Atualizar button): probes now, then renders the cards."""
+    CACHE.refresh()
+    return render(request, "pages/status.html", "partials/status_cards.html", {"active": "status", "st": CACHE.snapshot()})
+
+
+@app.get("/status/pill", response_class=HTMLResponse)
+def status_pill(request: Request):
+    return templates.TemplateResponse(request, "partials/status_pill.html", {"request": request, "st": CACHE.snapshot()})
 
 
 @app.get("/api/health")
@@ -242,9 +270,9 @@ def health():
 
 @app.get("/api/status")
 def api_status():
-    st = full_status(include_rag=False)
+    st = CACHE.snapshot()
     st["speech_fallback"] = transcribe.available()
-    return JSONResponse(st)
+    return JSONResponse(json.loads(json.dumps(st, default=str)))
 
 
 @app.post("/api/analisar")

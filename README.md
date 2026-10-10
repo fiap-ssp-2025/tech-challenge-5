@@ -174,3 +174,7 @@ tests/                  features · regras do grafo · juiz · rotas web
 ## Integrantes
 
 Marcelo Arruda de Siqueira · Leonardo Barbosa Nogueira · Jose Flavio Neto · Pedro Matias dos Santos · Wellington Oliveira de Andrade
+
+## Próxima etapa
+
+Deploy público (app no Hugging Face Spaces, LLM via OpenRouter): ver [`specs/002-deploy-hf-spaces-openrouter.md`](specs/002-deploy-hf-spaces-openrouter.md).

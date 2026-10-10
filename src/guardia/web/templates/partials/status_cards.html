@@ -4,8 +4,9 @@
   {% for l in lines %}<p class="text-xs text-muted-foreground break-all">{{ l }}</p>{% endfor %}
 </div>
 {% endmacro %}
-{{ card('LLM geradora', st.generator.ok, [st.generator.backend ~ ' · ' ~ (st.generator.model or '—'), st.generator.endpoint or '', st.generator.note or (st.generator.served|join(', ') if st.generator.served else '')]) }}
+{{ card('LLM geradora', st.generator.ok, [st.generator.backend ~ ' · ' ~ (st.generator.model or '—'), st.generator.endpoint or '', st.generator.note or (st.generator.served|join(', ') if st.generator.served else ('' if st.pending else ''))]) }}
 {{ card('Juiz independente', st.judge.ok, [st.judge.backend ~ ' · ' ~ (st.judge.model or '—'), st.judge.endpoint or '', st.judge.note or (st.judge.served|join(', ') if st.judge.served else '')]) }}
 {{ card('Modelo de encaminhamento', st.model.ok, [st.model.get('model', st.model.get('note', '')), 'PR-AUC ' ~ st.model.get('pr_auc', '—') ~ ' · recall ' ~ (st.model.get('test', {}).get('recall', '—')), st.model.get('path', '')]) }}
 {% if st.rag %}{{ card('RAG (Chroma)', st.rag.ok, [(st.rag.chunks|string ~ ' trechos indexados') if st.rag.ok else st.rag.note, (st.rag.documents|length|string ~ ' documentos') if st.rag.ok else '']) }}{% endif %}
 {% if st.speech %}{{ card('Ditado por voz', true, [st.speech.note]) }}{% endif %}
+<p class="sm:col-span-2 text-xs text-muted-foreground">{% if st.pending %}Primeira verificação em andamento…{% elif st.age_s is not none %}Última verificação há {{ st.age_s }} s.{% endif %}</p>
