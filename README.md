@@ -40,8 +40,8 @@ relato + ficha ──▶ LangGraph (F1) ──▶ nota de apoio
 | Fluxo | O que faz | Onde |
 |---|---|---|
 | **F1 Triagem** | caixa de relato no estilo chat (escrever ou **ditar por voz**) → nota de apoio, com progresso real por etapa do grafo | `/` |
-| **F2 Estruturar relato** | enquanto a profissional escreve ou fala, o modelo rápido preenche a ficha (JSON por schema); o que foi detectado aparece como chips e os campos ficam em grupos recolhíveis | ao vivo em `/` |
-| **F3 Consultar protocolos** | chat com memória no servidor sobre a base RAG, sempre citando a fonte | `/protocolos` |
+| **F2 Estruturar relato** | enquanto a profissional escreve ou fala, o modelo rápido preenche a ficha (JSON por schema); o que foi detectado aparece como chips e os campos ficam em grupos recolhíveis. Sob o relato, um **guia de entrevista** mostra as 3 próximas perguntas que faltam (11 tópicos do Formulário Nacional de Avaliação de Risco); some o que a ficha ou o relato já cobriu, ou o que a profissional marcou | ao vivo em `/` |
+| **F3 Consultar protocolos** | painel lateral aberto pelo botão **Protocolos** (canto inferior direito, em todas as páginas): conversa contínua com memória no servidor sobre a base RAG, fontes recolhidas sob cada resposta, botão **Recomeçar**. Na triagem, considera o caso em andamento (campos da ficha e resultado da análise, nunca o texto do relato) | botão flutuante; `/protocolos` abre a triagem com o painel aberto |
 | **F4 Histórico** | atendimentos anteriores com linha do tempo digerida: o que cada etapa fez, quanto levou, modelo, fontes e validador | `/historico` |
 | Status | saúde dos componentes (LLM, juiz, modelo, RAG, voz) no indicador do cabeçalho; métricas e figuras do modelo ficam no relatório e em `docs/figures` | cabeçalho |
 

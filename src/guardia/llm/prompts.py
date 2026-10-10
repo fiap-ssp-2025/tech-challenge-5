@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 from guardia.data.features import AG, CATEGORICAL, ESCOLARIDADE_LABELS, REL_GROUPS, UF_OPTIONS, VIOL
+from guardia.interview import TOPICS
 
 SYSTEM_PROMPT = (
     "Você é a Guardiã AI, um sistema de apoio a profissionais que atendem mulheres em situação de violência "
@@ -94,6 +95,16 @@ Tarefa: produza a nota de apoio em JSON, concisa (resumo com 3 a 4 frases; lista
 
 # ── F2: structure the free-text report into the form fields ───────────────────
 
+# Interview topics the report already answered, even negatively (feeds the live interview guide, spec 003 U6).
+# Each topic carries a literal quote from the report ("id: trecho"); the server drops topics whose quote is not in
+# the text (the fast model otherwise lists every topic). Flat strings: Gemini Flash Lite loops on nested objects.
+TOPICS_PROPERTY: dict[str, Any] = {"type": "array", "items": {"type": "string"}}
+TOPICS_LEGEND = "; ".join(f"{t.id} = {t.hint}" for t in TOPICS)
+TOPICS_RULE = ("- topicos_abordados: só os tópicos de entrevista que o relato responde explicitamente, mesmo que a resposta seja "
+               "negativa (\"não tem arma\" conta como arma), no formato \"id: trecho\", onde trecho é cópia literal e curta do relato "
+               "que o responde (ex.: \"filhos: não tem filhos\"). Sem trecho literal, não inclua o tópico; na dúvida, deixe de fora. "
+               f"Tópicos: {TOPICS_LEGEND}")
+
 STRUCTURE_SCHEMA: dict[str, Any] = {
     "type": "object",
     "additionalProperties": False,
@@ -111,10 +122,11 @@ STRUCTURE_SCHEMA: dict[str, Any] = {
         "local_seguro": {"type": ["boolean", "null"]},
         "resumo_objetivo": {"type": "string", "description": "2 frases, sem nomes próprios."},
         "campos_incertos": {"type": "array", "items": {"type": "string"}},
+        "topicos_abordados": TOPICS_PROPERTY,
     },
     "required": list(VIOL) + list(AG) + list(REL_GROUPS) + list(CATEGORICAL) + [
         "SG_UF", "ESCOLARIDADE", "IDADE_ANOS", "arma_mencionada", "ameaca_de_morte", "filhos_envolvidos",
-        "local_seguro", "resumo_objetivo", "campos_incertos",
+        "local_seguro", "resumo_objetivo", "campos_incertos", "topicos_abordados",
     ],
 }
 
@@ -140,6 +152,7 @@ def build_structure_prompt(text: str) -> str:
 - ESCOLARIDADE: {', '.join(ESCOLARIDADE_LABELS.values())} ou IGNORADO
 - IDADE_ANOS: inteiro ou null
 - arma_mencionada / ameaca_de_morte / filhos_envolvidos / local_seguro: sinais de risco do relato
+{TOPICS_RULE}
 
 Relato:
 \"\"\"{text.strip()}\"\"\"
@@ -164,9 +177,11 @@ STRUCTURE_SCHEMA_SPARSE: dict[str, Any] = {
         "local_seguro": {"type": ["boolean", "null"]},
         "resumo_objetivo": {"type": "string"},
         "campos_incertos": {"type": "array", "items": {"type": "string"}},
+        "topicos_abordados": TOPICS_PROPERTY,
     },
     "required": ["marcados"] + list(CATEGORICAL) + ["SG_UF", "ESCOLARIDADE", "IDADE_ANOS", "arma_mencionada", "ameaca_de_morte",
-                                                     "filhos_envolvidos", "local_seguro", "resumo_objetivo", "campos_incertos"],
+                                                     "filhos_envolvidos", "local_seguro", "resumo_objetivo", "campos_incertos",
+                                                     "topicos_abordados"],
 }
 
 
@@ -183,6 +198,7 @@ Campos de contexto (uma opção cada; IGNORADO quando o relato não diz):
 - SG_UF: sigla da UF de residência ou IGNORADO · ESCOLARIDADE: {', '.join(ESCOLARIDADE_LABELS.values())} ou IGNORADO · IDADE_ANOS: inteiro ou null
 - arma_mencionada / ameaca_de_morte / filhos_envolvidos / local_seguro: sinais de risco do relato
 - resumo_objetivo: 1 frase, sem nomes próprios · campos_incertos: nomes dos campos em dúvida
+{TOPICS_RULE}
 
 Relato:
 \"\"\"{text.strip()}\"\"\"

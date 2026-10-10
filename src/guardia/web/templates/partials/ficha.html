@@ -2,7 +2,8 @@
    fields live in collapsible groups with a count in each summary. Re-rendered by /estruturar (live) and on 422. #}
 {% set groups = ["Tipo de violência", "Meio de agressão", "Relação com o provável autor"] %}
 {% set n_ctx = (FORM.selects|selectattr(0, 'in', case)|list|length) %}
-<section id="ficha" class="card grid gap-4 p-4 sm:p-5" hx-on:htmx:after:swap="window.guardiaFicha && window.guardiaFicha.reset()">
+<section id="ficha" class="card grid gap-4 p-4 sm:p-5" hx-on:htmx:after:swap="window.guardiaFicha && window.guardiaFicha.reset()"
+         hx-post="/guia" hx-trigger="change" hx-target="#guia" hx-swap="outerHTML">
   <input type="hidden" id="ficha_editada" name="ficha_editada" value="{{ '1' if ficha_editada else '0' }}">
   <header class="flex flex-wrap items-start justify-between gap-2">
     <div class="grid gap-0.5">

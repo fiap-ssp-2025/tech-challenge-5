@@ -25,11 +25,13 @@ from fastapi.templating import Jinja2Templates
 
 from guardia.audit import store as audit
 from guardia.graph.flow import run_case
+from guardia.guardrails.blocklist import SAFETY_NOTICE
+from guardia.interview import build_guide, parse_ids
 from guardia.llm import transcribe
 from guardia.llm.structurer import structure_report
 from guardia.rag import chat as rag_chat
 from guardia.web import jobs
-from guardia.web.forms import FORM, SIGNAL_FIELDS, case_summary, label, parse_case_form
+from guardia.web.forms import FORM, SIGNAL_FIELDS, case_facts, case_summary, label, parse_case_form
 from guardia.web.status import CACHE, model_status
 
 log = logging.getLogger("guardia.web")
@@ -56,14 +58,16 @@ def asset_version() -> int:
 
 
 templates.env.globals.update(FORM=FORM, SIGNAL_FIELDS=SIGNAL_FIELDS, case_summary=case_summary, asset_version=asset_version,
+                             SAFETY_NOTICE=SAFETY_NOTICE,
                              json_dumps=lambda v: json.dumps(v, ensure_ascii=False, indent=2, default=str))
 
-NAV = [("/", "Triagem", "triagem"), ("/protocolos", "Protocolos", "protocolos"), ("/historico", "Histórico", "historico")]
+NAV = [("/", "Triagem", "triagem"), ("/historico", "Histórico", "historico")]  # Protocolos: painel lateral em todas as páginas
 MIN_RELATO = 20
 
 
 def is_htmx(request: Request) -> bool:
-    return request.headers.get("HX-Request") == "true"
+    """Fragment requests only: boosted navigation targets the whole body (``HX-Request-Type: full``)."""
+    return request.headers.get("HX-Request") == "true" and request.headers.get("HX-Request-Type") != "full"
 
 
 def render(request: Request, page: str, partial: str | None, ctx: dict[str, Any], status: int = 200) -> HTMLResponse:
@@ -76,12 +80,25 @@ def render(request: Request, page: str, partial: str | None, ctx: dict[str, Any]
 
 
 def _ficha_ctx(relato: str = "", case: dict | None = None, signals: dict | None = None, errors: dict | None = None,
-               structured: dict | None = None, edited: bool = False) -> dict[str, Any]:
+               structured: dict | None = None, edited: bool = False, guide: dict | None = None) -> dict[str, Any]:
     case = case or {}
     detected = [text for _, name, text in FORM.checks if case.get(name)]
     detected += [text for name, text in SIGNAL_FIELDS if (signals or {}).get(name)]
     return {"active": "triagem", "relato": relato, "case": case, "signals": signals or {}, "errors": errors or {},
-            "structured": structured, "detected": detected, "ficha_editada": edited, "speech_fallback": transcribe.available()}
+            "structured": structured, "detected": detected, "ficha_editada": edited, "speech_fallback": transcribe.available(),
+            "guide": guide or build_guide(case, signals, set(), set())}
+
+
+def _form_signals(form: dict[str, Any]) -> dict[str, bool]:
+    return {k: bool(form.get(k)) for k, _ in SIGNAL_FIELDS}
+
+
+def _form_guide(form: dict[str, Any], mentioned: set[str] | None = None, case: dict | None = None,
+                signals: dict | None = None) -> dict[str, Any]:
+    """Interview guide from the posted form: hand-edited record + topics seen by the LLM + questions marked as asked."""
+    if case is None:
+        case, signals = parse_case_form(form).case, _form_signals(form)
+    return build_guide(case, signals, parse_ids(form.get("guia_mencionados")) | (mentioned or set()), parse_ids(form.get("guia_feitos")))
 
 
 # ── F1 · Triagem ───────────────────────────────────────────────────────────────
@@ -92,6 +109,15 @@ def triagem(request: Request):
     return render(request, "pages/triagem.html", None, _ficha_ctx())
 
 
+@app.post("/guia", response_class=HTMLResponse)
+async def guia(request: Request):
+    """Interview guide recomputed from the form (record edited by hand, or a question marked/unmarked as asked)."""
+    form = dict(await request.form())
+    done = parse_ids(form.get("guia_feitos")) ^ parse_ids(form.get("feito"))  # clicking toggles
+    form["guia_feitos"] = ",".join(done)
+    return templates.TemplateResponse(request, "partials/guia.html", {"request": request, "guide": _form_guide(form)})
+
+
 @app.post("/estruturar", response_class=HTMLResponse)
 async def estruturar(request: Request):
     """F2: fill the record from the free-text report. ``live=1`` → fast model, debounced from the textbox.
@@ -100,9 +126,13 @@ async def estruturar(request: Request):
     relato = str(form.get("relato") or "").strip()
     live = str(form.get("live") or "") == "1"
     edited = str(form.get("ficha_editada") or "") == "1"
-    if live and edited:
-        # the professional already adjusted the record by hand: do not overwrite it
-        return HTMLResponse("", status_code=204)
+    if live and edited and len(relato) >= MIN_RELATO:
+        # the professional already adjusted the record by hand: do not overwrite it, only refresh the interview guide
+        st = structure_report(relato, fast=True)
+        if not st.ok:
+            return HTMLResponse("", status_code=204)
+        guide = _form_guide(form, set(st.topics))
+        return templates.TemplateResponse(request, "partials/guia.html", {"request": request, "guide": guide, "oob": True})
     if len(relato) < MIN_RELATO:
         if live:
             return HTMLResponse("", status_code=204)
@@ -111,13 +141,15 @@ async def estruturar(request: Request):
     t0 = time.monotonic()
     st = structure_report(relato, fast=live)
     if not st.ok:
-        ctx = _ficha_ctx(relato, errors={"estruturar": f"A LLM não respondeu ({st.error}). Preencha os campos manualmente."})
-        return render(request, "pages/triagem.html", "partials/ficha.html", ctx)
+        ctx = _ficha_ctx(relato, errors={"estruturar": f"A LLM não respondeu ({st.error}). Preencha os campos manualmente."},
+                         guide=_form_guide(form))
+        return render(request, "pages/triagem.html", "partials/ficha_live.html", ctx)
     signals = {"arma_mencionada": st.signals.get("arma_mencionada"), "ameaca_de_morte": st.signals.get("ameaca_de_morte"),
                "filhos_envolvidos": st.signals.get("filhos_envolvidos"), "sem_local_seguro": st.signals.get("local_seguro") is False}
     structured = {"summary": st.summary, "uncertain": st.uncertain, "model": st.model, "backend": st.backend,
                   "latency_ms": int((time.monotonic() - t0) * 1000), "live": live}
-    return render(request, "pages/triagem.html", "partials/ficha.html", _ficha_ctx(relato, st.case, signals, structured=structured))
+    guide = _form_guide(form, set(st.topics), st.case, signals)
+    return render(request, "pages/triagem.html", "partials/ficha_live.html", _ficha_ctx(relato, st.case, signals, structured=structured, guide=guide))
 
 
 @app.post("/analisar", response_class=HTMLResponse)
@@ -169,12 +201,39 @@ async def transcrever(audio: UploadFile, skip_ms: int = Form(0)):
 # ── F3 · Protocolos (chat com memória no servidor) ─────────────────────────────
 
 
+CHAT_COOKIE = {"max_age": 60 * 60 * 24 * 7, "samesite": "lax"}
+
+
+def _chat(request: Request, partial: str, ctx: dict[str, Any], cid: str, status: int = 200) -> HTMLResponse:
+    """Chat fragments for the side panel; a direct visit gets the triage page with the panel already open."""
+    page_ctx = {**_ficha_ctx(), "chat_open": True} if not is_htmx(request) else {}
+    if not is_htmx(request) or partial.endswith("chat_thread.html"):
+        page_ctx["turns"] = rag_chat.turns(cid)
+    resp = render(request, "pages/triagem.html", partial, {**page_ctx, **ctx}, status=status)
+    resp.set_cookie("guardia_chat", cid, **CHAT_COOKIE)
+    return resp
+
+
 @app.get("/protocolos", response_class=HTMLResponse)
 def protocolos(request: Request):
-    cid = request.cookies.get("guardia_chat") or rag_chat.new_conversation_id()
-    resp = render(request, "pages/protocolos.html", None, {"active": "protocolos", "turns": rag_chat.turns(cid), "cid": cid})
-    resp.set_cookie("guardia_chat", cid, max_age=60 * 60 * 24 * 7, samesite="lax")
-    return resp
+    """The conversation thread (loaded when the panel first opens)."""
+    return _chat(request, "partials/chat_thread.html", {}, request.cookies.get("guardia_chat") or rag_chat.new_conversation_id())
+
+
+def _chat_case(form: dict[str, Any]) -> list[str]:
+    """Context for the protocol chat (spec 004): the record fields of the triage on screen and, when it was already
+    analysed, risk, model suggestion and referrals from the stored note. Never the report text."""
+    if str(form.get("usar_caso") or "") != "1":
+        return []
+    facts = case_facts(parse_case_form(form).case, _form_signals(form))
+    aid = str(form.get("analise_id") or "")
+    row = audit.fetch_one(int(aid)) if aid.isdigit() else None
+    if row:
+        facts.append(f"Última análise: risco {row.get('risk_level') or 'indeterminado'}")
+        if row.get("ml_suggest_referral"):
+            facts.append("Modelo sugere encaminhar à rede de proteção")
+        facts += [f"Encaminhamento sugerido: {e}" for e in ((row.get("response_json") or {}).get("encaminhamentos") or [])[:3]]
+    return facts
 
 
 @app.post("/protocolos/perguntar", response_class=HTMLResponse)
@@ -183,22 +242,24 @@ async def perguntar(request: Request):
     cid = request.cookies.get("guardia_chat") or str(form.get("cid") or rag_chat.new_conversation_id())
     q = str(form.get("pergunta") or "").strip()
     if len(q) < 5:
-        return render(request, "pages/protocolos.html", "partials/chat_error.html", {"active": "protocolos", "message": "Escreva uma pergunta com pelo menos 5 caracteres."}, status=422)
+        return _chat(request, "partials/chat_error.html", {"message": "Escreva uma pergunta com pelo menos 5 caracteres."}, cid, status=422)
     try:
-        turn = rag_chat.ask(cid, q)
+        turn = rag_chat.ask(cid, q, case=_chat_case(form))
     except Exception as e:
         log.exception("chat failed")
-        return render(request, "pages/protocolos.html", "partials/chat_error.html", {"active": "protocolos", "message": f"Falha: {type(e).__name__}: {e}"}, status=500)
-    resp = render(request, "pages/protocolos.html", "partials/chat_turn.html", {"active": "protocolos", "t": turn})
-    resp.set_cookie("guardia_chat", cid, max_age=60 * 60 * 24 * 7, samesite="lax")
-    return resp
+        return _chat(request, "partials/chat_error.html", {"message": f"Falha: {type(e).__name__}: {e}"}, cid, status=500)
+    return _chat(request, "partials/chat_turn.html", {"t": turn}, cid)
 
 
 @app.post("/protocolos/nova", response_class=HTMLResponse)
 def nova_conversa(request: Request):
-    resp = RedirectResponse("/protocolos", status_code=303)
-    resp.set_cookie("guardia_chat", rag_chat.new_conversation_id(), max_age=60 * 60 * 24 * 7, samesite="lax")
-    return resp
+    """Recomeçar: a new conversation id; the panel gets the empty thread back."""
+    cid = rag_chat.new_conversation_id()
+    if not is_htmx(request):
+        resp = RedirectResponse("/protocolos", status_code=303)
+        resp.set_cookie("guardia_chat", cid, **CHAT_COOKIE)
+        return resp
+    return _chat(request, "partials/chat_thread.html", {}, cid)
 
 
 # ── F4 · Histórico (linha do tempo dos atendimentos) ───────────────────────────

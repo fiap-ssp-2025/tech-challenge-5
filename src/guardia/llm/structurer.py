@@ -6,6 +6,7 @@ from dataclasses import dataclass, field
 from typing import Any
 
 from guardia.data.features import CATEGORICAL, ESCOLARIDADE_LABELS, FORM_DEFAULTS, UF_OPTIONS
+from guardia.interview import TOPIC_IDS
 from guardia.llm.client import chat
 from guardia.llm.prompts import (
     BINARY_FIELDS,
@@ -23,6 +24,7 @@ class Structured:
     signals: dict[str, Any]
     summary: str
     uncertain: list[str] = field(default_factory=list)
+    topics: list[str] = field(default_factory=list)  # interview topics the report touched (spec 003 U6)
     backend: str = "error"
     model: str = ""
     latency_ms: int = 0
@@ -65,6 +67,23 @@ def _expand_sparse(parsed: dict[str, Any]) -> dict[str, Any]:
     return dense
 
 
+def _norm(s: str) -> str:
+    return " ".join(s.lower().split())
+
+
+def _quoted_topics(parsed: dict[str, Any], text: str) -> list[str]:
+    """Topics whose quote really is in the report (spec 003 U6): the model's claim alone is not enough."""
+    body, out, raw = _norm(text), [], parsed.get("topicos_abordados") or []
+    if isinstance(raw, dict):  # json_object fallback sometimes answers {"id": "trecho"}
+        raw = [f"{k}: {v}" for k, v in raw.items()]
+    for item in raw:
+        tid, _, quote = str(item).partition(":")
+        tid, quote = tid.strip(), _norm(quote.strip(" \"'“”"))
+        if tid in TOPIC_IDS and tid not in out and len(quote) >= 3 and quote in body:
+            out.append(tid)
+    return out
+
+
 def structure_report(text: str, *, fast: bool = False) -> Structured:
     """`fast=True` → live extraction while the user types: the FAST_* endpoint (or the generator) with the sparse
     schema, which is ~4x shorter to generate. The full schema is used by the explicit "Reextrair" button."""
@@ -80,5 +99,6 @@ def structure_report(text: str, *, fast: bool = False) -> Structured:
     return Structured(
         case=case, signals=signals, summary=str(res.parsed.get("resumo_objetivo") or ""),
         uncertain=[str(x) for x in (res.parsed.get("campos_incertos") or [])][:10],
+        topics=_quoted_topics(res.parsed, text),
         backend=res.backend, model=res.model, latency_ms=res.latency_ms,
     )

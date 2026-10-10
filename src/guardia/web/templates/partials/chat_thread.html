@@ -1,0 +1,11 @@
+{# O fio da conversa de protocolos: estado vazio com sugestões (some quando há turnos) e os turnos gravados. #}
+<div class="chat-empty">
+  <p>Tire dúvidas sobre a Lei Maria da Penha, medidas protetivas, canais de denúncia e a rede de proteção do DF. A conversa continua: dá para pedir detalhes da resposta anterior.</p>
+  <ul class="chat-suggestions">
+    <li class="chat-case-only"><button type="button" onclick="guardiaChat.ask(this.textContent)">O que os protocolos indicam para este caso?</button></li>
+    {% for q in ["Como solicitar medida protetiva de urgência?", "Quais canais de atendimento existem no DF?", "O que fazer nas primeiras 72 horas após violência sexual?"] %}
+    <li><button type="button" onclick="guardiaChat.ask(this.textContent)">{{ q }}</button></li>
+    {% endfor %}
+  </ul>
+</div>
+{% for t in turns %}{% include "partials/chat_turn.html" %}{% endfor %}

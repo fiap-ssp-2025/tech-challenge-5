@@ -1,0 +1,38 @@
+{# Guia de entrevista (spec 003): as próximas perguntas que faltam, para ler em voz alta, e o checklist completo
+   recolhido no contador. Recalculado pelo servidor; o estado vive nos dois campos ocultos do próprio formulário. #}
+{% set g = guide %}
+<div id="guia" class="guide" role="region" aria-label="Guia de perguntas" {% if oob %}hx-swap-oob="true"{% endif %}>
+  <input type="hidden" name="guia_mencionados" value="{{ g.mentioned }}">
+  <input type="hidden" name="guia_feitos" value="{{ g.done }}">
+  <div class="guide-row">
+    <p class="guide-lead">{% if not g.next %}Tópicos básicos cobertos{% elif g.started %}Falta perguntar{% else %}Para começar{% endif %}</p>
+    {% if g.next %}
+    <ul class="guide-next">
+      {% for t in g.next %}
+      <li><button type="button" class="guide-q" hx-post="/guia" hx-vals='{"feito": "{{ t.id }}"}' hx-target="#guia" hx-swap="outerHTML" title="Marcar como perguntado">
+        <span>{{ t.question }}</span>
+        <svg class="guide-tick" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="m5.2 8.2 1.9 1.9 3.7-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="sr-only">(marcar como perguntado)</span>
+      </button></li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="guide-done-note">Confira a ficha e clique em Analisar.</p>
+    {% endif %}
+    <details class="guide-all" id="guia-todos" data-keep-open>
+      <summary><span class="guide-count" style="--p: {{ (g.covered / g.total * 100)|round|int }}" aria-hidden="true"></span>{{ g.covered }} de {{ g.total }}<span class="sr-only"> tópicos abordados; ver todos</span></summary>
+      <ul class="guide-checklist">
+        {% for t in g.topics %}
+        <li>
+          {% if t.state in ('ficha', 'relato') %}
+          <span class="guide-topic" data-state="on" title="{{ 'Já está na ficha' if t.state == 'ficha' else 'Citado no relato' }}">{{ t.label }}</span>
+          {% else %}
+          <button type="button" class="guide-topic" data-state="{{ 'on' if t.state == 'feito' else 'off' }}" aria-pressed="{{ 'true' if t.state == 'feito' else 'false' }}" hx-post="/guia" hx-vals='{"feito": "{{ t.id }}"}' hx-target="#guia" hx-swap="outerHTML" title="{{ t.question }}">{{ t.label }}</button>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      <p class="guide-legend">Marcados pela ficha, pelo relato ou por você. Clique num tópico para marcar ou desmarcar.</p>
+    </details>
+  </div>
+</div>

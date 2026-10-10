@@ -26,7 +26,7 @@ OPTION_LABELS: dict[str, str] = {
 
 
 def label(opt: str) -> str:
-    if len(opt) == 2 and opt.isupper():  # UF
+    if opt in UF_OPTIONS:  # "UM" (one person involved) is not a state
         return opt
     return OPTION_LABELS.get(opt, opt.replace("_", " ").title())
 
@@ -112,3 +112,23 @@ def case_summary(case: dict[str, Any]) -> list[tuple[str, str]]:
             continue
         pairs.append((names.get(k, k), "sim" if v in (1, True) else label(str(v))))
     return pairs
+
+
+# Short names for the protocol chat context (spec 004); the SINAN labels are written as form questions.
+FACT_NAMES = {"OUT_VEZES": "Já ocorreu outras vezes", "AUTOR_ALCO": "Autor com suspeita de uso de álcool", "AUTOR_SEXO": "Sexo do autor",
+              "NUM_ENVOLV": "Envolvidos", "DEF_TRANS": "Deficiência ou transtorno", "SG_UF": "UF", "IDADE_ANOS": "Idade"}
+
+
+def case_facts(case: dict[str, Any], signals: dict[str, Any] | None = None) -> list[str]:
+    """The record as short readable facts ("Violência física", "Gestante: 2º trimestre") for the protocol chat.
+    Structured fields only: the free-text report never leaves the triage (spec 004, C1)."""
+    facts = [text for _, name, text in FORM.checks if (case or {}).get(name)]
+    facts = [f.split(" (")[0] for f in facts]
+    facts += [text for name, text in SIGNAL_FIELDS if (signals or {}).get(name)]
+    for name, text, _ in FORM.selects:
+        v = (case or {}).get(name)
+        if v not in (None, "", "IGNORADO", "NAO_SE_APLICA"):
+            facts.append(f"{FACT_NAMES.get(name, text)}: {label(str(v))}")
+    if (case or {}).get("IDADE_ANOS") not in (None, ""):
+        facts.append(f"Idade: {case['IDADE_ANOS']} anos")
+    return facts

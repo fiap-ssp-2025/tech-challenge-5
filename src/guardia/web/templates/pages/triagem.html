@@ -3,7 +3,7 @@
 {% block content %}
 <section class="grid gap-1">
   <h1 class="text-2xl font-semibold tracking-tight">Conte o relato</h1>
-  <p class="text-sm text-muted-foreground max-w-prose">Escreva ou fale. Enquanto você conta, a Guardiã preenche a ficha; confira o que foi detectado e clique em <strong>Analisar</strong>. Nenhum nome ou documento é necessário e o texto não é armazenado.</p>
+  <p class="text-sm text-muted-foreground max-w-prose">Escreva ou fale. Enquanto você conta, a Guardiã preenche a ficha e sugere o que ainda perguntar; confira e clique em <strong>Analisar</strong>. Nenhum nome ou documento é necessário e o texto não é armazenado.</p>
   {% if not model.ok %}
   <div class="alert" data-variant="destructive"><h2>Modelo de encaminhamento ausente</h2><section>{{ model.note }}</section></div>
   {% endif %}
@@ -30,6 +30,7 @@
       </div>
     </div>
     {% if errors.relato %}<p id="relato-error" role="alert" class="text-sm text-destructive">{{ errors.relato }}</p>{% endif %}
+    {% include "partials/guia.html" %}
   </div>
 
   <div class="grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] items-start">

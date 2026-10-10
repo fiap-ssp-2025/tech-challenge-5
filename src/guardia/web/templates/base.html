@@ -54,10 +54,11 @@
   <main id="main" class="mx-auto max-w-6xl px-4 py-6 grid gap-6">
     {% block content %}{% endblock %}
   </main>
-  <footer class="mx-auto max-w-6xl px-4 py-8 text-xs text-muted-foreground">
+  <footer class="mx-auto max-w-6xl px-4 pt-8 pb-24 text-xs text-muted-foreground">
     Guardiã AI · Tech Challenge 5 · FIAP Pós IA para Devs · grupo fiap-ssp-2025. Dados: SINAN/DATASUS 2024 (públicos, anonimizados).
     O sistema não decide encaminhamentos, não diagnostica e não prescreve.
   </footer>
+  {% include "partials/chat_drawer.html" %}
   <div id="toaster" class="toaster" data-align="end"></div>
 </body>
 </html>
