@@ -172,7 +172,7 @@ Ordenadas por relação ganho/trabalho. "Must" entra no plano; "nice" só após 
 - **Imagem Docker grande** (torch + sentence-transformers): aceitável; opção de trocar embeddings por API se passar de 6 GB.
 - **Escopo crescer**: F5 e F6 só depois de relatório e vídeo prontos.
 
-## 10. Estado da implementação (v1.0, 2026-10-10)
+## 10. Estado da implementação (v1.1, 2026-10-11)
 
 Repositório: https://github.com/fiap-ssp-2025/tech-challenge-5 (CI verde: ruff, pytest, docker build). Modelo publicado:
 https://huggingface.co/fiap-ssp-2025/tc5-guardia-encaminhamento. Apresentação: artefato "Guardiã AI" (claude.ai).
@@ -184,16 +184,18 @@ https://huggingface.co/fiap-ssp-2025/tc5-guardia-encaminhamento. Apresentação:
 | Dados | `guardia.data.features`: SINAN 2024 → 280.757 linhas, 42 features, alvo `ENCAMINHA_PROTECAO` (28,3%). Notebook 02 executado. |
 | Modelos | LR, RF, RF+GA, HistGB. Implantado HistGB calibrado (0,5 MB): PR-AUC 0,674, ROC-AUC 0,816, recall 0,923 / precisão 0,392 no limiar 0,15; gap de recall por raça 0,18. SHAP global e por caso. Notebook 03 executado; figuras em `docs/figures`. |
 | Grafo | LangGraph de 9 nós (`guardia.graph.flow`), rastreado no LangSmith (projeto `guardia-ai`). |
-| LLM | Geradora Qwen3.6-27B-AWQ e juiz Qwen2.5-7B-AWQ em vLLM no RunPod (`scripts/runpod_vllm.py`: create/update/stop/start/delete; dois servidores no mesmo pod; 8k ctx; sem eager). JSON por schema em F1, F2 e F3. Modelo rápido (`FAST_*`, por padrão o juiz) para a extração ao vivo. |
-| RAG | Chroma (cosseno) + MiniLM multilíngue e BM25, fundidos por RRF, sobre 11 documentos, 227 trechos normalizados, com citação de fonte e trecho-chave por tema (D22, spec 005). |
+| LLM | Padrão via OpenRouter (D15), três famílias: geradora `openai/gpt-4o-mini`, juiz `mistralai/mistral-small-3.2-24b-instruct`, extração ao vivo (`FAST_*`) `google/gemini-2.5-flash-lite`. JSON por schema em F1, F2 e F3. Alternativa auto-hospedada: geradora Qwen3.6-27B-AWQ e juiz Qwen2.5-7B-AWQ em vLLM no RunPod (`scripts/runpod_vllm.py`: create/update/stop/start/delete; dois servidores no mesmo pod; 8k ctx; sem eager). |
+| RAG | Chroma (cosseno) + MiniLM multilíngue e BM25, fundidos por RRF, sobre 11 documentos, 227 trechos normalizados, com citação de fonte e trecho-chave por tema (D22, spec 005). Um único cliente Chroma por processo, criado sob lock: a thread de status e a primeira requisição chegavam juntas após a inicialização e quebravam o cache de clientes do chromadb. |
 | Guardrails | Blocklist + aviso fixo + juiz com 6 critérios e defesas contra reprovação sem trecho literal. Auditoria SQLite com hash do relato, nota, ficha, fontes, veredito e linha do tempo por nó. |
-| Interface | FastAPI + Jinja2 + htmx 4.0.0 + Tailwind 4 + Basecoat 1.0.2. F1 (caixa única, voz, extração ao vivo, ficha com revelação progressiva, análise como job com progresso real), guia de entrevista com as próximas perguntas (D20), F3 em painel lateral com conversa contínua e o caso em andamento como contexto (D19, D21), F4 (histórico com linha do tempo), Status (cache + indicador no cabeçalho). Tema claro/escuro, 360 px sem scroll horizontal. |
+| Interface | FastAPI + Jinja2 + htmx 4.0.0 + Tailwind 4 + Basecoat 1.0.2. F1 (caixa única, voz, extração ao vivo, ficha com revelação progressiva, análise como job com progresso real), guia de entrevista com as próximas perguntas (D20), F3 em painel lateral com conversa contínua e o caso em andamento como contexto (D19, D21), F4 (histórico com linha do tempo), indicador de status no cabeçalho (popover que lê um cache atualizado por thread; sem páginas Status e Modelo). Tema claro/escuro, 360 px sem scroll horizontal. |
 | Voz | Web Speech API + fallback no servidor: Gemini 2.5 Flash via OpenRouter (whisper de reserva), gravação contínua, corte por silêncio, fila e passada final sobre o áudio inteiro (D18). |
-| Avaliação | 60 relatos sintéticos (`data/synthetic`); sobre 30: F2 precisão 0,916 / recall 0,932 por campo, `OUT_VEZES` 100%; F1 30/30 notas, juiz aprovou 29, 1 bloqueada; LLM 25 s mediana, 52 s total; 2,8 fontes recuperadas, 2,1 citadas; concordância modelo × encaminhamento real 0,767 (`docs/eval_pipeline.json`). |
-| Qualidade | 22 testes, ruff limpo, Docker 4,6 GB (torch CPU, ffmpeg, whisper) testado em todas as rotas. |
+| Avaliação | 60 relatos sintéticos (`data/synthetic`); sobre 30, com a configuração padrão (OpenRouter): F2 precisão 0,902 / recall 0,949 por campo, `OUT_VEZES` 90%; F1 30/30 notas, juiz aprovou 30; LLM 5 s mediana, 20 s total; 2,8 fontes recuperadas, 2 citadas; concordância modelo × encaminhamento real 0,80 (`docs/eval_pipeline.json`). No pod vLLM: F2 0,916 / 0,932, `OUT_VEZES` 100%, juiz aprovou 29 (1 bloqueada), LLM 25 s, 52 s total, concordância 0,767 (`docs/eval_pipeline_runpod.json`). Recuperação do RAG: 18/18 perguntas (`docs/eval_rag.json`). |
+| Qualidade | 44 testes (pytest), ruff limpo em `src`, `tests` e `scripts`, Docker 4,6 GB (torch CPU, ffmpeg, whisper) testado em todas as rotas. |
 | Docs | README, `docs/relatorio_tecnico.md` (falta exportar PDF), `docs/roteiro_video.md`, AGENTS.md, esta spec. |
 
 **Pendências de entrega (humanas):** PDF do relatório, vídeo, revisão final pelo grupo.
 **Deploy (spec 002, fechada em 2026-10-10):** LLM via OpenRouter (D15), app no RunPod CPU com volume (D17), voz via Gemini (D18); URL, custos e preços de tokens no README; `make app-redeploy` publica a `main`.
 
-**Operação do pod (enquanto não há deploy):** `make pod-status`; se `pod-start` falhar por "not enough free GPUs", `make pod-create` (Secure Cloud é mais estável que Community) e atualizar `LLM_BASE_URL`/`JUDGE_BASE_URL` no `.env`; `make pod-stop` ao terminar (US$ 0,59/h ligado; volume parado custa US$ 0,017/h). Saldo em 2026-10-10: ~US$ 11.
+**Operação do app público:** `make app-status` mostra estado e URL (muda se o pod for recriado); `make app-start` religa em ~2 min, `make app-stop` para (custo zero), `make app-redeploy` publica a `main`. US$ 0,066/h ligado.
+
+**Pod vLLM (opcional, configuração auto-hospedada):** `make pod-status`; se `pod-start` falhar por "not enough free GPUs", `make pod-create` (Secure Cloud é mais estável que Community) e apontar `LLM_BASE_URL`/`JUDGE_BASE_URL` do `.env` para ele; `make pod-stop` ao terminar (US$ 0,59/h ligado; volume parado custa US$ 0,017/h).
