@@ -16,6 +16,7 @@ import hashlib
 import math
 import os
 import re
+import threading
 import unicodedata
 from collections import Counter
 from dataclasses import dataclass
@@ -154,8 +155,18 @@ def _bm25() -> _BM25:
     return _BM25([_tokens(d.page_content) for d in chunks()])
 
 
-@lru_cache(maxsize=1)
+_STORE_LOCK = threading.Lock()
+
+
 def vectorstore() -> Chroma:
+    """One Chroma client per process. The status thread and the first request reach this together right after
+    startup; two clients created at once on the same directory broke chromadb's client cache (KeyError on the path)."""
+    with _STORE_LOCK:
+        return _vectorstore()
+
+
+@lru_cache(maxsize=1)
+def _vectorstore() -> Chroma:
     name = f"protocolos_{_corpus_fingerprint()}"
     PERSIST_DIR.mkdir(parents=True, exist_ok=True)
     store = Chroma(collection_name=name, embedding_function=embeddings(), persist_directory=str(PERSIST_DIR),
