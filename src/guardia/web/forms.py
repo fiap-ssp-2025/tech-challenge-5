@@ -114,14 +114,14 @@ def case_summary(case: dict[str, Any]) -> list[tuple[str, str]]:
     return pairs
 
 
-# Short names for the protocol chat context (spec 004); the SINAN labels are written as form questions.
+# Short names for the protocol chat context; the SINAN labels are written as form questions.
 FACT_NAMES = {"OUT_VEZES": "Já ocorreu outras vezes", "AUTOR_ALCO": "Autor com suspeita de uso de álcool", "AUTOR_SEXO": "Sexo do autor",
               "NUM_ENVOLV": "Envolvidos", "DEF_TRANS": "Deficiência ou transtorno", "SG_UF": "UF", "IDADE_ANOS": "Idade"}
 
 
 def case_facts(case: dict[str, Any], signals: dict[str, Any] | None = None) -> list[str]:
     """The record as short readable facts ("Violência física", "Gestante: 2º trimestre") for the protocol chat.
-    Structured fields only: the free-text report never leaves the triage (spec 004, C1)."""
+    Structured fields only: the free-text report never leaves the triage."""
     facts = [text for _, name, text in FORM.checks if (case or {}).get(name)]
     facts = [f.split(" (")[0] for f in facts]
     facts += [text for name, text in SIGNAL_FIELDS if (signals or {}).get(name)]

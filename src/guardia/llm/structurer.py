@@ -24,7 +24,7 @@ class Structured:
     signals: dict[str, Any]
     summary: str
     uncertain: list[str] = field(default_factory=list)
-    topics: list[str] = field(default_factory=list)  # interview topics the report touched (spec 003 U6)
+    topics: list[str] = field(default_factory=list)  # interview topics the report touched
     backend: str = "error"
     model: str = ""
     latency_ms: int = 0
@@ -72,7 +72,7 @@ def _norm(s: str) -> str:
 
 
 def _quoted_topics(parsed: dict[str, Any], text: str) -> list[str]:
-    """Topics whose quote really is in the report (spec 003 U6): the model's claim alone is not enough."""
+    """Topics whose quote really is in the report: the model's claim alone is not enough."""
     body, out, raw = _norm(text), [], parsed.get("topicos_abordados") or []
     if isinstance(raw, dict):  # json_object fallback sometimes answers {"id": "trecho"}
         raw = [f"{k}: {v}" for k, v in raw.items()]

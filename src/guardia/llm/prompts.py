@@ -95,7 +95,7 @@ Tarefa: produza a nota de apoio em JSON, concisa (resumo com 3 a 4 frases; lista
 
 # ── F2: structure the free-text report into the form fields ───────────────────
 
-# Interview topics the report already answered, even negatively (feeds the live interview guide, spec 003 U6).
+# Interview topics the report already answered, even negatively (feeds the live interview guide).
 # Each topic carries a literal quote from the report ("id: trecho"); the server drops topics whose quote is not in
 # the text (the fast model otherwise lists every topic). Flat strings: Gemini Flash Lite loops on nested objects.
 TOPICS_PROPERTY: dict[str, Any] = {"type": "array", "items": {"type": "string"}}

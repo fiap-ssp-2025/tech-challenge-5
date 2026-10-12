@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Retrieval evaluation of the protocol RAG (spec 005).
+"""Retrieval evaluation of the protocol RAG.
 
 Two sets, no LLM involved:
   * chat (F3): questions with the expected document and a pattern the chunk must contain → hit in the top-6

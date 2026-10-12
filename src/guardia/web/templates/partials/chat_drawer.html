@@ -1,4 +1,4 @@
-{# F3 · Protocolos como painel lateral (spec 003, U1–U4). Botão flutuante em todas as páginas; o fio carrega na
+{# F3 · Protocolos como painel lateral. Botão flutuante em todas as páginas; o fio carrega na
    primeira abertura. <dialog> não modal: o relato continua editável ao lado. #}
 <button type="button" id="chat-fab" class="chat-fab" aria-haspopup="dialog" aria-controls="chat-drawer" aria-expanded="{{ 'true' if chat_open else 'false' }}"
         hx-get="/protocolos" hx-target="#chat-thread" hx-swap="innerHTML scroll:bottom" hx-trigger="click once" onclick="guardiaChat.open()">
@@ -23,7 +23,7 @@
     {% if turns is defined %}{% include "partials/chat_thread.html" %}
     {% else %}<div class="skeleton-card p-1" aria-label="Carregando a conversa"><div class="sk sk-short"></div><div class="sk"></div><div class="sk sk-title"></div></div>{% endif %}
   </div>
-  {# hx-include: só os campos da ficha e o id da última análise; o texto do relato nunca vai para o chat (spec 004) #}
+  {# hx-include: só os campos da ficha e o id da última análise; o texto do relato nunca vai para o chat #}
   <form id="chat-form" class="chat-compose" hx-post="/protocolos/perguntar" hx-target="#chat-thread" hx-swap="beforeend scroll:bottom" hx-include="#ficha, #analise_id"
         hx-on:htmx:before:request="guardiaChat.pending(this)" hx-on:htmx:finally:request="guardiaChat.settle(this, ctx)">
     <label class="chat-case" title="Envia os campos marcados na ficha (e o resultado da análise, se houver). O texto do relato não é enviado.">

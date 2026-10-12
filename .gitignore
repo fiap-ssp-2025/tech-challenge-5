@@ -13,3 +13,5 @@ logs/
 *.log
 notebooks/.ipynb_checkpoints/
 models/README.md
+# gerado por make relatorio (o PDF é versionado)
+docs/relatorio_tecnico.html

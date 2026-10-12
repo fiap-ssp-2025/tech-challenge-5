@@ -60,7 +60,7 @@ class Turn:
     latency_ms: int = 0
     error: str | None = None
     blocked: bool = False
-    case_facts: list[str] = field(default_factory=list)  # record fields sent as context (spec 004); never the report text
+    case_facts: list[str] = field(default_factory=list)  # record fields sent as context; never the report text
 
 
 def new_conversation_id() -> str:
@@ -71,7 +71,7 @@ def _init() -> None:
     with _connect(DB_PATH) as conn:
         conn.executescript(_SCHEMA)
         cols = {r["name"] for r in conn.execute("PRAGMA table_info(chat_turns)")}
-        if "case_context" not in cols:  # spec 004: databases created before the case context
+        if "case_context" not in cols:  # databases created before the case context column
             conn.execute("ALTER TABLE chat_turns ADD COLUMN case_context TEXT")
 
 
@@ -105,7 +105,7 @@ def turns(conversation_id: str) -> list[dict[str, Any]]:
 
 
 def ask(conversation_id: str, question: str, case: list[str] | None = None) -> Turn:
-    """``case``: short facts from the record of the triage in progress (spec 004). Sent with this question only,
+    """``case``: short facts from the record of the triage in progress. Sent with this question only,
     so the answer follows the record as it changes; stored with the turn so the thread can show what was used."""
     case = [str(f) for f in (case or [])][:20]
     past = history(conversation_id)

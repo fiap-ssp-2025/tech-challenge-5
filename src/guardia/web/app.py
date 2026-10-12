@@ -221,7 +221,7 @@ def protocolos(request: Request):
 
 
 def _chat_case(form: dict[str, Any]) -> list[str]:
-    """Context for the protocol chat (spec 004): the record fields of the triage on screen and, when it was already
+    """Context for the protocol chat: the record fields of the triage on screen and, when it was already
     analysed, risk, model suggestion and referrals from the stored note. Never the report text."""
     if str(form.get("usar_caso") or "") != "1":
         return []

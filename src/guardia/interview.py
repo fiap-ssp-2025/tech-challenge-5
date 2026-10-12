@@ -1,4 +1,4 @@
-"""Interview guide: the few questions still open while the report is being told (spec 003, U5–U6).
+"""Interview guide: the few questions still open while the report is being told.
 
 Topics follow the Formulário Nacional de Avaliação de Risco, ordered by risk priority. A topic is covered when the
 record already has the field (filled by the LLM or by hand), when the live extraction says the report touched it

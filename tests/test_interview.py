@@ -1,4 +1,4 @@
-"""Interview guide (spec 003): coverage by record, by report mention and by hand."""
+"""Interview guide: coverage by record, by report mention and by hand."""
 
 from guardia.interview import SHOW_NEXT, TOPIC_IDS, build_guide, parse_ids
 
@@ -37,7 +37,7 @@ def test_chat_table_gains_case_context_column(tmp_path, monkeypatch):
     from guardia.rag import chat as rag_chat
 
     db = tmp_path / "old.db"
-    with sqlite3.connect(db) as conn:  # schema before spec 004
+    with sqlite3.connect(db) as conn:  # schema before the case context column
         conn.execute("CREATE TABLE chat_turns (id INTEGER PRIMARY KEY AUTOINCREMENT, conversation_id TEXT NOT NULL, ts TEXT NOT NULL, "
                      "question TEXT NOT NULL, answer TEXT, sources TEXT, backend TEXT, latency_ms INTEGER)")
         conn.execute("INSERT INTO chat_turns (conversation_id, ts, question) VALUES ('c1', 'now', 'pergunta antiga')")

@@ -3,7 +3,7 @@
 {% set log = s.audit_log or {} %}
 {% set risk = s.risk_level or 'indeterminado' %}
 <article class="card p-5 grid gap-4 risk-{{ risk }}" aria-label="Resultado da análise">
-  {% if s.audit_id %}<input type="hidden" id="analise_id" name="analise_id" value="{{ s.audit_id }}">{% endif %}{# contexto do painel de protocolos (spec 004) #}
+  {% if s.audit_id %}<input type="hidden" id="analise_id" name="analise_id" value="{{ s.audit_id }}">{% endif %}{# contexto do painel de protocolos #}
   <header class="flex flex-wrap items-start justify-between gap-3">
     <div class="grid gap-1">
       <h2 class="text-lg font-semibold">Nota de apoio</h2>

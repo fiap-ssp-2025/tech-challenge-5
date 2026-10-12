@@ -4,8 +4,31 @@
     {
       "name": "guardia-web",
       "runtimeExecutable": "uv",
-      "runtimeArgs": ["run", "uvicorn", "guardia.web.app:app", "--host", "127.0.0.1", "--port", "8010", "--reload"],
+      "runtimeArgs": [
+        "run",
+        "uvicorn",
+        "guardia.web.app:app",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8010",
+        "--reload"
+      ],
       "port": 8010
+    },
+    {
+      "name": "guardia-web-alt",
+      "runtimeExecutable": "uv",
+      "runtimeArgs": [
+        "run",
+        "uvicorn",
+        "guardia.web.app:app",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8011"
+      ],
+      "port": 8011
     }
   ]
 }

@@ -7,8 +7,8 @@ modelo de machine learning se o caso tem perfil de **encaminhamento à rede de p
 cadastrados (RAG) e devolve uma **nota de apoio com fontes citadas**, auditada por um segundo modelo de linguagem.
 A decisão é sempre da profissional: o sistema não decide encaminhamentos, não diagnostica e não prescreve.
 
-> Especificação e decisões: [`spec.md`](spec.md) · por que esta base: [`analise-base-tc5.md`](analise-base-tc5.md) ·
-> relatório técnico: [`docs/relatorio_tecnico.md`](docs/relatorio_tecnico.md) · convenções: [`AGENTS.md`](AGENTS.md)
+> Especificação e decisões: [`spec.md`](spec.md) ·
+> relatório técnico: [`docs/relatorio_tecnico.md`](docs/relatorio_tecnico.md) ([PDF](docs/relatorio_tecnico.pdf))
 
 ## O problema e o cenário escolhido
 
@@ -110,7 +110,7 @@ juiz aprovou 30 de 30, LLM 5 s de mediana e 20 s no total por análise, concord�
   rede de proteção do DF, LGPD, norma técnica MS/MJ de violência sexual) em Chroma com embeddings multilíngues,
   combinados com BM25 por fusão de ranks (busca híbrida) e um trecho-chave por tema (violência sexual → prazo de
   72 h); a nota cita os títulos usados e a interface mostra quais foram recuperados e quais foram citados.
-  `scripts/avaliar_rag.py` mede a recuperação sem LLM: 18/18 perguntas no top-6 (antes 12/18), spec 005.
+  `scripts/avaliar_rag.py` mede a recuperação sem LLM: 18/18 perguntas no top-6 (antes 12/18).
 - **Guardrails:** blocklist de frases proibidas, aviso fixo de apoio à decisão, juiz independente, hash do relato na
   auditoria (texto nunca persiste).
 - **Rastreabilidade:** LangSmith (`LANGCHAIN_TRACING_V2=true`) rastreia cada nó e chamada.
@@ -149,6 +149,7 @@ A imagem traz o modelo treinado, os protocolos e o índice RAG; a LLM é remota 
 | `make synth` | gera relatos sintéticos a partir de fichas reais (rótulos de graça) → `data/synthetic/relatos.jsonl` |
 | `make eval` | avalia F2 (concordância por campo) e F1 (juiz, latência, citação) → `docs/eval_pipeline.json` |
 | `make publish-hf` | publica modelo, métricas e figuras em `huggingface.co/fiap-ssp-2025/tc5-guardia-encaminhamento` |
+| `make relatorio` | gera `docs/relatorio_tecnico.pdf` (e `.html`) a partir de `docs/relatorio_tecnico.md` |
 | `uv run guardia demo` | roda o grafo num caso de exemplo no terminal |
 
 ## Estrutura
@@ -205,5 +206,4 @@ persistente ao subir (`scripts/runpod_app.py`, sem registro de imagens); `make a
 `make app-stop` (custo zero), `make app-start` (religa em ~2 min) e `make app-redeploy` (publica a `main`: o pod refaz o clone ao subir). Alternativa com a imagem Docker, publicada (privada, 5,5 GB) em `ghcr.io/fiap-ssp-2025/guardia-ai:latest`:
 `make docker-push` + `app-create --image` (exige token do GitHub com `write:packages`; o RunPod guarda a credencial de registro). O Hugging Face
 Spaces foi descartado porque Spaces com Docker passaram a exigir plano pago (Team na org, PRO na conta pessoal); o script
-`scripts/deploy_space.py` fica no repositório caso o grupo assine. Detalhes e decisões em
-[`specs/002-deploy-hf-spaces-openrouter.md`](specs/002-deploy-hf-spaces-openrouter.md).
+`scripts/deploy_space.py` fica no repositório caso o grupo assine. Decisões em [`spec.md`](spec.md) (D15–D17).

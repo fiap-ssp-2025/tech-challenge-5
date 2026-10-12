@@ -146,7 +146,7 @@ def status(args: argparse.Namespace) -> None:
     pod = r.json() if r.status_code == 200 else {}
     print(json.dumps({k: pod.get(k) for k in ("id", "desiredStatus", "costPerHr", "volumeInGb", "lastStatusChange")}, indent=2, default=str))
     if pod and not pod.get("volumeInGb"):
-        print("  AVISO: pod sem volume — o histórico some a cada restart (ver spec 002, E5)")
+        print("  AVISO: pod sem volume — o histórico some a cada restart")
     ok, info = _ready(pod_id)
     print(f"  app {_url(pod_id)} → {'READY' if ok else 'not ready'} ({info})")
 

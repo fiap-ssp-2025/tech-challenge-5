@@ -19,7 +19,7 @@
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hideSoon(); });
 })();
 
-// Painel de protocolos (spec 003): <dialog> não modal aberto com show(), Esc fecha, foco volta ao botão.
+// Painel de protocolos: <dialog> não modal aberto com show(), Esc fecha, foco volta ao botão.
 // A pergunta aparece na hora como balão provisório; a resposta do servidor (o turno inteiro) o substitui.
 window.guardiaChat = (function () {
   const $ = (id) => document.getElementById(id);

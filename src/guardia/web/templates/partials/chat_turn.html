@@ -1,5 +1,5 @@
 {# Um turno da conversa de protocolos: balão da pergunta, balão da resposta, fontes recolhidas e metadados.
-   O aviso de segurança fica fixo no rodapé do painel (spec 003, U4), por isso sai do balão. #}
+   O aviso de segurança fica fixo no rodapé do painel, por isso sai do balão. #}
 {% set cited = t.cited or [] %}
 {% set titles = [] %}{% set docs = [] %}
 {% for s in t.sources or [] %}{% if s.title not in titles %}{% set _ = titles.append(s.title) %}{% set _ = docs.append(s) %}{% endif %}{% endfor %}

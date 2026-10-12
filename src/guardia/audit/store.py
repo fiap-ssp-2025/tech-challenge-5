@@ -3,7 +3,7 @@
 LGPD: the free-text report is never stored. Only its SHA-256 hash and length are kept, which
 allow counting and de-duplication without re-identification. Everything the model produced
 (risk, probability, SHAP factors, sources, judge verdict) is stored so an analysis can be
-reconstructed and explained later (roteiro: "registro das análises realizadas").
+reconstructed and explained later.
 """
 
 from __future__ import annotations
